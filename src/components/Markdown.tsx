@@ -61,7 +61,7 @@ function CodeNode(props:{node:rendererNode, stylesheet: { [key: string]: React.C
 export default function Markdown(props: MarkdownProps) {
     
     return (
-        <article className='markdown-body'>
+        <article className='markdown-body text-[15px] leading-7 text-[var(--fg)]'>
             <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={MakeComponents(props.href)}
@@ -76,9 +76,9 @@ const MakeComponents = (href:string):Components => {
     return {
         async h1(props) { 
             return (
-                <h1 className='text-3xl my-4 font-bold text-center text-sky-800 dark:text-sky-500 underline underline-offset-8'>
+                <h1 className='my-6 border-b-2 border-dashed border-[var(--border)] pb-4 text-center text-3xl font-bold tracking-[0.08em] text-[var(--accent)]'>
                     <Link 
-                        href={href} className='cursor-pointor'
+                        href={href} className='transition-opacity hover:opacity-80'
                     >
                     {props.children}
                     </Link>
@@ -89,10 +89,10 @@ const MakeComponents = (href:string):Components => {
         async h2(props) { 
             const anchor = await anchorHash(props.children?.toString()??'');
             return (
-                <h2 id={anchor} className='text-2xl my-3 font-bold text-sky-800 dark:text-sky-500 border-s-4 border-b-1 px-1'>
+                <h2 id={anchor} className='my-5 scroll-mt-20 border-s-4 border-[var(--accent-2)] ps-3 text-2xl font-bold text-[var(--accent)]'>
                     <Link 
                         href={href + `#` + anchor}
-                        className='cursor-pointor'
+                        className='transition-opacity hover:opacity-80'
                     >
                         {props.children}
                     </Link>
@@ -103,10 +103,10 @@ const MakeComponents = (href:string):Components => {
         async h3(props) { 
             const anchor = await anchorHash(props.children?.toString()??'');
             return (
-                <h3 id={anchor} className='text-xl my-2 font-bold text-sky-800 dark:text-sky-500'>
+                <h3 id={anchor} className='my-4 scroll-mt-20 text-xl font-bold text-[var(--accent-2)]'>
                     <Link 
                         href={href + `#` + anchor}
-                        className='cursor-pointor'
+                        className='transition-opacity hover:opacity-80'
                     >
                         {props.children}
                     </Link>
@@ -117,10 +117,10 @@ const MakeComponents = (href:string):Components => {
         async h4(props) { 
             const anchor = await anchorHash(props.children?.toString()??'');
             return (
-                <h4 id={anchor} className='text-md my-2 font-bold'>
+                <h4 id={anchor} className='my-3 text-lg font-bold text-[var(--fg)]'>
                     <Link 
                         href={href + `#` + anchor}
-                        className='cursor-pointor'
+                        className='transition-opacity hover:opacity-80'
                     >
                         {props.children}
                     </Link>
@@ -131,10 +131,10 @@ const MakeComponents = (href:string):Components => {
         async h5(props) { 
             const anchor = await anchorHash(props.children?.toString()??'');
             return (
-                <h5 id={anchor} className='text-md my-2 font-bold'>
+                <h5 id={anchor} className='my-2 text-base font-bold text-[var(--muted)]'>
                     <Link 
                         href={href + `#` + anchor}
-                        className='cursor-pointor'
+                        className='transition-opacity hover:opacity-80'
                     >
                         {props.children}
                     </Link>
@@ -145,10 +145,10 @@ const MakeComponents = (href:string):Components => {
         async h6(props) { 
             const anchor = await anchorHash(props.children?.toString()??'');
             return (
-                <h6 id={anchor} className='text-md my-2 font-bold'>
+                <h6 id={anchor} className='my-2 text-sm font-bold text-[var(--muted)]'>
                     <Link 
                         href={href + `#` + anchor}
-                        className='cursor-pointor'
+                        className='transition-opacity hover:opacity-80'
                     >
                         {props.children}
                     </Link>
@@ -158,13 +158,13 @@ const MakeComponents = (href:string):Components => {
 
         async p(props) { 
             return (
-                <p className='my-2'>{props.children}</p>
+                <p className='my-3 leading-7'>{props.children}</p>
             )
         },
 
         async blockquote(props) {
             return (
-                <blockquote className='my-2 px-1 border border-s-4 border-emerald-600'>
+                <blockquote className='my-4 border border-[var(--border)] border-s-4 border-s-[var(--accent-2)] bg-[var(--panel-2)] px-3 py-1 text-[var(--muted)]'>
                     {props.children}
                 </blockquote>
             )
@@ -172,7 +172,7 @@ const MakeComponents = (href:string):Components => {
 
         async table(props) {
             return (
-                <table className='my-2 max-w-8/10 mx-auto border border-[rgba(0,0,0,0.1)] dark:border-[rgba(255,255,255,0.2)]'>
+                <table className='my-4 mx-auto max-w-full border-2 border-[var(--border)] bg-[var(--panel)]'>
                     { props.children }
                 </table>
             )
@@ -192,20 +192,20 @@ const MakeComponents = (href:string):Components => {
 
         async th(props) {
             const align = props.node?.properties.align as "center" | "right" | "left" | "justify" | "char" | undefined
-            return <td align={align} className='font-bold p-2 border border-[rgba(0,0,0,0.1)] dark:border-[rgba(255,255,255,0.2)]'>{ props.children }</td>
+            return <th align={align} className='border border-[var(--border)] bg-[var(--panel-2)] p-2 font-bold'>{ props.children }</th>
         },
 
         async td(props) {
             const align = props.node?.properties.align as "center" | "right" | "left" | "justify" | "char" | undefined
-            return <td align={align} className='p-2 border border-[rgba(0,0,0,0.1)] dark:border-[rgba(255,255,255,0.2)]'>{ props.children }</td>
+            return <td align={align} className='border border-[var(--border)] p-2'>{ props.children }</td>
         },
 
         async ol(props) {
-            return <ol className='ml-10 list-decimal'>{ props.children} </ol>
+            return <ol className='my-3 ml-8 list-decimal space-y-1 marker:text-[var(--accent)]'>{ props.children} </ol>
         },
 
         async ul(props) {
-            return <ul className='ml-10 list-disc'>{ props.children} </ul>
+            return <ul className='my-3 ml-8 list-disc space-y-1 marker:text-[var(--accent)]'>{ props.children} </ul>
         },
 
         async li(props) {
@@ -221,7 +221,7 @@ const MakeComponents = (href:string):Components => {
         },
 
         a({href, title, children}) {
-            return <Link href={href} title={title} children={children} className='text-blue-500 dark:text-blue-400 hover:underline'/>
+            return <Link href={href} title={title} className='text-[var(--accent-2)] underline decoration-dotted underline-offset-4 hover:text-[var(--accent)]'>{children}</Link>
         },
 
         code({className, children}) {
@@ -262,7 +262,7 @@ const MakeComponents = (href:string):Components => {
                 )
             } else {
                 return (
-                    <code className="bg-pink-50 text-pink-500 px-1">
+                    <code className="border border-[var(--border)] bg-[var(--panel-2)] px-1 text-[var(--accent-2)]">
                         {children}
                     </code>
                 )

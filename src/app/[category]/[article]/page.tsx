@@ -1,7 +1,4 @@
-import HomeIcon from "@/assets/icons/HomeIcon";
 import ListIcon from "@/assets/icons/ListIcon";
-import ShareIcon from "@/assets/icons/ShareIcon";
-import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Discussion from "@/components/Discussion";
 import Frame from "@/components/Frame";
@@ -43,15 +40,31 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
     const categories = await getGategories();
     const articles = categories.flatMap(category => category.articles).sort((x, y) => y.state.createdTime.getTime() - x.state.createdTime.getTime());
     const href = `${SITE_CONFIG.origin}${SITE_CONFIG.basePath}/${path.category}/${path.article}`;
+    const category = decodeURIComponent(path.category);
+    const article = decodeURIComponent(path.article).replace(/\.md$/, '');
 
     return (
         <Frame categories={categories} articles={articles.slice(0,30)}>
-            <Card>
-                <div className="flex justify-between">
-                    <Link href='/'><HomeIcon/></Link>
-                    <Link href={`/${decodeURIComponent(path.category)}`}><ListIcon/></Link>
+            <nav aria-label="面包屑" className="flex flex-wrap items-center gap-2 px-1 text-[10px] tracking-[0.14em] text-[var(--muted)]">
+                <Link href="/" className="transition-colors hover:text-[var(--accent)]">~</Link>
+                <span>/</span>
+                <Link href={`/${path.category}`} className="transition-colors hover:text-[var(--accent)]">{category}</Link>
+                <span>/</span>
+                <span className="truncate text-[var(--fg)]">{article}.md</span>
+            </nav>
+            <Card className="p-0">
+                <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-[var(--border)] bg-[var(--panel-2)] px-4 py-2 text-[10px] tracking-[0.16em] text-[var(--muted)]">
+                    <span className="truncate">FILE: {article}.md</span>
+                    <div className="flex items-center gap-2">
+                        <span className="retro-chip">{category}</span>
+                        <Link href={`/${path.category}`} title="返回分类" className="retro-button p-1">
+                            <span className="[&_svg]:h-4 [&_svg]:w-4"><ListIcon/></span>
+                        </Link>
+                    </div>
                 </div>
-                <Markdown content={text} href={href}/>
+                <div className="p-5 sm:p-8">
+                    <Markdown content={text} href={href}/>
+                </div>
             </Card>
             <Discussion/>
         </Frame>

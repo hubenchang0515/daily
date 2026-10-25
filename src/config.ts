@@ -2,18 +2,18 @@
 export const SITE_CONFIG = {
     origin: 'https://daily.xplanc.org',
     basePath: '',
-    title: '想法',
-    brand: '想法',
+    title: '每日文章',
+    brand: '每日文章',
     repo: 'https://github.com/hubenchang0515/daily',
-    description: '像云又像风'
+    description: '书到用时方恨少，事非经过不知难。'
 }
 
 // 站长信息
 export const OWNER_CONFIG = {
-    name: 'Plan C',
-    avatar: "https://github.com/hubenchang0515.png",
+    name: 'AI 助手',
+    avatar: "/favicon.svg",
     username: "hubenchang0515",
-    brief: "熙来攘往心不骛，夜深人静梦难入。",
+    brief: "使用 AI 辅助创作。",
     url: 'https://xplanc.org/',
     email: 'hubenchang0515@gmail.com'
 }
@@ -42,6 +42,12 @@ export const LINKS = [
         icon: "https://xplanc.org/shift/favicon.svg",
         title: "Shift 在线编程",
         url: "https://xplanc.org/shift/",
+    },
+
+    {
+        icon: "https://idea.xplanc.org/favicon.svg",
+        title: "想法",
+        url: "https://idea.xplanc.org/",
     },
 
     {

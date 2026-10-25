@@ -14,14 +14,14 @@ export interface LinkProps {
 export default function Link(props:LinkProps) {
 
     if (!props.href) {
-        return <NextLink className={props.className ?? "cursor-default text-transparent"} prefetch={false} {...props} href="" onClick={(ev)=>ev.preventDefault()}/>
+        return <NextLink {...props} className={props.className ?? "cursor-default text-transparent"} prefetch={false} href="" onClick={(ev)=>ev.preventDefault()}/>
     }
 
     if (props.href.toString().startsWith("http") && !props.href.toString().startsWith(SITE_CONFIG.origin + SITE_CONFIG.basePath)) {
-        return <NextLink className={props.className ?? "border border-transparent hover:border-emerald-500"} prefetch={false} target="_blank" rel="noopener" href={props.href} {...props} />
+        return <NextLink {...props} href={props.href} className={props.className ?? "retro-link"} prefetch={false} target="_blank" rel="noopener" />
     }
     
     return (
-        <NextLink className={props.className ?? "border border-transparent hover:border-emerald-500"} prefetch={false} href={props.href} {...props}/>
+        <NextLink {...props} href={props.href} className={props.className ?? "retro-link"} prefetch={false}/>
     )
 }

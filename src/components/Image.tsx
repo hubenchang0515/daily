@@ -10,12 +10,15 @@ export interface ImageProps {
 }
 
 export default async function Image(props:ImageProps) {
+    let info: Awaited<ReturnType<typeof imageInfo>>;
+
     try {
-        const info = await imageInfo(props.src??"", props.absolute);
-        return (
-            <NextImage src={info.src} alt={props.alt??'image'} width={info.width} height={info.height} style={props.style} rel="nofollow" referrerPolicy="no-referrer"/>
-        )
+        info = await imageInfo(props.src??"", props.absolute);
     } catch {
         return <img src={props.src} alt={props.alt??'image'} style={props.style} referrerPolicy="no-referrer"/>
     }
+
+    return (
+        <NextImage src={info.src} alt={props.alt??'image'} width={info.width} height={info.height} style={props.style} rel="nofollow" referrerPolicy="no-referrer"/>
+    )
 }

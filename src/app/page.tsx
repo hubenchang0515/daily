@@ -1,7 +1,7 @@
-import HomeIcon from "@/assets/icons/HomeIcon";
 import ArticleCard from "@/components/ArticleCard";
+import Card from "@/components/Card";
 import Frame from "@/components/Frame";
-import Link from "@/components/Link";
+import Pagination from "@/components/Pagination";
 import { DOCUMENT_CONFIG } from "@/config";
 import { categories as getGategories } from "@/utils/document";
 
@@ -12,6 +12,21 @@ export default async function Home() {
 
     return (
         <Frame categories={categories} articles={articles.slice(0,30)}>
+            <section className="flex items-end justify-between gap-3 px-1">
+                <div>
+                    <p className="retro-label">[ LATEST LOG ]</p>
+                    <h1 className="mt-1 text-2xl font-bold tracking-[0.12em] text-[var(--fg)]">
+                        &gt; 最新文章<span className="blink text-[var(--accent)]">_</span>
+                    </h1>
+                </div>
+                <span className="retro-chip shrink-0">{articles.length} 篇</span>
+            </section>
+            {
+                articles.length === 0 &&
+                <Card className="p-8 text-center text-sm text-[var(--muted)]">
+                    还没有文章，去写一篇吧。
+                </Card>
+            }
             {
                 articles.slice(0, DOCUMENT_CONFIG.pageSize).map((article, i) => {
                     return (
@@ -19,12 +34,11 @@ export default async function Home() {
                     )
                 })
             }
-            <div className="bg-white dark:bg-[#161B22] rounded-md shadow-md p-2 flex justify-between">
-                <Link>上一页</Link>
-                <Link href='/'><HomeIcon/></Link>
-                <Link href={last > 1? `/page/2` : undefined}>下一页</Link>
-            </div>
-            
+            <Pagination
+                next={last > 1 ? '/page/2' : undefined}
+                page={last > 1 ? 1 : undefined}
+                last={last > 1 ? last : undefined}
+            />
         </Frame>
     );
 }
