@@ -90,3 +90,18 @@ export function getPrimerSitemap(): Record<string, SitemapNode> {
 
     return sitemap;
 }
+
+// 根据文本查找对应的 Primer 文档链接
+export function getPrimerLink(text: string, languages: string | string[]): string | undefined {
+    const data = getPrimerSitemap();
+    const key = text.replace(/^\W+|\W+$/g, '');
+
+    for (const language of Array.isArray(languages) ? languages : [languages]) {
+        const links = data[language.toLocaleLowerCase()]?.links;
+        if (links && Object.hasOwn(links, key)) {
+            return links[key];
+        }
+    }
+
+    return undefined;
+}

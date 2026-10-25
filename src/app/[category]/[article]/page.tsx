@@ -4,8 +4,10 @@ import Discussion from "@/components/Discussion";
 import Frame from "@/components/Frame";
 import Link from "@/components/Link";
 import Markdown from "@/components/Markdown";
+import RepostButton from "@/components/RepostButton";
 import { SITE_CONFIG } from "@/config";
 import { categories as getGategories, content } from "@/utils/document";
+import { markdownForRepost } from "@/utils/repost";
 
 export interface PageParams {
     category:string;    // 分类： 例如 Python 等
@@ -42,6 +44,8 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
     const href = `${SITE_CONFIG.origin}${SITE_CONFIG.basePath}/${path.category}/${path.article}`;
     const category = decodeURIComponent(path.category);
     const article = decodeURIComponent(path.article).replace(/\.md$/, '');
+    const title = /^#\s+(.+)$/m.exec(text)?.[1]?.trim() ?? article;
+    const repost = `${markdownForRepost(text, category).trimEnd()}\n\n---\n\n转载自：[${title} - ${SITE_CONFIG.title}](${href})\n`;
 
     return (
         <Frame categories={categories} articles={articles.slice(0,30)}>
@@ -57,6 +61,7 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
                     <span className="truncate">FILE: {article}.md</span>
                     <div className="flex items-center gap-2">
                         <span className="retro-chip">{category}</span>
+                        <RepostButton content={repost}/>
                         <Link href={`/${path.category}`} title="返回分类" className="retro-button p-1">
                             <span className="[&_svg]:h-4 [&_svg]:w-4"><ListIcon/></span>
                         </Link>
