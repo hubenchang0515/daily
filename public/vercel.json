@@ -1,0 +1,14 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/idea/",
+      "destination": "/"
+    },
+
+    {
+      "source": "/idea/:path*",
+      "destination": "/:path*"
+    }
+  ]
+}

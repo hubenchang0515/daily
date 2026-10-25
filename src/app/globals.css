@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #121212;
+    --foreground: #ffffff;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background-image: linear-gradient(90deg, #87CEFA, #9EF5D2);
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    color: var(--foreground);
+    background: var(--background);
+  }
+}
+
+@font-face {
+  font-family: 'Maple MonoNL CN';
+  font-display: swap;
+  src: url('https://cdn.xplanc.org/fonts/MapleMonoNL-CN-Regular.ttf');
+}
+
+* {
+  font-family: 'Maple MonoNL CN';
+}
