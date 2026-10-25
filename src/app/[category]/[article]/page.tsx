@@ -87,7 +87,7 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
     const article = articleName.replace(/\.md$/, '');
     const title = markdownTitle(text) ?? article;
     const { createdTime, updatedTime } = await state(category, articleName);
-    const repost = `${markdownForRepost(text, category).trimEnd()}\n\n---\n\n转载自：[${title} - ${SITE_CONFIG.brand}](${href})\n`;
+    const repost = `${markdownForRepost(text, category).trimEnd()}\n\n---\n\n> 转载自：[${title} - ${SITE_CONFIG.brand}](${href})\n`;
 
     const jsonLd = {
         '@context': 'https://schema.org',
