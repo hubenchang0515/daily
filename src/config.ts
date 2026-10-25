@@ -3,9 +3,12 @@ export const SITE_CONFIG = {
     origin: 'https://daily.xplanc.org',
     basePath: '',
     title: '每日文章',
-    brand: '每日文章',
+    brand: '码日新 · 每日文章',
+    slogan: '书到用时方恨少，事非经过不知难。',
     repo: 'https://github.com/hubenchang0515/daily',
-    description: '书到用时方恨少，事非经过不知难。'
+    description: '苟日新，日日新，又日新。每天一篇通俗易懂的编程实战文章，涵盖 Python、Linux、Lua、HTML。',
+    keywords: ['码日新', '编程日课', '每日文章', '编程实战', 'Python', 'Linux', 'Lua', 'HTML', 'AI 编程', '技术博客'],
+    locale: 'zh_CN',
 }
 
 // 站长信息

@@ -32,7 +32,7 @@ export default function Frame(props:FrameProps)
                                 {SITE_CONFIG.title}
                                 <span className="blink ml-1 text-[var(--accent)]">_</span>
                             </span>
-                            <span className="block truncate text-[11px] tracking-[0.16em] text-[var(--muted)]">{SITE_CONFIG.description}</span>
+                            <span className="block truncate text-[11px] tracking-[0.16em] text-[var(--muted)]">{SITE_CONFIG.slogan}</span>
                         </span>
                     </Link>
                     <div className="flex shrink-0 items-center gap-3">
@@ -144,7 +144,7 @@ export default function Frame(props:FrameProps)
                 </aside>
             </main>
             <footer className="mx-auto w-full max-w-[1500px] px-4 pb-6 pt-1 text-center text-[10px] tracking-[0.18em] text-[var(--muted)]">
-                © {new Date().getFullYear()} {OWNER_CONFIG.name} · {SITE_CONFIG.title}
+                © {new Date().getFullYear()} {OWNER_CONFIG.name} · {SITE_CONFIG.brand}
                 <span className="blink ml-1 text-[var(--accent)]">_</span>
             </footer>
         </div>

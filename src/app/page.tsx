@@ -2,7 +2,7 @@ import ArticleCard from "@/components/ArticleCard";
 import Card from "@/components/Card";
 import Frame from "@/components/Frame";
 import Pagination from "@/components/Pagination";
-import { DOCUMENT_CONFIG } from "@/config";
+import { DOCUMENT_CONFIG, SITE_CONFIG } from "@/config";
 import { categories as getGategories } from "@/utils/document";
 
 export default async function Home() {
@@ -21,6 +21,9 @@ export default async function Home() {
                 </div>
                 <span className="retro-chip shrink-0">{articles.length} 篇</span>
             </section>
+            <p className="px-1 text-sm leading-6 text-[var(--muted)]">
+                {SITE_CONFIG.description}
+            </p>
             {
                 articles.length === 0 &&
                 <Card className="p-8 text-center text-sm text-[var(--muted)]">

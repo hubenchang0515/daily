@@ -1,13 +1,50 @@
+import type { Metadata } from "next";
 import ArticleCard from "@/components/ArticleCard";
 import Card from "@/components/Card";
 import Frame from "@/components/Frame";
 import Pagination from "@/components/Pagination";
-import { DOCUMENT_CONFIG } from "@/config";
+import { DOCUMENT_CONFIG, SITE_CONFIG } from "@/config";
 import { categories as getGategories } from "@/utils/document";
+import { absoluteUrl, categoryPath } from "@/utils/seo";
 
 export interface PageParams {
     category:string;    // 分类： 例如 Python 等
     page:string;        // 页码
+}
+
+export async function generateMetadata({params}:{params:Promise<PageParams>}): Promise<Metadata> {
+    const path = await params;
+    const name = decodeURIComponent(path.category);
+    const page = Number(path.page);
+    const categories = await getGategories();
+    const category = categories.find(item => item.name === name);
+    const last = Math.max(1, Math.ceil((category?.articles.length ?? 0) / DOCUMENT_CONFIG.pageSize));
+    const title = page <= 1 ? `${name} 分类` : `${name} 分类 - 第 ${page} 页`;
+    const description = `码日新「${name}」分类第 ${page} 页，共 ${last} 页，包含 ${name} 相关的编程实战文章。`;
+    const url = page <= 1
+        ? absoluteUrl(categoryPath(name))
+        : absoluteUrl(`${categoryPath(name)}/page/${page}`);
+
+    return {
+        title,
+        description,
+        alternates: {
+            canonical: url,
+        },
+        openGraph: {
+            type: 'website',
+            locale: SITE_CONFIG.locale,
+            url,
+            siteName: SITE_CONFIG.brand,
+            title,
+            description,
+        },
+        twitter: {
+            card: 'summary',
+            title,
+            description,
+        },
+    };
 }
 
 // 生成静态页面路径
@@ -70,8 +107,8 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
                 </Card>
             }
             <Pagination
-                previous={page > 1 ? `/${path.category}/page/${page-1}` : undefined}
-                next={page < last ? `/${path.category}/page/${page+1}` : undefined}
+                previous={page > 1 ? `${categoryPath(name)}/page/${page-1}` : undefined}
+                next={page < last ? `${categoryPath(name)}/page/${page+1}` : undefined}
                 page={last > 0 ? page : undefined}
                 last={last > 0 ? last : undefined}
             />

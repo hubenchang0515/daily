@@ -1,12 +1,45 @@
+import type { Metadata } from "next";
 import ArticleCard from "@/components/ArticleCard";
 import Card from "@/components/Card";
 import Frame from "@/components/Frame";
 import Pagination from "@/components/Pagination";
-import { DOCUMENT_CONFIG } from "@/config";
+import { DOCUMENT_CONFIG, SITE_CONFIG } from "@/config";
 import { categories as getGategories } from "@/utils/document";
+import { absoluteUrl } from "@/utils/seo";
 
 export interface PageParams {
     page:string;    // 页码
+}
+
+export async function generateMetadata({params}:{params:Promise<PageParams>}): Promise<Metadata> {
+    const path = await params;
+    const page = Number(path.page);
+    const title = page <= 1 ? '最新文章' : `最新文章 - 第 ${page} 页`;
+    const description = page <= 1
+        ? SITE_CONFIG.description
+        : `码日新最新文章列表第 ${page} 页，持续更新 Python、Linux、Lua、HTML 等编程实战文章。`;
+    const url = page <= 1 ? absoluteUrl('/') : absoluteUrl(`/page/${page}`);
+
+    return {
+        title,
+        description,
+        alternates: {
+            canonical: url,
+        },
+        openGraph: {
+            type: 'website',
+            locale: SITE_CONFIG.locale,
+            url,
+            siteName: SITE_CONFIG.brand,
+            title,
+            description,
+        },
+        twitter: {
+            card: 'summary',
+            title,
+            description,
+        },
+    };
 }
 
 // 生成静态页面路径
