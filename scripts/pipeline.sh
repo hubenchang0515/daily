@@ -9,5 +9,6 @@ source $HOME/.nvm/nvm.sh
 
 cd $PROJECT_DIR
 npm run gen -- "$1" -m "$2"
+npm run build
 npm run commit
 npm run deploy
