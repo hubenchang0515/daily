@@ -14,7 +14,7 @@
     "deploy": "npm run deploy:cf",
     "deploy:gh": "gh-pages -d out -t",
     "deploy:cf": "npx wrangler pages deploy out --branch main --project-name daily-xplanc",
-    "commit": "git commit -a -m '自动提交' && git push origin master "
+    "commit": "git add daily-document && git commit -a -m '自动提交' && git push origin master "
   },
   "dependencies": {
     "@giscus/react": "^3.1.0",
