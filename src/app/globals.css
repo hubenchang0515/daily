@@ -227,6 +227,14 @@ body::after {
   border-color: var(--border);
 }
 
+/* Tailwind 只要在源码里看到 `table` 就会生成 .table { display: table }，
+   Prism 的 TOML 高亮又会把 `[project]` 的表名标记成 token table，
+   于是这个高亮 token 被当成块级表格元素，导致代码块里出现异常换行。
+   把代码块里的 token 统一固定为行内元素，行号的内联样式仍然优先。 */
+.markdown-body .token {
+  display: inline;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
