@@ -44,6 +44,7 @@ html {
 body {
   min-height: 100vh;
   color: var(--fg);
+  background-attachment: fixed;
   background-color: var(--bg);
   background-image:
     url('/clouds.svg'),

@@ -48,9 +48,9 @@ export const LINKS = [
     },
 
     {
-        icon: "https://idea.js.org/favicon.svg",
+        icon: "https://idea.xplanc.org/favicon.svg",
         title: "想法",
-        url: "https://idea.js.org/",
+        url: "https://idea.xplanc.org/",
     },
 
     {
