@@ -1,23 +1,4 @@
-import { getPrimerLink, getPrimerSitemap } from './primers';
-
-// 文章分类对应的 Primer 语言
-const CATEGORY_LANGUAGES: Record<string, string[]> = {
-    html: ['html'],
-    python: ['python'],
-    lua: ['lua'],
-    linux: ['bash'],
-    bash: ['bash', 'shell', 'sh'],
-    shell: ['bash', 'shell', 'sh'],
-    sh: ['bash', 'shell', 'sh'],
-    c: ['c'],
-    cpp: ['c'],
-    'c++': ['c'],
-};
-
-function languageCandidates(category: string): string[] {
-    const languages = CATEGORY_LANGUAGES[category.toLocaleLowerCase()];
-    return languages ?? Object.keys(getPrimerSitemap());
-}
+import { getPrimerLink, primerLanguages } from './primers';
 
 function replaceCodeSpans(text: string, languages: string[]): string {
     return text.replace(/(?<!`)(`+)(?!`)([^`\n]*?)\1(?!`)/g, (span, ticks, content) => {
@@ -28,7 +9,7 @@ function replaceCodeSpans(text: string, languages: string[]): string {
 
 // 生成用于转载的 Markdown：保留代码块，将可匹配的 code span 替换为 Primer 链接
 export function markdownForRepost(markdown: string, category: string): string {
-    const languages = languageCandidates(category);
+    const languages = primerLanguages(category);
     const lines = markdown.split('\n');
     const result: string[] = [];
     let buffer: string[] = [];

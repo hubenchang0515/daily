@@ -2,7 +2,7 @@ import { getPrimerLink } from "@/utils/primers";
 
 export interface DocLinkProps {
     text: string;
-    lang: string;
+    lang: string | string[];
 }
 
 export default function DocLink(props:DocLinkProps) {

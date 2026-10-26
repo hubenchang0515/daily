@@ -50,6 +50,25 @@ const PATTERNS: Pattern[] = [
     },
 ]
 
+// 文章分类对应的 Primer 语言
+const CATEGORY_LANGUAGES: Record<string, string[]> = {
+    html: ['html'],
+    python: ['python'],
+    lua: ['lua'],
+    linux: ['bash'],
+    bash: ['bash', 'shell', 'sh'],
+    shell: ['bash', 'shell', 'sh'],
+    sh: ['bash', 'shell', 'sh'],
+    c: ['c'],
+    cpp: ['c'],
+    'c++': ['c'],
+};
+
+// 根据文章分类得到候选语言，未知分类时匹配全部语言
+export function primerLanguages(category: string): string[] {
+    return CATEGORY_LANGUAGES[category.toLocaleLowerCase()] ?? Object.keys(getPrimerSitemap());
+}
+
 // 构建时由 scripts/fetch-primers-sitemap.mjs 生成
 const SITEMAP_FILE = path.join(process.cwd(), '.cache', 'primers-sitemap.xml');
 
@@ -91,25 +110,30 @@ export function getPrimerSitemap(): Record<string, SitemapNode> {
     return sitemap;
 }
 
-// 限定名或调用表达式，如 `setmetatable(t, mt)`、`table.insert`、`debug.getmetatable(t)`
-const CALL_EXPRESSION = /^\s*([A-Za-z_$][\w$]*(?:\s*[.:]\s*[A-Za-z_$][\w$]*)*)\s*(?:\([\s\S]*\))?\s*$/;
+// 文本开头的限定名，如 `setmetatable(t, mt)`、`table.insert`、`du -x -h`
+const LEADING_NAME = /^\s*([A-Za-z_$][\w$]*(?:\s*[.:]\s*[A-Za-z_$][\w$]*)*)/;
 
-// 提取可用于匹配的候选键：原文本、限定名，以及模块名（如 debug.getmetatable → debug）
+// 提取可用于匹配的候选键：原文本、命令/函数名，以及模块名
 function primerKeys(text: string): string[] {
     const key = text.replace(/^\W+|\W+$/g, '');
-    const match = CALL_EXPRESSION.exec(text);
+    const keys = [key];
 
-    if (!match) {
-        return [key];
+    // `sudo xxx` 优先匹配 xxx，匹配不上时再退回 sudo
+    const source = text.replace(/^\s*sudo(?=\s|$)/, '');
+    const name = LEADING_NAME.exec(source)?.[1].replace(/\s+/g, '');
+
+    if (name) {
+        keys.push(name);
+
+        // 带命名空间时退化到模块名匹配，如 table.insert → table、debug.getmetatable → debug
+        const parts = name.split(/[.:]/);
+        for (let i = 1; i < parts.length; i++) {
+            keys.push(parts.slice(0, i).join('.'));
+        }
     }
 
-    const name = match[1].replace(/\s+/g, '');
-    const keys = [key, name];
-    const parts = name.split(/[.:]/);
-
-    // 带命名空间时退化到模块名匹配，如 table.insert(t, v) → table、debug.getmetatable → debug
-    for (let i = 1; i < parts.length; i++) {
-        keys.push(parts.slice(0, i).join('.'));
+    if (source !== text) {
+        keys.push('sudo');
     }
 
     return Array.from(new Set(keys));

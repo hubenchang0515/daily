@@ -20,6 +20,7 @@ export default async function ArticleCard(props:ArticleProps) {
                 <Markdown 
                     content={text.split('\n').slice(0, 10).join('\n')}
                     href={`/${encodeURIComponent(props.category)}/${encodeURIComponent(props.name)}`} 
+                    lang={props.category}
                 />
             </div>
             <Link 

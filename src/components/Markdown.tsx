@@ -5,6 +5,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus as highlight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Link from './Link';
 import DocLink from './DocLink';
+import { getPrimerSitemap, primerLanguages } from '@/utils/primers';
 
 export async function hash(algorithm:string, data:BufferSource) {
     const hashBuffer = await crypto.subtle.digest(algorithm, data);
@@ -23,6 +24,7 @@ export async function anchorHash(text:string) {
 export interface MarkdownProps {
     content:string;
     href:string;
+    lang?:string;       // 文章分类，用于匹配 Primer 文档链接
 }
 
 function CodeNode(props:{node:rendererNode, stylesheet: { [key: string]: React.CSSProperties }, context:string, rows:number}) {
@@ -59,12 +61,13 @@ function CodeNode(props:{node:rendererNode, stylesheet: { [key: string]: React.C
 }
 
 export default function Markdown(props: MarkdownProps) {
-    
+    const languages = props.lang ? primerLanguages(props.lang) : Object.keys(getPrimerSitemap());
+
     return (
         <article className='markdown-body text-[15px] leading-7 text-[var(--fg)]'>
             <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
-                components={MakeComponents(props.href)}
+                components={MakeComponents(props.href, languages)}
             >
                 {props.content}
             </ReactMarkdown>
@@ -72,7 +75,7 @@ export default function Markdown(props: MarkdownProps) {
     )
 }
 
-const MakeComponents = (href:string):Components => {
+const MakeComponents = (href:string, languages:string[]):Components => {
     return {
         async h1(props) { 
             return (
@@ -263,7 +266,7 @@ const MakeComponents = (href:string):Components => {
             } else {
                 return (
                     <code className="border border-[var(--border)] bg-[var(--panel-2)] px-1 text-[var(--accent-2)]">
-                        {children}
+                        <DocLink text={children?.toString() ?? ''} lang={languages}/>
                     </code>
                 )
             }
