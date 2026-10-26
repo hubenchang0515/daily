@@ -91,15 +91,44 @@ export function getPrimerSitemap(): Record<string, SitemapNode> {
     return sitemap;
 }
 
+// 限定名或调用表达式，如 `setmetatable(t, mt)`、`table.insert`、`debug.getmetatable(t)`
+const CALL_EXPRESSION = /^\s*([A-Za-z_$][\w$]*(?:\s*[.:]\s*[A-Za-z_$][\w$]*)*)\s*(?:\([\s\S]*\))?\s*$/;
+
+// 提取可用于匹配的候选键：原文本、限定名，以及模块名（如 debug.getmetatable → debug）
+function primerKeys(text: string): string[] {
+    const key = text.replace(/^\W+|\W+$/g, '');
+    const match = CALL_EXPRESSION.exec(text);
+
+    if (!match) {
+        return [key];
+    }
+
+    const name = match[1].replace(/\s+/g, '');
+    const keys = [key, name];
+    const parts = name.split(/[.:]/);
+
+    // 带命名空间时退化到模块名匹配，如 table.insert(t, v) → table、debug.getmetatable → debug
+    for (let i = 1; i < parts.length; i++) {
+        keys.push(parts.slice(0, i).join('.'));
+    }
+
+    return Array.from(new Set(keys));
+}
+
 // 根据文本查找对应的 Primer 文档链接
 export function getPrimerLink(text: string, languages: string | string[]): string | undefined {
     const data = getPrimerSitemap();
-    const key = text.replace(/^\W+|\W+$/g, '');
 
     for (const language of Array.isArray(languages) ? languages : [languages]) {
         const links = data[language.toLocaleLowerCase()]?.links;
-        if (links && Object.hasOwn(links, key)) {
-            return links[key];
+        if (!links) {
+            continue;
+        }
+
+        for (const key of primerKeys(text)) {
+            if (Object.hasOwn(links, key)) {
+                return links[key];
+            }
         }
     }
 
