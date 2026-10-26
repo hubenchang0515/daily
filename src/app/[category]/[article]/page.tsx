@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ListIcon from "@/assets/icons/ListIcon";
+import ArticleNav from "@/components/ArticleNav";
 import Card from "@/components/Card";
 import Discussion from "@/components/Discussion";
 import Frame from "@/components/Frame";
@@ -87,6 +88,9 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
     const article = articleName.replace(/\.md$/, '');
     const title = markdownTitle(text) ?? article;
     const { createdTime, updatedTime } = await state(category, articleName);
+    const index = articles.findIndex(item => item.category === category && item.name === articleName);
+    const previous = index > 0 ? articles[index - 1] : undefined;                     // 列表中较新的一篇
+    const next = index >= 0 && index < articles.length - 1 ? articles[index + 1] : undefined;  // 列表中较旧的一篇
     const repost = `${markdownForRepost(text, category).trimEnd()}\n\n---\n\n> 转载自：[${title} - ${SITE_CONFIG.brand}](${href})\n`;
 
     const jsonLd = {
@@ -150,12 +154,12 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
             <Frame categories={categories} articles={articles.slice(0,30)}>
-            <nav aria-label="面包屑" className="flex flex-wrap items-center gap-2 px-1 text-[10px] tracking-[0.14em] text-[var(--muted)]">
-                <Link href="/" className="transition-colors hover:text-[var(--accent)]">~</Link>
-                <span>/</span>
-                <Link href={categoryPath(category)} className="transition-colors hover:text-[var(--accent)]">{category}</Link>
-                <span>/</span>
-                <span className="truncate text-[var(--fg)]">{article}.md</span>
+            <nav aria-label="面包屑" className="flex flex-nowrap items-center gap-2 overflow-hidden px-1 text-[10px] tracking-[0.14em] text-[var(--muted)]">
+                <Link href="/" className="shrink-0 transition-colors hover:text-[var(--accent)]">~</Link>
+                <span className="shrink-0">/</span>
+                <Link href={categoryPath(category)} className="shrink-0 transition-colors hover:text-[var(--accent)]">{category}</Link>
+                <span className="shrink-0">/</span>
+                <span className="min-w-0 truncate text-[var(--fg)]">{article}.md</span>
             </nav>
             <Card className="p-0">
                 <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-[var(--border)] bg-[var(--panel-2)] px-4 py-2 text-[10px] tracking-[0.16em] text-[var(--muted)]">
@@ -171,6 +175,7 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
                 <div className="p-5 sm:p-8">
                     <Markdown content={text} href={href} lang={category}/>
                 </div>
+                <ArticleNav previous={previous} next={next}/>
             </Card>
             <Discussion/>
             </Frame>
