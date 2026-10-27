@@ -1,4 +1,4 @@
-:HL["/daily/_next/static/chunks/0k-dax3s1-gob.css","style"]
+:HL["/daily/_next/static/chunks/14o-g914zuj99.css","style"]
 :HL["/daily/favicon.svg","image"]
 :HL["https://hubenchang0515.github.io/icons/launcher.svg","image"]
 :HL["https://primers.xplanc.org/favicon.svg","image"]
@@ -11,4 +11,4 @@
 3:[["children",{"s":"__PAGE__","h":160}]]
 2:[["children",{"s":{"n":"article","t":"d","k":"Lua-%E5%85%83%E8%A1%A8%E5%AE%9E%E6%88%98%EF%BC%9A%E5%8F%AA%E8%AF%BB%E8%A1%A8%E3%80%81%E9%BB%98%E8%AE%A4%E5%80%BC%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD.md","s":["page"]},"h":96,"c":"$Q3"}]]
 1:[["children",{"s":{"n":"category","t":"d","k":"lua","s":["page"]},"h":96,"c":"$Q2"}]]
-0:{"b":"F_94zkvKrLgvuWkQQOvg4","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"Wxwmm04JgYYRQdDE9u8hm","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
