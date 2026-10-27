@@ -11,4 +11,4 @@
 3:[["children",{"s":"__PAGE__","h":160}]]
 2:[["children",{"s":{"n":"article","t":"d","k":"%E6%9C%AC%E5%91%A8%E8%BF%81%E7%A7%BB%E5%AE%9E%E5%BD%95%EF%BC%9A%E6%8A%8A-pip-%E6%8D%A2%E6%88%90-uv.md","s":["page"]},"h":96,"c":"$Q3"}]]
 1:[["children",{"s":{"n":"category","t":"d","k":"%E6%AF%8F%E5%91%A8%E6%8A%A5%E5%91%8A","s":["page"]},"h":96,"c":"$Q2"}]]
-0:{"b":"wd00F0Qr5mOp_d7ZRAT1s","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"nb_er_WHwFoKa2rYo80mm","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
