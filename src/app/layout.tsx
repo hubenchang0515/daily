@@ -93,11 +93,14 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body style={bodyStyle}>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
-        />
-        {children}
+        <div className="site-bg" aria-hidden="true" />
+        <div className="site-content">
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+          />
+          {children}
+        </div>
       </body>
     </html>
   );
