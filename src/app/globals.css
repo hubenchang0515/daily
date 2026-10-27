@@ -80,6 +80,45 @@ body {
   z-index: 1;
 }
 
+/* 内链跳转提示：固定居中，避免遮挡内容，仅作状态反馈 */
+.nav-hint {
+  position: fixed;
+  top: 32px;
+  left: 50%;
+  z-index: 200;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: calc(100vw - 24px);
+  padding: 6px 14px;
+  border: 2px solid var(--border);
+  border-radius: 2px;
+  background: var(--panel);
+  box-shadow: 4px 4px 0 var(--shadow);
+  color: var(--fg);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translate(-50%, 0);
+  animation: nav-hint-in 0.18s ease-out both;
+}
+
+.nav-hint .blink {
+  color: var(--accent);
+}
+
+@keyframes nav-hint-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -8px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
 @keyframes clouds-drift {
   from {
     transform: translate3d(0, 0, 0);
@@ -276,6 +315,7 @@ body::after {
 
   .animate-rise,
   .blink,
+  .nav-hint,
   .site-bg::before,
   body {
     animation: none;

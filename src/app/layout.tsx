@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { OWNER_CONFIG, SITE_CONFIG } from "@/config";
 import { absoluteUrl } from "@/utils/seo";
+import NavigationHint from "@/components/NavigationHint";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.origin),
@@ -101,6 +102,7 @@ export default function RootLayout({
           />
           {children}
         </div>
+        <NavigationHint />
       </body>
     </html>
   );
