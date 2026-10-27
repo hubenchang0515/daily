@@ -174,3 +174,7 @@ cat /proc/pressure/memory
 当 `some avg10` 持续升高时，说明进程已经在为内存等待，这通常比 OOM 更早发出信号。对于桌面或小内存机器，也可以考虑 `systemd-oomd` 或 `earlyoom`，在系统完全卡死前主动处理高压力进程。
 
 最后记住排查顺序：**先看 `available`，再找 OOM 日志，然后按 `RssAnon` 定位进程，最后检查 cgroup 限额**。大多数“内存突然没了”的问题，都能在这四步内收敛到具体原因。
+
+---
+
+> 原文链接：[Linux 内存去哪了：一次 OOM Killer 排查实录](https://daily.xplanc.org/linux/Linux-%E5%86%85%E5%AD%98%E5%8E%BB%E5%93%AA%E4%BA%86%EF%BC%9A%E4%B8%80%E6%AC%A1-OOM-Killer-%E6%8E%92%E6%9F%A5%E5%AE%9E%E5%BD%95.md)

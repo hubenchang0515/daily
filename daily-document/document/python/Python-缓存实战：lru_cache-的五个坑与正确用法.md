@@ -257,3 +257,7 @@ print(calls)   # 通常会大于 1
 - 线程安全不等于只执行一次，有副作用时请自己控制并发。
 
 把这些边界想清楚，`lru_cache` 才是那个"一行就能提速"的工具，而不是下一场内存泄漏的起点。
+
+---
+
+> 原文链接：[Python 缓存实战：lru_cache 的五个坑与正确用法](https://daily.xplanc.org/python/Python-%E7%BC%93%E5%AD%98%E5%AE%9E%E6%88%98%EF%BC%9Alru_cache-%E7%9A%84%E4%BA%94%E4%B8%AA%E5%9D%91%E4%B8%8E%E6%AD%A3%E7%A1%AE%E7%94%A8%E6%B3%95.md)

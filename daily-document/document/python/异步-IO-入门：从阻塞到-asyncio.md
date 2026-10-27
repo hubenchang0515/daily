@@ -103,3 +103,7 @@ asyncio.run(main())
 判断标准很简单：**任务是否在等 IO，且并发量是否较大**。爬虫、API 网关、WebSocket 服务、批量数据库查询都适合；图像处理、数值计算则不适合。
 
 如果是新项目，可以从 `asyncio` 标准库起步；需要 HTTP 客户端时再引入 `aiohttp` 或 `httpx`。关键是先把“等待时不占着线程”这个思维建立起来，剩下的 API 都是围绕它展开的。
+
+---
+
+> 原文链接：[异步 IO 入门：从阻塞到 asyncio](https://daily.xplanc.org/python/%E5%BC%82%E6%AD%A5-IO-%E5%85%A5%E9%97%A8%EF%BC%9A%E4%BB%8E%E9%98%BB%E5%A1%9E%E5%88%B0-asyncio.md)

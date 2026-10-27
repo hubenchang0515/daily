@@ -91,7 +91,7 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
     const index = articles.findIndex(item => item.category === category && item.name === articleName);
     const previous = index > 0 ? articles[index - 1] : undefined;                     // 列表中较新的一篇
     const next = index >= 0 && index < articles.length - 1 ? articles[index + 1] : undefined;  // 列表中较旧的一篇
-    const repost = `${markdownForRepost(text, category).trimEnd()}\n\n---\n\n> 转载自：[${title} - ${SITE_CONFIG.brand}](${href})\n`;
+    const repost = `${markdownForRepost(text, category).trimEnd()}\n`;
 
     const jsonLd = {
         '@context': 'https://schema.org',

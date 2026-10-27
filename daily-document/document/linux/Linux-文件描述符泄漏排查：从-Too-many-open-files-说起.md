@@ -235,3 +235,7 @@ echo 'fs.file-max=2097152' | sudo tee /etc/sysctl.d/99-file-max.conf
 6. 修复代码，把提高 limit 只当作缓冲，而不是解决方案。
 
 FD 泄漏的危险之处在于它通常不会立刻让服务崩溃，而是先表现为偶发超时、连接失败，最后才集中报错。越早把 FD 数量纳入监控，越容易在故障前找到那条没有关闭的连接。
+
+---
+
+> 原文链接：[Linux 文件描述符泄漏排查：从 Too many open files 说起](https://daily.xplanc.org/linux/Linux-%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6%E6%B3%84%E6%BC%8F%E6%8E%92%E6%9F%A5%EF%BC%9A%E4%BB%8E-Too-many-open-files-%E8%AF%B4%E8%B5%B7.md)

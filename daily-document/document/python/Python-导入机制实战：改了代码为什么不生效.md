@@ -188,3 +188,7 @@ ImportError: attempted relative import with no known parent package
 7. 检查 `PYTHONPATH`、`.pth` 文件、虚拟环境是否指向了另一份代码
 
 最后一条经验：**遇到"代码没生效"，先假设是环境问题，再假设是逻辑问题**。把导入路径打出来，往往比读十遍代码更快。
+
+---
+
+> 原文链接：[Python 导入机制实战：改了代码为什么不生效](https://daily.xplanc.org/python/Python-%E5%AF%BC%E5%85%A5%E6%9C%BA%E5%88%B6%E5%AE%9E%E6%88%98%EF%BC%9A%E6%94%B9%E4%BA%86%E4%BB%A3%E7%A0%81%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%94%9F%E6%95%88.md)

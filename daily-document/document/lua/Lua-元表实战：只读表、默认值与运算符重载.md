@@ -221,3 +221,7 @@ print(err) -- cannot change a protected metatable
 ## 小结
 
 元表不是语法糖，而是 Lua 的扩展机制。掌握 `__index` 和 `__newindex`，就能实现默认配置、继承和只读代理；掌握运算符元方法，就能写出可读性更好的领域对象。使用前先想清楚“原始操作在什么条件下才会触发元方法”，再决定用函数还是表，大部分坑都可以提前避开。
+
+---
+
+> 原文链接：[Lua 元表实战：只读表、默认值与运算符重载](https://daily.xplanc.org/lua/Lua-%E5%85%83%E8%A1%A8%E5%AE%9E%E6%88%98%EF%BC%9A%E5%8F%AA%E8%AF%BB%E8%A1%A8%E3%80%81%E9%BB%98%E8%AE%A4%E5%80%BC%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD.md)

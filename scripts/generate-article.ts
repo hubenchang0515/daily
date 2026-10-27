@@ -3,6 +3,7 @@ import path from 'node:path';
 import { spawn } from 'node:child_process';
 import { parseArgs } from 'node:util';
 import { DOCUMENT_CONFIG } from '../src/config';
+import { absoluteUrl, articlePath } from '../src/utils/seo';
 
 const DEFAULT_MODEL = 'opencode/beam-free';
 
@@ -268,12 +269,17 @@ async function main(): Promise<void> {
         throw new Error('无法生成文件名，请使用 --slug 指定');
     }
 
+    // 末尾追加原文链接，便于转载时保留出处
+    const title = titleOf(content) ?? slug;
+    const url = absoluteUrl(articlePath(category, `${slug}.md`));
+    const article = `${content}\n\n---\n\n> 原文链接：[${title}](${url})\n`;
+
     const directory = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document', category);
     const file = path.join(directory, `${slug}.md`);
     const relative = path.relative(process.cwd(), file);
 
     if (dryRun) {
-        console.log(content);
+        console.log(article);
         console.error(`[dry-run] 未写入文件: ${relative}`);
         return;
     }
@@ -283,8 +289,8 @@ async function main(): Promise<void> {
     }
 
     await fs.mkdir(directory, { recursive: true });
-    await fs.writeFile(file, content.endsWith('\n') ? content : `${content}\n`, 'utf8');
-    console.log(`文章已生成: ${relative} (${content.length} 字符)`);
+    await fs.writeFile(file, article, 'utf8');
+    console.log(`文章已生成: ${relative} (${article.length} 字符)`);
 }
 
 main().catch((err: unknown) => {
