@@ -1,5 +1,5 @@
 User-Agent: *
 Allow: /
 
-Host: https://daily.xplanc.org
-Sitemap: https://daily.xplanc.org/daily/sitemap.xml
+Host: https://hubenchang0515.github.io
+Sitemap: https://hubenchang0515.github.io/daily/sitemap.xml
