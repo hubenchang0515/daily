@@ -1,6 +1,10 @@
 #!/usr/bin/bash
 
+# 出错时退出，不继续执行
 set -e
+
+# 重定向到日志
+exec > >(tee -a /tmp/daily.log) 2>&1
 
 SCRIPT_DIR="$(dirname $(readlink -f $0))"
 PROJECT_DIR="$(dirname -- "$SCRIPT_DIR")"
