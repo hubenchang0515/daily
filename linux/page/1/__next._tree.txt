@@ -1,4 +1,4 @@
-:HL["/daily/_next/static/chunks/27fv3mcpfzu-g.css","style"]
+:HL["/daily/_next/static/chunks/1iy3kq3bqvx1a.css","style"]
 :HL["/daily/favicon.svg","image"]
 :HL["https://hubenchang0515.github.io/icons/launcher.svg","image"]
 :HL["https://primers.xplanc.org/favicon.svg","image"]
@@ -12,4 +12,4 @@
 3:[["children",{"s":{"n":"page","t":"d","k":"1","s":[]},"h":96,"c":"$Q4"}]]
 2:[["children",{"s":"page","h":96,"c":"$Q3"}]]
 1:[["children",{"s":{"n":"category","t":"d","k":"linux","s":["page"]},"h":96,"c":"$Q2"}]]
-0:{"b":"DqJ5N7o6tI4AvA0QqP4oh","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"ELmzsw-OMZBn4Hztfsa0Q","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
