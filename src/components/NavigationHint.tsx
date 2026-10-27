@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, useCallback } from "react";
 
-const SHOW_DELAY = 150;      // 跳转太快时不闪烁，延迟一小会儿再显示
+const MIN_VISIBLE = 300;     // 命中缓存秒开时，也保证提示可见约 300ms
 const SAFETY_TIMEOUT = 5000; // 跳转失败或超时后的兜底隐藏时间
 
 function isInternalNavigation(anchor: HTMLAnchorElement, event: MouseEvent): boolean {
@@ -23,26 +23,33 @@ function isInternalNavigation(anchor: HTMLAnchorElement, event: MouseEvent): boo
 export default function NavigationHint() {
     const pathname = usePathname();
     const [visible, setVisible] = useState(false);
-    const showTimer = useRef<number | undefined>(undefined);
+    const shownAt = useRef(0);
     const hideTimer = useRef<number | undefined>(undefined);
 
-    const clearTimers = useCallback(() => {
-        window.clearTimeout(showTimer.current);
+    const clearHideTimer = useCallback(() => {
         window.clearTimeout(hideTimer.current);
     }, []);
 
-    useEffect(() => {
-        // 路由变化即视为跳转完成
-        clearTimers();
+    const hide = useCallback(() => {
+        clearHideTimer();
+        shownAt.current = 0;
         setVisible(false);
-    }, [pathname, clearTimers]);
+    }, [clearHideTimer]);
 
     useEffect(() => {
-        const hide = () => {
-            clearTimers();
-            setVisible(false);
-        };
+        // 路由已变化；未展示满 MIN_VISIBLE 时延后隐藏，避免秒开时一闪而过
+        clearHideTimer();
+        if (shownAt.current === 0) return;
 
+        const remaining = MIN_VISIBLE - (performance.now() - shownAt.current);
+        if (remaining > 0) {
+            hideTimer.current = window.setTimeout(hide, remaining);
+        } else {
+            hide();
+        }
+    }, [pathname, clearHideTimer, hide]);
+
+    useEffect(() => {
         const onClick = (event: MouseEvent) => {
             const target = event.target;
             if (!(target instanceof Element)) return;
@@ -51,9 +58,10 @@ export default function NavigationHint() {
             if (!(anchor instanceof HTMLAnchorElement)) return;
             if (!isInternalNavigation(anchor, event)) return;
 
-            clearTimers();
-            showTimer.current = window.setTimeout(() => setVisible(true), SHOW_DELAY);
-            hideTimer.current = window.setTimeout(() => setVisible(false), SAFETY_TIMEOUT);
+            clearHideTimer();
+            shownAt.current = performance.now();
+            setVisible(true);
+            hideTimer.current = window.setTimeout(hide, SAFETY_TIMEOUT);
         };
 
         document.addEventListener("click", onClick, true);
@@ -62,9 +70,9 @@ export default function NavigationHint() {
         return () => {
             document.removeEventListener("click", onClick, true);
             window.removeEventListener("popstate", hide);
-            clearTimers();
+            clearHideTimer();
         };
-    }, [clearTimers]);
+    }, [clearHideTimer, hide]);
 
     if (!visible) return null;
 
