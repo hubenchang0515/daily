@@ -1,0 +1,1 @@
+{"name":"每日文章","short_name":"码日新 · 每日文章","description":"苟日新，日日新，又日新。每天一篇通俗易懂的编程实战文章，涵盖 Python、Linux、Lua、HTML。","start_url":"/daily/","scope":"/daily/","display":"standalone","background_color":"#5c94fc","theme_color":"#5c94fc","lang":"zh-CN","icons":[{"src":"/daily/favicon.svg","sizes":"any","type":"image/svg+xml"}]}
