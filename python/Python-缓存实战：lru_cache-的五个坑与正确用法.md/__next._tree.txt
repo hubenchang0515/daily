@@ -11,4 +11,4 @@
 3:[["children",{"s":"__PAGE__","h":160}]]
 2:[["children",{"s":{"n":"article","t":"d","k":"Python-%E7%BC%93%E5%AD%98%E5%AE%9E%E6%88%98%EF%BC%9Alru_cache-%E7%9A%84%E4%BA%94%E4%B8%AA%E5%9D%91%E4%B8%8E%E6%AD%A3%E7%A1%AE%E7%94%A8%E6%B3%95.md","s":["page"]},"h":96,"c":"$Q3"}]]
 1:[["children",{"s":{"n":"category","t":"d","k":"python","s":["page"]},"h":96,"c":"$Q2"}]]
-0:{"b":"tFWaPcDDDiTlzDeROLSLF","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"F_94zkvKrLgvuWkQQOvg4","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
