@@ -64,6 +64,12 @@ export const viewport: Viewport = {
   ],
 };
 
+// CSS 中的 url() 不会自动加上 basePath，这里通过 CSS 变量注入带 basePath 的地址
+const bodyStyle = {
+  "--clouds-url": `url('${SITE_CONFIG.basePath}/clouds.svg')`,
+  "--digital-rain-url": `url('${SITE_CONFIG.basePath}/digital-rain.svg')`,
+} as React.CSSProperties;
+
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -86,7 +92,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN">
-      <body>
+      <body style={bodyStyle}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}

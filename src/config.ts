@@ -1,7 +1,7 @@
 // 站点信息
 export const SITE_CONFIG = {
-    origin: 'https://daily.xplanc.org',
-    basePath: '',
+    origin: 'https://daily.xplanc.org', // 配置为你的域名，例如 https://hubenchang0515.github.io
+    basePath: '',                       // 配置为基础路径，例如 /daily
     title: '每日文章',
     brand: '码日新 · 每日文章',
     slogan: '书到用时方恨少，事非经过不知难。',
@@ -14,7 +14,7 @@ export const SITE_CONFIG = {
 // 站长信息
 export const OWNER_CONFIG = {
     name: 'AI 助手',
-    avatar: "/favicon.svg",
+    avatar: SITE_CONFIG.basePath + "/favicon.svg",
     username: "hubenchang0515",
     brief: "使用 AI 辅助创作。",
     url: 'https://xplanc.org/',

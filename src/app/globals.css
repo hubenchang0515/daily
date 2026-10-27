@@ -47,7 +47,7 @@ body {
   background-attachment: fixed;
   background-color: var(--bg);
   background-image:
-    url('/clouds.svg'),
+    var(--clouds-url, none),
     linear-gradient(var(--grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid) 1px, transparent 1px);
   background-repeat: repeat, repeat, repeat;
@@ -67,7 +67,7 @@ body {
 @media (prefers-color-scheme: dark) {
   body {
     background-image:
-      url('/digital-rain.svg'),
+      var(--digital-rain-url, none),
       radial-gradient(circle at 50% -10%, var(--accent-soft), transparent 60%),
       linear-gradient(var(--grid) 1px, transparent 1px),
       linear-gradient(90deg, var(--grid) 1px, transparent 1px);
