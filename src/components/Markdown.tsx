@@ -175,9 +175,11 @@ const MakeComponents = (href:string, languages:string[]):Components => {
 
         async table(props) {
             return (
-                <table className='my-4 mx-auto max-w-full border-2 border-[var(--border)] bg-[var(--panel)]'>
-                    { props.children }
-                </table>
+                <div className='my-4 max-w-full overflow-x-auto'>
+                    <table className='mx-auto border-2 border-[var(--border)] bg-[var(--panel)]'>
+                        { props.children }
+                    </table>
+                </div>
             )
         },
 
@@ -265,7 +267,7 @@ const MakeComponents = (href:string, languages:string[]):Components => {
                 )
             } else {
                 return (
-                    <code className="border border-[var(--border)] bg-[var(--panel-2)] px-1 text-[var(--accent-2)]">
+                    <code className="border border-[var(--border)] bg-[var(--panel-2)] px-1 text-[var(--accent-2)] [overflow-wrap:anywhere]">
                         <DocLink text={children?.toString() ?? ''} lang={languages}/>
                     </code>
                 )
