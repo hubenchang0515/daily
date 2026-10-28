@@ -1,4 +1,3 @@
-import GamepadIcon from "@/assets/icons/GamepadIcon";
 import GitHubIcon from "@/assets/icons/GitHubIcon";
 import { LINKS, OWNER_CONFIG, SITE_CONFIG } from "@/config";
 import React from "react";
@@ -24,9 +23,13 @@ export default function Frame(props:FrameProps)
             <header className="mx-auto w-full max-w-[1500px] px-3 pt-3 sm:px-4 sm:pt-4">
                 <div className="retro-panel flex items-center justify-between gap-3 px-4 py-3">
                     <Link href="/" className="group flex min-w-0 items-center gap-3">
-                        <span className="grid h-10 w-10 shrink-0 place-items-center border-2 border-[var(--border)] bg-[var(--accent)] text-[var(--on-accent)] shadow-[3px_3px_0_var(--shadow)] transition-transform duration-150 group-hover:-translate-y-0.5">
-                            <GamepadIcon className="h-6 w-6" />
-                        </span>
+                        <img
+                            src="/favicon.svg"
+                            alt=""
+                            width={40}
+                            height={40}
+                            className="h-10 w-10 shrink-0 transition-transform duration-150 group-hover:-translate-y-0.5"
+                        />
                         <span className="min-w-0">
                             <span className="block truncate text-lg font-bold tracking-[0.18em] text-[var(--fg)]">
                                 {SITE_CONFIG.title}
@@ -37,7 +40,7 @@ export default function Frame(props:FrameProps)
                     </Link>
                     <div className="flex shrink-0 items-center gap-3">
                         <span className="hidden items-center gap-2 text-[10px] tracking-[0.2em] text-[var(--muted)] sm:flex">
-                            <span className="h-2 w-2 bg-[var(--accent)] shadow-[0_0_8px_var(--accent)]" />
+                            <span className="h-2 w-2 bg-[var(--online)] shadow-[0_0_8px_var(--online)]" />
                             SYSTEM ONLINE
                         </span>
                         <Link

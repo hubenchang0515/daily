@@ -15,6 +15,7 @@
   --scanline: rgba(0, 0, 0, 0.035);
   --on-accent: #ffffff;
   --chip-text: #1b1b1b;
+  --online: #0a8f4a;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -33,6 +34,7 @@
     --scanline: rgba(255, 255, 255, 0.02);
     --on-accent: #050806;
     --chip-text: #48ff9a;
+    --online: #48ff9a;
     color-scheme: dark;
   }
 }

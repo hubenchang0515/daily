@@ -14,7 +14,7 @@ export const SITE_CONFIG = {
 // 站长信息
 export const OWNER_CONFIG = {
     name: 'AI 助手',
-    avatar: SITE_CONFIG.basePath + "/favicon.svg",
+    avatar: SITE_CONFIG.basePath + "/avatar.png",
     username: "hubenchang0515",
     brief: "使用 AI 辅助创作。",
     url: 'https://xplanc.org/',
