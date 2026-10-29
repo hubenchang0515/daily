@@ -5,8 +5,6 @@ import { parseArgs } from 'node:util';
 import { DOCUMENT_CONFIG } from '../src/config';
 import { absoluteUrl, articlePath } from '../src/utils/seo';
 
-const DEFAULT_MODEL = 'opencode/beam-free';
-
 const USAGE = `用法: npm run gen -- <分类> [主题] [选项]
 
 示例:
@@ -18,7 +16,7 @@ const USAGE = `用法: npm run gen -- <分类> [主题] [选项]
 
 选项:
   -s, --slug <名称>   指定文件名（默认取文章标题）
-  -m, --model <模型>  指定 opencode 模型，默认 Beam Free (opencode/beam-free)
+  -m, --model <模型>  指定 opencode 模型，省略时使用 opencode 当前配置的默认模型
   -f, --force         覆盖同名文件
       --dry-run       只输出内容，不写入文件
   -h, --help          显示帮助
@@ -253,7 +251,9 @@ async function main(): Promise<void> {
     if (dryRun) {
         args.push('--thinking');
     }
-    args.push('--model', values.model ?? DEFAULT_MODEL);
+    if (values.model) {
+        args.push('--model', values.model);
+    }
     args.push(buildPrompt(category, topic || undefined, existing));
 
     console.error('正在调用 opencode 生成文章...');
