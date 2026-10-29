@@ -32,9 +32,8 @@ interface OpenCodeEvent {
         text?: string;
     };
     error?: {
-        data?: {
-            message?: string;
-        };
+        type?: string;
+        message?: string;
     };
 }
 
@@ -58,8 +57,8 @@ function buildPrompt(category: string, topic: string | undefined, existing: stri
 2. 结构清晰，篇幅约 1500～2500 字，根据需要合理使用小标题、列表、表格和代码块。
 3. 内容准确、具体、可操作；涉及命令或代码时给出可运行的示例。
 4. 不要使用任何工具，不要读写文件，不要询问问题。
-5. 只输出文章内容，不要添加解释、说明或结束语。
-6. 使用中文撰写文章，标题不要太长尽量在一行以内`;
+5. 使用中文撰写文章，只输出文章内容，不要添加解释、说明或结束语。
+6. 标题不要太长尽量在一行以内，标题风格要多样化不要使用“xx实战”这样的标题。`;
 }
 
 function runOpenCode(args: string[], showReasoning: boolean): Promise<RunResult> {
@@ -114,7 +113,8 @@ function runOpenCode(args: string[], showReasoning: boolean): Promise<RunResult>
             } else if (event.type === 'text' && event.part?.type === 'text' && typeof event.part.text === 'string') {
                 texts.push(event.part.text);
             } else if (event.type === 'error') {
-                streamError = event.error?.data?.message ?? 'opencode 返回错误';
+                console.log(event)
+                streamError = event.error?.message ?? 'opencode 返回错误';
             }
         };
 
