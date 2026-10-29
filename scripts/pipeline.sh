@@ -13,7 +13,11 @@ source $HOME/.nvm/nvm.sh
 export PATH=$HOME/.opencode/bin:$PATH
 
 cd $PROJECT_DIR
+
+git pull --rebase --autostash
 npm run gen -- "$1" -m "$2"
 npm run build
-npm run commit
+git add daily-document 
+git commit -a -m '自动提交' 
+git push origin master
 npm run deploy
