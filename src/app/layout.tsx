@@ -71,6 +71,18 @@ const bodyStyle = {
   "--digital-rain-url": `url('${SITE_CONFIG.basePath}/digital-rain.svg')`,
 } as React.CSSProperties;
 
+// 在首屏绘制前跟随系统主题，刷新后恢复默认
+const themeScript = `
+(function () {
+  try {
+    var theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    var root = document.documentElement;
+    root.dataset.theme = theme;
+    root.style.colorScheme = theme;
+  } catch (error) {}
+})();
+`;
+
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -92,8 +104,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN">
+    <html lang="zh-CN" suppressHydrationWarning>
       <body style={bodyStyle}>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <div className="site-bg" aria-hidden="true" />
         <div className="site-content">
           <script

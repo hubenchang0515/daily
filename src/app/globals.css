@@ -16,10 +16,32 @@
   --on-accent: #ffffff;
   --chip-text: #1b1b1b;
   --online: #0a8f4a;
+  color-scheme: light;
 }
 
+/* 手动切换：主题脚本会在首屏渲染前写入 data-theme */
+:root[data-theme="dark"] {
+  --bg: #050806;
+  --fg: #b8ffd0;
+  --muted: #6c9a7a;
+  --panel: #08120c;
+  --panel-2: #0d1b12;
+  --border: #2f7a4d;
+  --accent: #48ff9a;
+  --accent-2: #ffb000;
+  --accent-soft: rgba(72, 255, 154, 0.12);
+  --shadow: rgba(0, 0, 0, 0.7);
+  --grid: rgba(72, 255, 154, 0.07);
+  --scanline: rgba(255, 255, 255, 0.02);
+  --on-accent: #050806;
+  --chip-text: #48ff9a;
+  --online: #48ff9a;
+  color-scheme: dark;
+}
+
+/* 脚本未执行时回退到系统偏好 */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #050806;
     --fg: #b8ffd0;
     --muted: #6c9a7a;
@@ -36,6 +58,29 @@
     --chip-text: #48ff9a;
     --online: #48ff9a;
     color-scheme: dark;
+  }
+}
+
+/* 明暗切换按钮：按当前主题显示红灯 / 绿灯 */
+.theme-dark-only {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-light-only {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-dark-only {
+  display: inline;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-light-only {
+    display: none;
+  }
+
+  :root:not([data-theme="light"]) .theme-dark-only {
+    display: inline;
   }
 }
 
@@ -130,8 +175,28 @@ body {
   }
 }
 
+:root[data-theme="dark"] body {
+  background-image:
+    radial-gradient(circle at 50% -10%, var(--accent-soft), transparent 60%),
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-repeat: no-repeat, repeat, repeat;
+  background-size: auto, 24px 24px, 24px 24px;
+}
+
+:root[data-theme="dark"] .site-bg::before {
+  inset: -480px 0 0 0;
+  background-image: var(--digital-rain-url, none);
+  background-size: 240px 480px;
+  /* 12s / 288 步 ≈ 每 42ms 更新一次（约 24fps），与云层保持一致 */
+  animation-name: digital-rain;
+  animation-duration: 12s;
+  animation-timing-function: steps(288, end);
+}
+
+/* 脚本未执行时回退到系统偏好 */
 @media (prefers-color-scheme: dark) {
-  body {
+  :root:not([data-theme="light"]) body {
     background-image:
       radial-gradient(circle at 50% -10%, var(--accent-soft), transparent 60%),
       linear-gradient(var(--grid) 1px, transparent 1px),
@@ -140,7 +205,7 @@ body {
     background-size: auto, 24px 24px, 24px 24px;
   }
 
-  .site-bg::before {
+  :root:not([data-theme="light"]) .site-bg::before {
     inset: -480px 0 0 0;
     background-image: var(--digital-rain-url, none);
     background-size: 240px 480px;

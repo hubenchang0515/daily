@@ -3,6 +3,7 @@ import { LINKS, OWNER_CONFIG, SITE_CONFIG } from "@/config";
 import React from "react";
 import Link from "./Link";
 import Card from './Card';
+import ThemeToggle from "./ThemeToggle";
 import { Article, Category } from "@/utils/document";
 
 export interface FrameProps
@@ -39,10 +40,7 @@ export default function Frame(props:FrameProps)
                         </span>
                     </Link>
                     <div className="flex shrink-0 items-center gap-3">
-                        <span className="hidden items-center gap-2 text-[10px] tracking-[0.2em] text-[var(--muted)] sm:flex">
-                            <span className="h-2 w-2 bg-[var(--online)] shadow-[0_0_8px_var(--online)]" />
-                            SYSTEM ONLINE
-                        </span>
+                        <ThemeToggle/>
                         <Link
                             href={SITE_CONFIG.repo}
                             className="retro-button inline-flex items-center gap-2 px-3 py-1.5 text-[11px] tracking-[0.16em]"
