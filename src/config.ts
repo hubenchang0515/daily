@@ -77,3 +77,15 @@ export const LINKS = [
         url: "https://pdf-shelf.pages.dev/",
     },
 ]
+
+// 广告
+export const ADS = [
+    {
+        image: SITE_CONFIG.basePath + "/ads/tx_240_400.png",
+        url: "https://curl.qcloud.com/XQ2YFLc8",
+    },
+    {
+        image: SITE_CONFIG.basePath + "/ads/ali_240_400.png",
+        url: "https://www.aliyun.com/minisite/goods?userCode=gtmsv57a",
+    }
+]

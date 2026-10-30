@@ -4,6 +4,7 @@ import React from "react";
 import Link from "./Link";
 import Card from './Card';
 import ThemeToggle from "./ThemeToggle";
+import AdCarousel from "./AdCarousel";
 import { Article, Category } from "@/utils/document";
 
 export interface FrameProps
@@ -114,6 +115,7 @@ export default function Frame(props:FrameProps)
                 </div>
                 <aside className="order-3 flex flex-col gap-3 md:w-64 md:shrink-0 xl:w-72">
                     <div className="flex flex-col gap-3">
+                    <AdCarousel/>
                     {
                         props.articles && 
                         <Card className="p-4">
