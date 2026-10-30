@@ -55,6 +55,7 @@ export default function Frame(props:FrameProps)
             <main className="mx-auto flex w-full max-w-[1500px] flex-col gap-3 p-3 sm:gap-4 sm:p-4 md:flex-row">
                 <aside className="order-2 flex flex-col gap-3 md:order-1 md:w-64 md:shrink-0 xl:w-72">
                     <div className="flex flex-col gap-3">
+                        <AdCarousel className="md:hidden"/>
                         <Card className="p-5 text-center">
                             <p className="retro-label mb-3">[ OPERATOR ]</p>
                             <Link href="/" className="group mx-auto block w-fit">

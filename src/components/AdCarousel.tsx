@@ -6,7 +6,11 @@ import Card from "./Card";
 
 const ROTATE_INTERVAL = 10000;
 
-export default function AdCarousel() {
+export interface AdCarouselProps {
+    className?: string;
+}
+
+export default function AdCarousel(props: AdCarouselProps) {
     const [position, setPosition] = useState(0);
     const [paused, setPaused] = useState(false);
     const [jumping, setJumping] = useState(false);
@@ -66,7 +70,7 @@ export default function AdCarousel() {
     }
 
     return (
-        <Card className="p-4">
+        <Card className={`p-4 ${props.className ?? ""}`}>
             <div className="mb-3 flex items-center justify-between">
                 <p className="retro-label">[ AD ]</p>
                 {

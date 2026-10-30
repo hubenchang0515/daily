@@ -165,10 +165,14 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
                 <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-[var(--border)] bg-[var(--panel-2)] px-4 py-2 text-[10px] tracking-[0.16em] text-[var(--muted)]">
                     <span className="truncate">FILE: {article}.md</span>
                     <div className="flex items-center gap-2">
-                        <span className="retro-chip">{category}</span>
                         <RepostButton content={repost}/>
-                        <Link href={categoryPath(category)} title="返回分类" className="retro-button p-1">
+                        <Link
+                            href={categoryPath(category)}
+                            title="返回分类"
+                            className="retro-button inline-flex items-center gap-1.5 px-2 py-1 text-[10px] tracking-[0.12em]"
+                        >
                             <span className="[&_svg]:h-4 [&_svg]:w-4"><ListIcon/></span>
+                            <span>{category}</span>
                         </Link>
                     </div>
                 </div>
