@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+
 type Theme = "light" | "dark";
 
 function applyTheme(theme: Theme) {
@@ -9,6 +11,17 @@ function applyTheme(theme: Theme) {
 }
 
 export default function ThemeToggle() {
+    // 系统主题变化时同步切换页面主题
+    useEffect(() => {
+        const media = window.matchMedia("(prefers-color-scheme: dark)");
+        const sync = (event: MediaQueryListEvent) => {
+            applyTheme(event.matches ? "dark" : "light");
+        };
+
+        media.addEventListener("change", sync);
+        return () => media.removeEventListener("change", sync);
+    }, []);
+
     function toggleTheme() {
         const isDark = document.documentElement.dataset.theme === "dark";
         applyTheme(isDark ? "light" : "dark");
