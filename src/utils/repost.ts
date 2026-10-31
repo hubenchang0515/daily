@@ -1,4 +1,4 @@
-import { getPrimerLink, primerLanguages } from './primers';
+import { articleLanguages, getPrimerLink } from './primers';
 
 function replaceCodeSpans(text: string, languages: string[]): string {
     return text.replace(/(?<!`)(`+)(?!`)([^`\n]*?)\1(?!`)/g, (span, ticks, content) => {
@@ -9,7 +9,7 @@ function replaceCodeSpans(text: string, languages: string[]): string {
 
 // 生成用于转载的 Markdown：保留代码块，将可匹配的 code span 替换为 Primer 链接
 export function markdownForRepost(markdown: string, category: string): string {
-    const languages = primerLanguages(category);
+    const languages = articleLanguages(category, markdown);
     const lines = markdown.split('\n');
     const result: string[] = [];
     let buffer: string[] = [];

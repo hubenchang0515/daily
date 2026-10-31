@@ -5,7 +5,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus as highlight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Link from './Link';
 import DocLink from './DocLink';
-import { getPrimerSitemap, primerLanguages } from '@/utils/primers';
+import { articleLanguages } from '@/utils/primers';
 
 export async function hash(algorithm:string, data:BufferSource) {
     const hashBuffer = await crypto.subtle.digest(algorithm, data);
@@ -61,7 +61,7 @@ function CodeNode(props:{node:rendererNode, stylesheet: { [key: string]: React.C
 }
 
 export default function Markdown(props: MarkdownProps) {
-    const languages = props.lang ? primerLanguages(props.lang) : Object.keys(getPrimerSitemap());
+    const languages = articleLanguages(props.lang, props.content);
 
     return (
         <article className='markdown-body text-[15px] leading-7 text-[var(--fg)]'>

@@ -64,9 +64,34 @@ const CATEGORY_LANGUAGES: Record<string, string[]> = {
     'c++': ['c'],
 };
 
-// 根据文章分类得到候选语言，未知分类时匹配全部语言
+// 根据文章分类得到候选语言，未知分类时不匹配任何语言
 export function primerLanguages(category: string): string[] {
-    return CATEGORY_LANGUAGES[category.toLocaleLowerCase()] ?? Object.keys(getPrimerSitemap());
+    return CATEGORY_LANGUAGES[category.toLocaleLowerCase()] ?? [];
+}
+
+// 提取文章内代码块的语言标记（```lang / ~~~lang）
+export function fenceLanguages(markdown: string): string[] {
+    const languages = new Set<string>();
+
+    for (const line of markdown.split('\n')) {
+        const match = /^\s*(?:`{3,}|~{3,})\s*([^\s`~]+)/.exec(line);
+        if (match) {
+            languages.add(match[1].toLocaleLowerCase());
+        }
+    }
+
+    return Array.from(languages);
+}
+
+// code span 只使用文章分类与文章内代码块的语言标记，避免跨语言误匹配
+export function articleLanguages(category: string | undefined, markdown: string): string[] {
+    const languages = new Set<string>(category ? primerLanguages(category) : []);
+
+    for (const language of fenceLanguages(markdown)) {
+        languages.add(language);
+    }
+
+    return Array.from(languages);
 }
 
 // 构建时由 scripts/fetch-primers-sitemap.mjs 生成
