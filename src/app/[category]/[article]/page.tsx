@@ -10,7 +10,7 @@ import RepostButton from "@/components/RepostButton";
 import { OWNER_CONFIG, SITE_CONFIG } from "@/config";
 import { categories as getGategories, content, state } from "@/utils/document";
 import { markdownForRepost } from "@/utils/repost";
-import { absoluteUrl, articlePath, categoryPath, markdownDescription, markdownTitle } from "@/utils/seo";
+import { absoluteUrl, articlePath, categoryPath, documentSourceUrl, markdownDescription, markdownTitle } from "@/utils/seo";
 
 export interface PageParams {
     category:string;    // 分类： 例如 Python 等
@@ -163,7 +163,16 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
             </nav>
             <Card className="p-0">
                 <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-[var(--border)] bg-[var(--panel-2)] px-4 py-2 text-[10px] tracking-[0.16em] text-[var(--muted)]">
-                    <span className="truncate">FILE: {article}.md</span>
+                    <span className="truncate">
+                        FILE:{' '}
+                        <Link
+                            href={documentSourceUrl(category, articleName)}
+                            title="在 GitHub 查看源文件"
+                            className="transition-colors hover:text-[var(--accent)]"
+                        >
+                            {article}.md
+                        </Link>
+                    </span>
                     <div className="flex items-center gap-2">
                         <RepostButton content={repost}/>
                         <Link

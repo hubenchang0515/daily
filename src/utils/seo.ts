@@ -1,4 +1,4 @@
-import { SITE_CONFIG } from '@/config';
+import { DOCUMENT_CONFIG, SITE_CONFIG } from '@/config';
 
 // 将站内路径转换为绝对地址
 export function absoluteUrl(pathname = '/') {
@@ -12,6 +12,14 @@ export function categoryPath(category: string) {
 
 export function articlePath(category: string, article: string) {
     return `/${encodeURIComponent(category)}/${encodeURIComponent(article)}`;
+}
+
+// 文章源文件在 GitHub 仓库中的地址
+export function documentSourceUrl(category: string, article: string) {
+    const file = [DOCUMENT_CONFIG.root, 'document', category, article]
+        .map(encodeURIComponent)
+        .join('/');
+    return `${SITE_CONFIG.repo}/blob/HEAD/${file}`;
 }
 
 // 提取 Markdown 一级标题

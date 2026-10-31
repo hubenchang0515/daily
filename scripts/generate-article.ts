@@ -56,7 +56,7 @@ function buildPrompt(category: string, topic: string | undefined, existing: stri
 3. 内容准确、具体、可操作；涉及命令或代码时给出可运行的示例。
 4. 不要使用任何工具，不要读写文件，不要询问问题。
 5. 使用中文撰写文章，只输出文章内容，不要添加解释、说明或结束语。
-6. 标题不要太长尽量在一行以内，标题风格要多样化不要使用“xx实战”这样的标题。`;
+6. 标题不要太长尽量在一行以内，标题风格要多样化不要频繁使用“xx实战”这样的标题。`;
 }
 
 function runOpenCode(args: string[], showReasoning: boolean): Promise<RunResult> {
