@@ -1,3 +1,7 @@
+> 原文链接：[ESM 循环依赖：为什么 import 进来的是 undefined - 码日新 · 每日文章](https://daily.xplanc.org/js/ESM-%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88-import-%E8%BF%9B%E6%9D%A5%E7%9A%84%E6%98%AF-undefined.md)
+
+---
+
 # ESM 循环依赖：为什么 import 进来的是 undefined
 
 把一个大文件拆成两个模块，结果页面白屏，控制台只留下一句：
@@ -235,7 +239,3 @@ npx madge --circular --extensions js,jsx,ts,tsx src
 - 循环依赖里的 `undefined` 和 `ReferenceError`，本质都是“在错误的时机访问了绑定”。
 
 真正的修复不是把 `const` 改成 `var` 让它“不报错”，而是调整依赖方向，或者把访问推迟到模块求值完成之后。前者消除问题，后者只是把爆炸时间往后挪。
-
----
-
-> 原文链接：[ESM 循环依赖：为什么 import 进来的是 undefined](https://daily.xplanc.org/js/ESM-%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88-import-%E8%BF%9B%E6%9D%A5%E7%9A%84%E6%98%AF-undefined.md)

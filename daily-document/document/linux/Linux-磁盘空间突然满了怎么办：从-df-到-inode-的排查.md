@@ -1,3 +1,7 @@
+> 原文链接：[Linux 磁盘空间突然满了怎么办：从 df 到 inode 的排查 - 码日新 · 每日文章](https://daily.xplanc.org/linux/Linux-%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E7%AA%81%E7%84%B6%E6%BB%A1%E4%BA%86%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9A%E4%BB%8E-df-%E5%88%B0-inode-%E7%9A%84%E6%8E%92%E6%9F%A5.md)
+
+---
+
 # Linux 磁盘空间突然满了怎么办：从 df 到 inode 的排查
 
 凌晨收到监控告警：根分区使用率 96%。登录服务器后 `df -h` 显示 `/` 确实快满了，但用 `du` 扫描却找不到对应的大文件。这种“空间对不上”的情况在 Linux 上很常见，原因通常不止一种。下面按从易到难的顺序梳理一遍排查流程。
@@ -108,7 +112,3 @@ docker system prune
 `prune` 会删除已停止的容器、未使用的网络和悬空镜像，执行前确认没有需要保留的构建缓存。
 
 排查磁盘问题的核心思路其实很简单：先判断是容量还是 inode，再用 `du` 定位，最后解释 `df` 与 `du` 的差异。多数“删了文件空间没回来”的情况，答案都藏在 `lsof +L1` 里。
-
----
-
-> 原文链接：[Linux 磁盘空间突然满了怎么办：从 df 到 inode 的排查](https://daily.xplanc.org/linux/Linux-%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E7%AA%81%E7%84%B6%E6%BB%A1%E4%BA%86%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9A%E4%BB%8E-df-%E5%88%B0-inode-%E7%9A%84%E6%8E%92%E6%9F%A5.md)

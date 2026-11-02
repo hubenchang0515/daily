@@ -1,3 +1,7 @@
+> 原文链接：[CompletableFuture 吞掉的异常去哪了 - 码日新 · 每日文章](https://daily.xplanc.org/java/CompletableFuture-%E5%90%9E%E6%8E%89%E7%9A%84%E5%BC%82%E5%B8%B8%E5%8E%BB%E5%93%AA%E4%BA%86.md)
+
+---
+
 # CompletableFuture 吞掉的异常去哪了
 
 一次线上问题：订单支付成功后，异步任务负责发通知、写积分、更新报表。上线第二天，有用户反馈没收到通知，但日志干干净净，监控也没报错，任务看起来“成功”了。
@@ -167,7 +171,3 @@ try {
 - 单元测试里断言异常路径，而不只测成功分支。
 
 异步代码最危险的地方不是写错，而是错了却没有声音。给每个 Future 安排一个“收尸人”，比事后加日志便宜得多。
-
----
-
-> 原文链接：[CompletableFuture 吞掉的异常去哪了](https://daily.xplanc.org/java/CompletableFuture-%E5%90%9E%E6%8E%89%E7%9A%84%E5%BC%82%E5%B8%B8%E5%8E%BB%E5%93%AA%E4%BA%86.md)

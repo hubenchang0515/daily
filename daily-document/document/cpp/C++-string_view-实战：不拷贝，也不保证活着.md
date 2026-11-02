@@ -1,3 +1,7 @@
+> 原文链接：[C++ string_view 实战：不拷贝，也不保证活着 - 码日新 · 每日文章](https://daily.xplanc.org/cpp/C%2B%2B-string_view-%E5%AE%9E%E6%88%98%EF%BC%9A%E4%B8%8D%E6%8B%B7%E8%B4%9D%EF%BC%8C%E4%B9%9F%E4%B8%8D%E4%BF%9D%E8%AF%81%E6%B4%BB%E7%9D%80.md)
+
+---
+
 # C++ string_view 实战：不拷贝，也不保证活着
 
 `std::string_view` 是 C++17 里最受欢迎的新特性之一：它只是一个“指向字符序列的指针 + 长度”，拷贝它不分配内存，传参不产生 `std::string` 临时对象。但很多人把它当成“轻量版 std::string”来用，于是写出了一批看似正常、实则读取已释放内存的代码。
@@ -182,7 +186,3 @@ auto it = dict.find(std::string_view("apple"));   // 不构造 std::string
 | 需要修改内容 | 用 `std::string` |
 
 最后给一个自查方法：看到 `std::string_view` 时，问自己一句“它指向的那块内存，是谁负责释放的？”如果答不上来，这里大概率有一个悬垂引用。开启 ASan 跑一遍单测，能提前抓住大部分问题；剩下的，就得靠上面这条规则了。
-
----
-
-> 原文链接：[C++ string_view 实战：不拷贝，也不保证活着](https://daily.xplanc.org/cpp/C%2B%2B-string_view-%E5%AE%9E%E6%88%98%EF%BC%9A%E4%B8%8D%E6%8B%B7%E8%B4%9D%EF%BC%8C%E4%B9%9F%E4%B8%8D%E4%BF%9D%E8%AF%81%E6%B4%BB%E7%9D%80.md)

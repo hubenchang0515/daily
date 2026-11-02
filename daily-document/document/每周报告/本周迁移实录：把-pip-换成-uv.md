@@ -1,3 +1,7 @@
+> 原文链接：[本周迁移实录：把 pip 换成 uv - 码日新 · 每日文章](https://daily.xplanc.org/%E6%AF%8F%E5%91%A8%E6%8A%A5%E5%91%8A/%E6%9C%AC%E5%91%A8%E8%BF%81%E7%A7%BB%E5%AE%9E%E5%BD%95%EF%BC%9A%E6%8A%8A-pip-%E6%8D%A2%E6%88%90-uv.md)
+
+---
+
 # 本周迁移实录：把 pip 换成 uv
 
 这周的主要工作只有一件：把一个运行了两年多的 Python 服务从 `pip + venv + requirements.txt` 迁移到 uv。动机很实际：CI 里安装依赖要三分半，`requirements.txt` 又没锁版本，同一个 commit 两次构建偶尔会装出不同的包。周五收工时，冷启动降到 40 秒以内，还顺带改掉了 Dockerfile 和 GitHub Actions。这篇周报记录过程、遇到的问题和最终数据。
@@ -122,7 +126,3 @@ jobs:
 - 观察一周 lock 文件的冲突频率，如果两个人同时加依赖经常打架，就在文档里补一条“先 rebase 再 `uv lock`”的约定。
 
 一周下来最大的感受是：工具替换本身只占两成时间，剩下八成都在处理历史遗留的隐式约定，比如谁在脚本里写死了 `pip install`、哪个镜像依赖系统 Python。迁移清单比迁移命令更值得写下来。
-
----
-
-> 原文链接：[本周迁移实录：把 pip 换成 uv](https://daily.xplanc.org/%E6%AF%8F%E5%91%A8%E6%8A%A5%E5%91%8A/%E6%9C%AC%E5%91%A8%E8%BF%81%E7%A7%BB%E5%AE%9E%E5%BD%95%EF%BC%9A%E6%8A%8A-pip-%E6%8D%A2%E6%88%90-uv.md)

@@ -1,3 +1,7 @@
+> 原文链接：[Linux 的时间为什么会被拨回去 - 码日新 · 每日文章](https://daily.xplanc.org/linux/Linux-%E7%9A%84%E6%97%B6%E9%97%B4%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%A2%AB%E6%8B%A8%E5%9B%9E%E5%8E%BB.md)
+
+---
+
 # Linux 的时间为什么会被拨回去
 
 凌晨两点多，监控里出现一批超时告警：某个服务里所有 30 秒超时的 RPC 在同一秒内集体失败。翻日志时更奇怪，同一台机器上连续几条日志的时间戳是倒着走的：
@@ -177,7 +181,3 @@ chronyc waitsync 60 0.1
 6. 把 `chronyc tracking` 的 `System time` 和 `Leap status` 接入监控，比等到业务报错再查要便宜得多。
 
 时间跳变本身不是故障，它只是内核在努力让时钟变准。真正的问题是代码默认了“时间只会均匀向前”。把“现在是几点”和“过了多久”分开对待，这类问题就少了一大半。
-
----
-
-> 原文链接：[Linux 的时间为什么会被拨回去](https://daily.xplanc.org/linux/Linux-%E7%9A%84%E6%97%B6%E9%97%B4%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%A2%AB%E6%8B%A8%E5%9B%9E%E5%8E%BB.md)

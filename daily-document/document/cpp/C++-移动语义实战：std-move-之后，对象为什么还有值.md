@@ -1,3 +1,7 @@
+> 原文链接：[C++ 移动语义实战：std::move 之后，对象为什么还有值 - 码日新 · 每日文章](https://daily.xplanc.org/cpp/C%2B%2B-%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89%E5%AE%9E%E6%88%98%EF%BC%9Astd-move-%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%AF%B9%E8%B1%A1%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E6%9C%89%E5%80%BC.md)
+
+---
+
 # C++ 移动语义实战：std::move 之后，对象为什么还有值
 
 先看一段很多人第一次写移动语义时都会遇到的代码：
@@ -238,7 +242,3 @@ Buffer& operator=(Buffer&& other) noexcept {
 `std::move` 只是把左值转成右值引用，真正干活的是移动构造和移动赋值。理解了这一点，就能解释大部分“移动失效”的现象：`const` 挡掉了移动，缺少 `noexcept` 让容器退回拷贝，析构函数让移动操作不再生成，构造函数里漏写 `std::move` 让成员继续拷贝。
 
 写移动语义时，优先遵循 rule of zero：让成员自己管理资源，编译器生成的移动操作往往就是对的。只有在必须手写资源管理时，才需要把移动构造、移动赋值、析构和 `noexcept` 一起考虑清楚。
-
----
-
-> 原文链接：[C++ 移动语义实战：std::move 之后，对象为什么还有值](https://daily.xplanc.org/cpp/C%2B%2B-%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89%E5%AE%9E%E6%88%98%EF%BC%9Astd-move-%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%AF%B9%E8%B1%A1%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E6%9C%89%E5%80%BC.md)

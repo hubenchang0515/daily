@@ -1,3 +1,7 @@
+> 原文链接：[负载 12，CPU 却在摸鱼：读懂 Linux 的 load average - 码日新 · 每日文章](https://daily.xplanc.org/linux/%E8%B4%9F%E8%BD%BD-12%EF%BC%8CCPU-%E5%8D%B4%E5%9C%A8%E6%91%B8%E9%B1%BC%EF%BC%9A%E8%AF%BB%E6%87%82-Linux-%E7%9A%84-load-average.md)
+
+---
+
 # 负载 12，CPU 却在摸鱼：读懂 Linux 的 load average
 
 凌晨两点，监控告警：一台 8 核机器的 `load15` 超过了 10。
@@ -190,7 +194,3 @@ load average 的三个数字背后，混着两种完全不同的东西：**想�
 前者加机器有用，后者加机器没用。分不清这两者，就会在 CPU 空闲的机器上一边扩容一边困惑。
 
 下次看到负载告警，先别急着看 CPU 使用率。敲一条 `vmstat 1`，看 `r` 和 `b` 哪个大，答案基本就出来了。
-
----
-
-> 原文链接：[负载 12，CPU 却在摸鱼：读懂 Linux 的 load average](https://daily.xplanc.org/linux/%E8%B4%9F%E8%BD%BD-12%EF%BC%8CCPU-%E5%8D%B4%E5%9C%A8%E6%91%B8%E9%B1%BC%EF%BC%9A%E8%AF%BB%E6%87%82-Linux-%E7%9A%84-load-average.md)

@@ -1,3 +1,7 @@
+> 原文链接：[别用字符串思维写 PowerShell 管道 - 码日新 · 每日文章](https://daily.xplanc.org/pwsh/%E5%88%AB%E7%94%A8%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%9D%E7%BB%B4%E5%86%99-PowerShell-%E7%AE%A1%E9%81%93.md)
+
+---
+
 # 别用字符串思维写 PowerShell 管道
 
 在大多数类 Unix Shell 里，管道两端流动的是一行行纯文本。`grep`、`awk`、`cut` 全部都靠切割字符串来达成目标。这种思路渗透太深，很多人刚接触 PowerShell 时也下意识地用同样的方法去写脚本：拿到一串输出、用正则把字段抠出来、再拼接下一条命令。
@@ -229,7 +233,3 @@ Get-Process -Name pwsh | Select-Object Id, CPU, WorkingSet64 | ConvertTo-Json
 管道传递的不是文本碎片，而是带着上下文的“实体”。属性是它的身份证，方法是它的能力。用字符串思维去折腾这些实体永远都有种“隔靴搔痒”的别扭，用对象思维去驾驭它们才会发现：原本要写一长串正则的活，往往只需要短短一行 `Where-Object`。
 
 下次写 PowerShell 脚本时，不妨先停顿半秒，提醒自己一句：**流动在管道里的，是对象。**
-
----
-
-> 原文链接：[别用字符串思维写 PowerShell 管道](https://daily.xplanc.org/pwsh/%E5%88%AB%E7%94%A8%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%9D%E7%BB%B4%E5%86%99-PowerShell-%E7%AE%A1%E9%81%93.md)

@@ -1,3 +1,7 @@
+> 原文链接：[Qt 信号槽：槽函数到底在哪个线程执行 - 码日新 · 每日文章](https://daily.xplanc.org/qt/Qt-%E4%BF%A1%E5%8F%B7%E6%A7%BD%EF%BC%9A%E6%A7%BD%E5%87%BD%E6%95%B0%E5%88%B0%E5%BA%95%E5%9C%A8%E5%93%AA%E4%B8%AA%E7%BA%BF%E7%A8%8B%E6%89%A7%E8%A1%8C.md)
+
+---
+
 # Qt 信号槽：槽函数到底在哪个线程执行
 
 “在工作线程里 emit 一下，槽函数就会在工作线程跑吧？”
@@ -180,7 +184,3 @@ connect(worker, &Worker::valueReady, this, [this](int v) {
 - 不要从别的线程直接调用 `QObject` 的方法，用信号槽或 `QMetaObject::invokeMethod` 把调用送回对象所属线程。
 
 信号槽的线程行为并不神秘，记住一句话就够了：**槽函数在哪里执行，看的是发射信号的那一刻，接收者住在哪个线程，以及你选了哪种连接方式。**
-
----
-
-> 原文链接：[Qt 信号槽：槽函数到底在哪个线程执行](https://daily.xplanc.org/qt/Qt-%E4%BF%A1%E5%8F%B7%E6%A7%BD%EF%BC%9A%E6%A7%BD%E5%87%BD%E6%95%B0%E5%88%B0%E5%BA%95%E5%9C%A8%E5%93%AA%E4%B8%AA%E7%BA%BF%E7%A8%8B%E6%89%A7%E8%A1%8C.md)

@@ -1,3 +1,7 @@
+> 原文链接：[Java 线程池实战：核心线程、队列与拒绝策略的三个坑 - 码日新 · 每日文章](https://daily.xplanc.org/java/Java-%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AE%9E%E6%88%98%EF%BC%9A%E6%A0%B8%E5%BF%83%E7%BA%BF%E7%A8%8B%E3%80%81%E9%98%9F%E5%88%97%E4%B8%8E%E6%8B%92%E7%BB%9D%E7%AD%96%E7%95%A5%E7%9A%84%E4%B8%89%E4%B8%AA%E5%9D%91.md)
+
+---
+
 # Java 线程池实战：核心线程、队列与拒绝策略的三个坑
 
 很多人第一次配置线程池，是照着某篇博客写下 `new ThreadPoolExecutor(10, 20, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<>())`。上线后一切正常，直到流量翻倍：接口 P99 从 80ms 涨到 3 秒，堆内存一路爬升，Full GC 之后也回不到原来的水位。
@@ -190,7 +194,3 @@ public final class Pools {
 最后，给线程起名字、把 `getActiveCount()`、`getQueue().size()`、`getCompletedTaskCount()` 暴露到监控里。线程池出问题时，最先能救你的不是参数，而是“队列什么时候开始堆积”这条曲线。
 
 不同业务用不同的池，别让一个慢接口把全站的线程占满——这条经验，比任何参数配置都值钱。
-
----
-
-> 原文链接：[Java 线程池实战：核心线程、队列与拒绝策略的三个坑](https://daily.xplanc.org/java/Java-%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AE%9E%E6%88%98%EF%BC%9A%E6%A0%B8%E5%BF%83%E7%BA%BF%E7%A8%8B%E3%80%81%E9%98%9F%E5%88%97%E4%B8%8E%E6%8B%92%E7%BB%9D%E7%AD%96%E7%95%A5%E7%9A%84%E4%B8%89%E4%B8%AA%E5%9D%91.md)

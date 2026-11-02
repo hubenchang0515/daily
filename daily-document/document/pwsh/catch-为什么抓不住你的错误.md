@@ -1,3 +1,7 @@
+> 原文链接：[PowerShell 错误处理：try/catch 为什么抓不住你的错误 - 码日新 · 每日文章](https://daily.xplanc.org/pwsh/catch-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%93%E4%B8%8D%E4%BD%8F%E4%BD%A0%E7%9A%84%E9%94%99%E8%AF%AF.md)
+
+---
+
 # PowerShell 错误处理：try/catch 为什么抓不住你的错误
 
 凌晨两点，同步脚本跑完了。日志里一串红色报错，但脚本继续往下执行，最后打印出「完成，成功 0 个文件」，退出码 0。CI 显示绿色，直到第二天业务方问：数据怎么没更新？
@@ -295,7 +299,3 @@ if ($report.Ok -contains $false) {
 ## 小结
 
 记住三句话就够了：内置 cmdlet 默认「报错但继续」，要捕获就加 `-ErrorAction Stop`；原生命令只看 `$LASTEXITCODE`，`try/catch` 管不着；需要让调用方感知失败时，用 `throw` 而不是 `Write-Error`。把这三点落实到脚本骨架里，凌晨两点那类「显示成功但其实没干活」的问题，基本可以绝迹。
-
----
-
-> 原文链接：[PowerShell 错误处理：try/catch 为什么抓不住你的错误](https://daily.xplanc.org/pwsh/catch-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%93%E4%B8%8D%E4%BD%8F%E4%BD%A0%E7%9A%84%E9%94%99%E8%AF%AF.md)

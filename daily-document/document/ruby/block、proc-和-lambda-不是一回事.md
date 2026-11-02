@@ -1,3 +1,7 @@
+> 原文链接：[block、proc 和 lambda 不是一回事 - 码日新 · 每日文章](https://daily.xplanc.org/ruby/block%E3%80%81proc-%E5%92%8C-lambda-%E4%B8%8D%E6%98%AF%E4%B8%80%E5%9B%9E%E4%BA%8B.md)
+
+---
+
 # block、proc 和 lambda 不是一回事
 
 第一次遇到 `LocalJumpError: unexpected return` 的时候，代码看起来毫无问题：一个方法里创建了 `Proc`，存进实例变量，稍后再调用。可只要这个 `Proc` 里写了 `return`，调用时就会炸。把 `proc` 改成 `lambda`，一切又恢复正常。
@@ -202,7 +206,3 @@ wrapper(&la) # => :after_yield
 proc 的用武之地其实很窄：你明确需要「宽松参数 + 返回定义处」这两个特性同时成立。大多数时候，那只是从旧代码或某个教程里抄来的写法。
 
 判断标准可以简化成一句话：**这个 Proc 会不会在定义它的方法返回之后才被调用？** 会，就别用 proc；不会，也要想清楚 `return` 到底想回到哪一层。
-
----
-
-> 原文链接：[block、proc 和 lambda 不是一回事](https://daily.xplanc.org/ruby/block%E3%80%81proc-%E5%92%8C-lambda-%E4%B8%8D%E6%98%AF%E4%B8%80%E5%9B%9E%E4%BA%8B.md)

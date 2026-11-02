@@ -1,3 +1,7 @@
+> 原文链接：[structuredClone 复制不了什么 - 码日新 · 每日文章](https://daily.xplanc.org/js/structuredClone-%E5%A4%8D%E5%88%B6%E4%B8%8D%E4%BA%86%E4%BB%80%E4%B9%88.md)
+
+---
+
 # structuredClone 复制不了什么
 
 `structuredClone` 已经是现代浏览器和 Node.js 17+ 的全局函数。很多人把它当成 `JSON.parse(JSON.stringify(obj))` 的替代品，甚至当成通用的深拷贝。大多数时候它确实更好用，但它的本质是“结构化克隆算法”：目标是把**数据**从一个执行环境搬到另一个执行环境，而不是把 JavaScript 对象原样复印一份。
@@ -183,7 +187,3 @@ console.log(moved[0]);          // 42
 `structuredClone` 仍然是 O(n) 的深拷贝，不会因为它是原生实现就免费。它最适合的场景是纯数据对象：配置、状态快照、跨线程消息、缓存条目。把这些数据交给它，通常比手写递归或 JSON 往返更可靠。
 
 把它当成跨环境传递数据的工具，而不是对象复印机，选择就清楚了。
-
----
-
-> 原文链接：[structuredClone 复制不了什么](https://daily.xplanc.org/js/structuredClone-%E5%A4%8D%E5%88%B6%E4%B8%8D%E4%BA%86%E4%BB%80%E4%B9%88.md)

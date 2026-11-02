@@ -1,3 +1,7 @@
+> 原文链接：[chmod 777 之后，为什么还是 Permission denied - 码日新 · 每日文章](https://daily.xplanc.org/linux/chmod-777-%E4%B9%8B%E5%90%8E%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E6%98%AF-Permission-denied.md)
+
+---
+
 # chmod 777 之后，为什么还是 Permission denied
 
 先还原一个很常见的现场。
@@ -239,7 +243,3 @@ echo "nameserver 1.1.1.1" | sudo tee /etc/resolv.conf
 `chmod 777` 的问题不在于它危险——虽然它确实危险——而在于它只覆盖了整条链路上的一小段。真正让人加班到凌晨的，往往是那个 `700` 的父目录，或者一行 `noexec`。
 
 下次再看到 `Permission denied`，先别急着加权限。让 `namei` 把路径摊开，答案通常就在里面。
-
----
-
-> 原文链接：[chmod 777 之后，为什么还是 Permission denied](https://daily.xplanc.org/linux/chmod-777-%E4%B9%8B%E5%90%8E%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E6%98%AF-Permission-denied.md)

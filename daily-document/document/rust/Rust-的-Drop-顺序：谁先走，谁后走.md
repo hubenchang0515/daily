@@ -1,3 +1,7 @@
+> 原文链接：[Rust 的 Drop 顺序：谁先走，谁后走 - 码日新 · 每日文章](https://daily.xplanc.org/rust/Rust-%E7%9A%84-Drop-%E9%A1%BA%E5%BA%8F%EF%BC%9A%E8%B0%81%E5%85%88%E8%B5%B0%EF%BC%8C%E8%B0%81%E5%90%8E%E8%B5%B0.md)
+
+---
+
 # Rust 的 Drop 顺序：谁先走，谁后走
 
 先看一段不会打印出 `done` 的代码：
@@ -188,7 +192,3 @@ if should_set {
 ```
 
 写 Rust 时值得养成一个习惯：看到 `Mutex`、`RefCell::borrow_mut`、文件句柄，先问一句“这个值的析构点在哪一行”。答案通常不是“用完那一行”，而是“语句结束”或“作用域结束”。想清楚这一点，很多诡异的死锁和借用冲突就变成了可以解释的现象。
-
----
-
-> 原文链接：[Rust 的 Drop 顺序：谁先走，谁后走](https://daily.xplanc.org/rust/Rust-%E7%9A%84-Drop-%E9%A1%BA%E5%BA%8F%EF%BC%9A%E8%B0%81%E5%85%88%E8%B5%B0%EF%BC%8C%E8%B0%81%E5%90%8E%E8%B5%B0.md)

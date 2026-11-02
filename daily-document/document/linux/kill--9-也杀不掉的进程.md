@@ -1,3 +1,7 @@
+> 原文链接：[kill -9 也杀不掉的进程 - 码日新 · 每日文章](https://daily.xplanc.org/linux/kill--9-%E4%B9%9F%E6%9D%80%E4%B8%8D%E6%8E%89%E7%9A%84%E8%BF%9B%E7%A8%8B.md)
+
+---
+
 # kill -9 也杀不掉的进程
 
 凌晨两点，监控报警：一台文件服务器上的备份任务卡住了。你 ssh 上去，`ps` 看到 `rsync` 的状态是 `D`，于是熟练地执行 `kill -9`。一分钟后再看，它还在。再 kill，还在。重启服务，父进程也变成了 `D`。最后连 `reboot` 都卡在 “Unmounting filesystems”。
@@ -179,7 +183,3 @@ ps -eo pid,ppid,stat,comm | awk '$3 ~ /^Z/'
 - 磁盘、RAID、云盘的健康状态要提前监控，别等 `D` 状态出现才去查坏道。
 
 `kill -9` 是终止进程的最后一招，但它不是万能的。遇到杀不掉的进程，先看 `wchan`，再看内核栈和 `dmesg`，找到那个“不返回的等待”。多数时候，你要修的是它背后的 I/O，而不是它本身。
-
----
-
-> 原文链接：[kill -9 也杀不掉的进程](https://daily.xplanc.org/linux/kill--9-%E4%B9%9F%E6%9D%80%E4%B8%8D%E6%8E%89%E7%9A%84%E8%BF%9B%E7%A8%8B.md)

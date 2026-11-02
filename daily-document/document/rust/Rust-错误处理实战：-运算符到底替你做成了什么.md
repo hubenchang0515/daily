@@ -1,3 +1,7 @@
+> 原文链接：[Rust 错误处理实战：? 运算符到底替你做成了什么 - 码日新 · 每日文章](https://daily.xplanc.org/rust/Rust-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98%EF%BC%9A-%E8%BF%90%E7%AE%97%E7%AC%A6%E5%88%B0%E5%BA%95%E6%9B%BF%E4%BD%A0%E5%81%9A%E6%88%90%E4%BA%86%E4%BB%80%E4%B9%88.md)
+
+---
+
 # Rust 错误处理实战：? 运算符到底替你做成了什么
 
 写 Rust 时，很多人第一次卡住的地方不是所有权，而是 `?`。代码看起来只是把错误往上抛，编译器却报出 `the trait bound ... From<...> is not implemented`；改成 `fn main() -> Result<(), Box<dyn Error>>` 后能编译了，运行时又只打印一行看不懂的 `Debug`。要解决这些问题，需要先弄清 `?` 到底做了什么。
@@ -279,7 +283,3 @@ Box<dyn std::error::Error + Send + Sync>
 - 需要控制退出码时，用 `ExitCode` 加 `{error:#}`，不要依赖默认的 `Debug` 输出。
 
 `?` 本身很简单，复杂的是它背后的错误类型设计。把“库用枚举、应用用 anyhow、边界加 context”这三件事做好，大部分 Rust 错误处理问题都会变得清晰。
-
----
-
-> 原文链接：[Rust 错误处理实战：? 运算符到底替你做成了什么](https://daily.xplanc.org/rust/Rust-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98%EF%BC%9A-%E8%BF%90%E7%AE%97%E7%AC%A6%E5%88%B0%E5%BA%95%E6%9B%BF%E4%BD%A0%E5%81%9A%E6%88%90%E4%BA%86%E4%BB%80%E4%B9%88.md)

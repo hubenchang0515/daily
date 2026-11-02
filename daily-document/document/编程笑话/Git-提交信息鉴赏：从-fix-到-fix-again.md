@@ -1,3 +1,7 @@
+> 原文链接：[Git 提交信息鉴赏：从 fix 到 fix again - 码日新 · 每日文章](https://daily.xplanc.org/%E8%BD%BB%E6%9D%BE%E4%B8%80%E7%AC%91/Git-%E6%8F%90%E4%BA%A4%E4%BF%A1%E6%81%AF%E9%89%B4%E8%B5%8F%EF%BC%9A%E4%BB%8E-fix-%E5%88%B0-fix-again.md)
+
+---
+
 # Git 提交信息鉴赏：从 fix 到 fix again
 
 如果把一个仓库的提交历史打印出来钉在墙上，它大概会像一面潦草的留言板：
@@ -184,7 +188,3 @@ git push --force-with-lease
 所以，下次手指准备敲下 `git commit -m "fix"` 的时候，不妨多写五个字。
 
 毕竟，三个月后的你，记性真的不太好。
-
----
-
-> 原文链接：[Git 提交信息鉴赏：从 fix 到 fix again](https://daily.xplanc.org/%E8%BD%BB%E6%9D%BE%E4%B8%80%E7%AC%91/Git-%E6%8F%90%E4%BA%A4%E4%BF%A1%E6%81%AF%E9%89%B4%E8%B5%8F%EF%BC%9A%E4%BB%8E-fix-%E5%88%B0-fix-again.md)
