@@ -26,7 +26,7 @@ export default function Frame(props:FrameProps)
                 <div className="retro-panel flex items-center justify-between gap-3 px-4 py-3">
                     <Link href="/" className="group flex min-w-0 items-center gap-3">
                         <img
-                            src="/favicon.svg"
+                            src={`${SITE_CONFIG.basePath}/favicon.svg`}
                             alt=""
                             width={40}
                             height={40}
