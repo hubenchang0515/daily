@@ -1,5 +1,6 @@
-:HL["/daily/_next/static/chunks/1iy3kq3bqvx1a.css","style"]
-:HL["/daily/favicon.svg","image"]
+:HL["/daily/_next/static/chunks/0jaifcqycl9cy.css","style"]
+:HL["/favicon.svg","image"]
+:HL["/daily/avatar.png","image"]
 :HL["https://hubenchang0515.github.io/icons/launcher.svg","image"]
 :HL["https://primers.xplanc.org/favicon.svg","image"]
 :HL["https://shift.js.org/favicon.svg","image"]
@@ -11,4 +12,4 @@
 3:[["children",{"s":"__PAGE__","h":160}]]
 2:[["children",{"s":{"n":"page","t":"d","k":"2","s":[]},"h":96,"c":"$Q3"}]]
 1:[["children",{"s":"page","h":96,"c":"$Q2"}]]
-0:{"b":"nb_er_WHwFoKa2rYo80mm","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"7sENjPTShyXBQ1tj1Xwwf","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
