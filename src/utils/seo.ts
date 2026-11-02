@@ -1,4 +1,5 @@
 import { DOCUMENT_CONFIG, SITE_CONFIG } from '@/config';
+import { stripOriginalLink } from '@/utils/markdown';
 
 // 将站内路径转换为绝对地址
 export function absoluteUrl(pathname = '/') {
@@ -32,7 +33,7 @@ export function markdownDescription(text: string, limit = 150) {
     const buffer: string[] = [];
     let inCode = false;
 
-    for (const raw of text.split('\n')) {
+    for (const raw of stripOriginalLink(text).split('\n')) {
         const line = raw.trim();
         if (line.startsWith('```')) {
             inCode = !inCode;

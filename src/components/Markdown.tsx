@@ -6,6 +6,7 @@ import { vscDarkPlus as highlight } from 'react-syntax-highlighter/dist/esm/styl
 import Link from './Link';
 import DocLink from './DocLink';
 import { articleLanguages } from '@/utils/primers';
+import { stripOriginalLink } from '@/utils/markdown';
 
 export async function hash(algorithm:string, data:BufferSource) {
     const hashBuffer = await crypto.subtle.digest(algorithm, data);
@@ -69,7 +70,7 @@ export default function Markdown(props: MarkdownProps) {
                 remarkPlugins={[remarkGfm]}
                 components={MakeComponents(props.href, languages)}
             >
-                {props.content}
+                {stripOriginalLink(props.content)}
             </ReactMarkdown>
         </article>
     )

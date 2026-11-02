@@ -2,7 +2,8 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
 import { parseArgs } from 'node:util';
-import { DOCUMENT_CONFIG } from '../src/config';
+import { DOCUMENT_CONFIG, SITE_CONFIG } from '../src/config';
+import { originalLinkBlock } from '../src/utils/markdown';
 import { absoluteUrl, articlePath } from '../src/utils/seo';
 
 const USAGE = `用法: npm run gen -- <分类> [主题] [选项]
@@ -269,10 +270,10 @@ async function main(): Promise<void> {
         throw new Error('无法生成文件名，请使用 --slug 指定');
     }
 
-    // 末尾追加原文链接，便于转载时保留出处
-    const title = titleOf(content) ?? slug;
+    // 开头插入原文链接，便于转载时保留出处（页面渲染时隐藏）
+    const title = titleOf(content) ?? slug
     const url = absoluteUrl(articlePath(category, `${slug}.md`));
-    const article = `${content}\n\n---\n\n> 原文链接：[${title}](${url})\n`;
+    const article = `${originalLinkBlock(title, url)}\n\n---\n\n${content}\n`;
 
     const directory = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document', category);
     const file = path.join(directory, `${slug}.md`);

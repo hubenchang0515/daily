@@ -10,6 +10,7 @@ import RepostButton from "@/components/RepostButton";
 import { OWNER_CONFIG, SITE_CONFIG } from "@/config";
 import { categories as getGategories, content, state } from "@/utils/document";
 import { markdownForRepost } from "@/utils/repost";
+import { originalLink, originalLinkBlock, stripOriginalLink } from "@/utils/markdown";
 import { absoluteUrl, articlePath, categoryPath, documentSourceUrl, markdownDescription, markdownTitle } from "@/utils/seo";
 
 export interface PageParams {
@@ -91,7 +92,9 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
     const index = articles.findIndex(item => item.category === category && item.name === articleName);
     const previous = index > 0 ? articles[index - 1] : undefined;                     // 列表中较新的一篇
     const next = index >= 0 && index < articles.length - 1 ? articles[index + 1] : undefined;  // 列表中较旧的一篇
-    const repost = `${markdownForRepost(text, category).trimEnd()}\n`;
+    // 转载时原文链接固定在开头
+    const original = originalLink(text) ?? originalLinkBlock(title, href);
+    const repost = `${original}\n\n---\n\n${markdownForRepost(stripOriginalLink(text), category).trimEnd()}\n`;
 
     const jsonLd = {
         '@context': 'https://schema.org',

@@ -1,4 +1,5 @@
 import { content, type Article as ArticleProps} from '@/utils/document'
+import { stripOriginalLink } from '@/utils/markdown';
 import Markdown from './Markdown';
 import Link from './Link';
 import Card from './Card';
@@ -18,7 +19,7 @@ export default async function ArticleCard(props:ArticleProps) {
                     <span className="ml-auto text-[var(--accent-2)]">●</span>
                 </div>
                 <Markdown 
-                    content={text.split('\n').slice(0, 10).join('\n')}
+                    content={stripOriginalLink(text).split('\n').slice(0, 10).join('\n')}
                     href={`/${encodeURIComponent(props.category)}/${encodeURIComponent(props.name)}`} 
                     lang={props.category}
                 />
