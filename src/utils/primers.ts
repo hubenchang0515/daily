@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { decodeUrl } from './markdown';
 
 export interface SitemapNode {
     links: Record<string, string>;
@@ -176,7 +177,7 @@ export function getPrimerLink(text: string, languages: string | string[]): strin
 
         for (const key of primerKeys(text)) {
             if (Object.hasOwn(links, key)) {
-                return links[key];
+                return decodeUrl(links[key]);
             }
         }
     }

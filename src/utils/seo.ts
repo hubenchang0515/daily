@@ -7,6 +7,12 @@ export function absoluteUrl(pathname = '/') {
     return new URL(`${SITE_CONFIG.basePath}${path}`, SITE_CONFIG.origin).toString();
 }
 
+// 将站内路径转换为绝对地址，保留中文等字符原样（用于 Markdown 中的链接）
+export function readableUrl(pathname = '/') {
+    const path = pathname.startsWith('/') ? pathname : `/${pathname}`;
+    return `${SITE_CONFIG.origin}${SITE_CONFIG.basePath}${path}`;
+}
+
 export function categoryPath(category: string) {
     return `/${encodeURIComponent(category)}`;
 }

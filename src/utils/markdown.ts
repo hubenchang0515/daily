@@ -9,9 +9,27 @@ export function originalLinkBlock(title: string, url: string) {
     return `> 原文链接：[${title} - ${SITE_CONFIG.brand}](${url})`;
 }
 
-// 提取原文链接块
+// 解码链接地址中的非 ASCII 百分号转义（保留空格等 ASCII 转义），无法解码时保留原样
+export function decodeUrl(url: string): string {
+    return url.replace(/(?:%[89A-Fa-f][0-9A-Fa-f])+/g, (sequence) => {
+        try {
+            const decoded = decodeURIComponent(sequence);
+            return /\s/u.test(decoded) ? sequence : decoded;
+        } catch {
+            return sequence;
+        }
+    });
+}
+
+// 提取原文链接块（链接地址保持中文等字符原样）
 export function originalLink(markdown: string): string | undefined {
-    return markdown.split('\n').find((line) => ORIGINAL_LINK.test(line))?.trim();
+    const line = markdown.split('\n').find((item) => ORIGINAL_LINK.test(item))?.trim();
+    if (!line) return undefined;
+
+    const match = /\]\((.*)\)$/.exec(line);
+    if (!match) return line;
+
+    return `${line.slice(0, match.index + 2)}${decodeUrl(match[1])})`;
 }
 
 // 移除原文链接块及其相邻的分隔线（用于页面渲染）
