@@ -1,4 +1,4 @@
-> 原文链接：[Linux 文件描述符泄漏排查：从 Too many open files 说起 - 码日新 · 每日文章](https://daily.xplanc.org/linux/Linux-%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6%E6%B3%84%E6%BC%8F%E6%8E%92%E6%9F%A5%EF%BC%9A%E4%BB%8E-Too-many-open-files-%E8%AF%B4%E8%B5%B7.md)
+> 原文链接：[Linux 文件描述符泄漏排查：从 Too many open files 说起 - 码日新 · 每日文章](https://daily.xplanc.org/linux/Linux-文件描述符泄漏排查：从-Too-many-open-files-说起.md)
 
 ---
 

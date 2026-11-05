@@ -1,4 +1,4 @@
-> 原文链接：[别急着写 JS：用原生 HTML 完成表单校验 - 码日新 · 每日文章](https://daily.xplanc.org/html/%E5%88%AB%E6%80%A5%E7%9D%80%E5%86%99-JS%EF%BC%9A%E7%94%A8%E5%8E%9F%E7%94%9F-HTML-%E5%AE%8C%E6%88%90%E8%A1%A8%E5%8D%95%E6%A0%A1%E9%AA%8C.md)
+> 原文链接：[别急着写 JS：用原生 HTML 完成表单校验 - 码日新 · 每日文章](https://daily.xplanc.org/html/别急着写-JS：用原生-HTML-完成表单校验.md)
 
 ---
 

@@ -1,4 +1,4 @@
-> 原文链接：[ESM 循环依赖：为什么 import 进来的是 undefined - 码日新 · 每日文章](https://daily.xplanc.org/js/ESM-%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88-import-%E8%BF%9B%E6%9D%A5%E7%9A%84%E6%98%AF-undefined.md)
+> 原文链接：[ESM 循环依赖：为什么 import 进来的是 undefined - 码日新 · 每日文章](https://daily.xplanc.org/js/ESM-循环依赖：为什么-import-进来的是-undefined.md)
 
 ---
 

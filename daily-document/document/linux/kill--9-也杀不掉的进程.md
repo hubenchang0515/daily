@@ -1,4 +1,4 @@
-> 原文链接：[kill -9 也杀不掉的进程 - 码日新 · 每日文章](https://daily.xplanc.org/linux/kill--9-%E4%B9%9F%E6%9D%80%E4%B8%8D%E6%8E%89%E7%9A%84%E8%BF%9B%E7%A8%8B.md)
+> 原文链接：[kill -9 也杀不掉的进程 - 码日新 · 每日文章](https://daily.xplanc.org/linux/kill--9-也杀不掉的进程.md)
 
 ---
 

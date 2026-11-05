@@ -1,4 +1,4 @@
-> 原文链接：[Lua 协程：让函数停在半句话上 - 码日新 · 每日文章](https://daily.xplanc.org/lua/Lua-%E5%8D%8F%E7%A8%8B%EF%BC%9A%E8%AE%A9%E5%87%BD%E6%95%B0%E5%81%9C%E5%9C%A8%E5%8D%8A%E5%8F%A5%E8%AF%9D%E4%B8%8A.md)
+> 原文链接：[Lua 协程：让函数停在半句话上 - 码日新 · 每日文章](https://daily.xplanc.org/lua/Lua-协程：让函数停在半句话上.md)
 
 ---
 

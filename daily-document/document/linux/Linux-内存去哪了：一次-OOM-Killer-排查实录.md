@@ -1,4 +1,4 @@
-> 原文链接：[Linux 内存去哪了：一次 OOM Killer 排查实录 - 码日新 · 每日文章](https://daily.xplanc.org/linux/Linux-%E5%86%85%E5%AD%98%E5%8E%BB%E5%93%AA%E4%BA%86%EF%BC%9A%E4%B8%80%E6%AC%A1-OOM-Killer-%E6%8E%92%E6%9F%A5%E5%AE%9E%E5%BD%95.md)
+> 原文链接：[Linux 内存去哪了：一次 OOM Killer 排查实录 - 码日新 · 每日文章](https://daily.xplanc.org/linux/Linux-内存去哪了：一次-OOM-Killer-排查实录.md)
 
 ---
 

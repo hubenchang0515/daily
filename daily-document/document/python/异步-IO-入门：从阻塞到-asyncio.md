@@ -1,4 +1,4 @@
-> 原文链接：[异步 IO 入门：从阻塞到 asyncio - 码日新 · 每日文章](https://daily.xplanc.org/python/%E5%BC%82%E6%AD%A5-IO-%E5%85%A5%E9%97%A8%EF%BC%9A%E4%BB%8E%E9%98%BB%E5%A1%9E%E5%88%B0-asyncio.md)
+> 原文链接：[异步 IO 入门：从阻塞到 asyncio - 码日新 · 每日文章](https://daily.xplanc.org/python/异步-IO-入门：从阻塞到-asyncio.md)
 
 ---
 

@@ -1,4 +1,4 @@
-> 原文链接：[写了 srcset，浏览器为什么还是下载了最大那张图 - 码日新 · 每日文章](https://daily.xplanc.org/html/%E5%86%99%E4%BA%86-srcset%EF%BC%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E6%98%AF%E4%B8%8B%E8%BD%BD%E4%BA%86%E6%9C%80%E5%A4%A7%E9%82%A3%E5%BC%A0%E5%9B%BE.md)
+> 原文链接：[写了 srcset，浏览器为什么还是下载了最大那张图 - 码日新 · 每日文章](https://daily.xplanc.org/html/写了-srcset，浏览器为什么还是下载了最大那张图.md)
 
 ---
 

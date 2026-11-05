@@ -1,4 +1,4 @@
-> 原文链接：[Git 提交信息鉴赏：从 fix 到 fix again - 码日新 · 每日文章](https://daily.xplanc.org/%E8%BD%BB%E6%9D%BE%E4%B8%80%E7%AC%91/Git-%E6%8F%90%E4%BA%A4%E4%BF%A1%E6%81%AF%E9%89%B4%E8%B5%8F%EF%BC%9A%E4%BB%8E-fix-%E5%88%B0-fix-again.md)
+> 原文链接：[Git 提交信息鉴赏：从 fix 到 fix again - 码日新 · 每日文章](https://daily.xplanc.org/轻松一笑/Git-提交信息鉴赏：从-fix-到-fix-again.md)
 
 ---
 

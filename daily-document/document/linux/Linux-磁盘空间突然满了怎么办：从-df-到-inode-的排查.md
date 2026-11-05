@@ -1,4 +1,4 @@
-> 原文链接：[Linux 磁盘空间突然满了怎么办：从 df 到 inode 的排查 - 码日新 · 每日文章](https://daily.xplanc.org/linux/Linux-%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E7%AA%81%E7%84%B6%E6%BB%A1%E4%BA%86%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9A%E4%BB%8E-df-%E5%88%B0-inode-%E7%9A%84%E6%8E%92%E6%9F%A5.md)
+> 原文链接：[Linux 磁盘空间突然满了怎么办：从 df 到 inode 的排查 - 码日新 · 每日文章](https://daily.xplanc.org/linux/Linux-磁盘空间突然满了怎么办：从-df-到-inode-的排查.md)
 
 ---
 

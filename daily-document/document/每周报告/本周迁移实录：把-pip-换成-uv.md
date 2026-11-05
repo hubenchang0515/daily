@@ -1,4 +1,4 @@
-> 原文链接：[本周迁移实录：把 pip 换成 uv - 码日新 · 每日文章](https://daily.xplanc.org/%E6%AF%8F%E5%91%A8%E6%8A%A5%E5%91%8A/%E6%9C%AC%E5%91%A8%E8%BF%81%E7%A7%BB%E5%AE%9E%E5%BD%95%EF%BC%9A%E6%8A%8A-pip-%E6%8D%A2%E6%88%90-uv.md)
+> 原文链接：[本周迁移实录：把 pip 换成 uv - 码日新 · 每日文章](https://daily.xplanc.org/每周报告/本周迁移实录：把-pip-换成-uv.md)
 
 ---
 

@@ -1,4 +1,4 @@
-> 原文链接：[别用字符串思维写 PowerShell 管道 - 码日新 · 每日文章](https://daily.xplanc.org/pwsh/%E5%88%AB%E7%94%A8%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%9D%E7%BB%B4%E5%86%99-PowerShell-%E7%AE%A1%E9%81%93.md)
+> 原文链接：[别用字符串思维写 PowerShell 管道 - 码日新 · 每日文章](https://daily.xplanc.org/pwsh/别用字符串思维写-PowerShell-管道.md)
 
 ---
 

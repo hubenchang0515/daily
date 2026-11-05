@@ -9,16 +9,26 @@ export function originalLinkBlock(title: string, url: string) {
     return `> 原文链接：[${title} - ${SITE_CONFIG.brand}](${url})`;
 }
 
-// 解码链接地址中的非 ASCII 百分号转义（保留空格等 ASCII 转义），无法解码时保留原样
+// 可安全还原到 Markdown 链接中的 ASCII 字符（不含空格、括号、分隔符等）
+const SAFE_ASCII = /^[A-Za-z0-9\-._~!$&'*+,;=:@]$/;
+
+// 解码链接地址中的百分号转义，保留会破坏链接的字符（空格、括号、#、? 等）
 export function decodeUrl(url: string): string {
-    return url.replace(/(?:%[89A-Fa-f][0-9A-Fa-f])+/g, (sequence) => {
-        try {
-            const decoded = decodeURIComponent(sequence);
-            return /\s/u.test(decoded) ? sequence : decoded;
-        } catch {
-            return sequence;
-        }
-    });
+    return url
+        // 非 ASCII 字符（UTF-8 多字节）
+        .replace(/(?:%[89A-Fa-f][0-9A-Fa-f])+/g, (sequence) => {
+            try {
+                const decoded = decodeURIComponent(sequence);
+                return /\s/u.test(decoded) ? sequence : decoded;
+            } catch {
+                return sequence;
+            }
+        })
+        // 可安全还原的 ASCII 字符，如 %2B -> +
+        .replace(/%([0-9A-Fa-f]{2})/g, (match, hex: string) => {
+            const char = String.fromCharCode(parseInt(hex, 16));
+            return SAFE_ASCII.test(char) ? char : match;
+        });
 }
 
 // 提取原文链接块（链接地址保持中文等字符原样）

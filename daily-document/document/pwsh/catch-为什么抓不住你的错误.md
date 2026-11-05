@@ -1,4 +1,4 @@
-> 原文链接：[PowerShell 错误处理：try/catch 为什么抓不住你的错误 - 码日新 · 每日文章](https://daily.xplanc.org/pwsh/catch-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%93%E4%B8%8D%E4%BD%8F%E4%BD%A0%E7%9A%84%E9%94%99%E8%AF%AF.md)
+> 原文链接：[PowerShell 错误处理：try/catch 为什么抓不住你的错误 - 码日新 · 每日文章](https://daily.xplanc.org/pwsh/catch-为什么抓不住你的错误.md)
 
 ---
 

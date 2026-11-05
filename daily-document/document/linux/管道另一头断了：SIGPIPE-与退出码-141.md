@@ -1,4 +1,4 @@
-> 原文链接：[管道另一头断了：SIGPIPE 与退出码 141 - 码日新 · 每日文章](https://daily.xplanc.org/linux/%E7%AE%A1%E9%81%93%E5%8F%A6%E4%B8%80%E5%A4%B4%E6%96%AD%E4%BA%86%EF%BC%9ASIGPIPE-%E4%B8%8E%E9%80%80%E5%87%BA%E7%A0%81-141.md)
+> 原文链接：[管道另一头断了：SIGPIPE 与退出码 141 - 码日新 · 每日文章](https://daily.xplanc.org/linux/管道另一头断了：SIGPIPE-与退出码-141.md)
 
 ---
 

@@ -1,4 +1,4 @@
-> 原文链接：[Go 的 map 被并发写时，为什么连 recover 都救不了 - 码日新 · 每日文章](https://daily.xplanc.org/go/Go-%E7%9A%84-map-%E8%A2%AB%E5%B9%B6%E5%8F%91%E5%86%99%E6%97%B6%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%9E-recover-%E9%83%BD%E6%95%91%E4%B8%8D%E4%BA%86.md)
+> 原文链接：[Go 的 map 被并发写时，为什么连 recover 都救不了 - 码日新 · 每日文章](https://daily.xplanc.org/go/Go-的-map-被并发写时，为什么连-recover-都救不了.md)
 
 ---
 

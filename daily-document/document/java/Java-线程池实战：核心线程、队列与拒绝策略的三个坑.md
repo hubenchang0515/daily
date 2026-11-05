@@ -1,4 +1,4 @@
-> 原文链接：[Java 线程池实战：核心线程、队列与拒绝策略的三个坑 - 码日新 · 每日文章](https://daily.xplanc.org/java/Java-%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AE%9E%E6%88%98%EF%BC%9A%E6%A0%B8%E5%BF%83%E7%BA%BF%E7%A8%8B%E3%80%81%E9%98%9F%E5%88%97%E4%B8%8E%E6%8B%92%E7%BB%9D%E7%AD%96%E7%95%A5%E7%9A%84%E4%B8%89%E4%B8%AA%E5%9D%91.md)
+> 原文链接：[Java 线程池实战：核心线程、队列与拒绝策略的三个坑 - 码日新 · 每日文章](https://daily.xplanc.org/java/Java-线程池实战：核心线程、队列与拒绝策略的三个坑.md)
 
 ---
 

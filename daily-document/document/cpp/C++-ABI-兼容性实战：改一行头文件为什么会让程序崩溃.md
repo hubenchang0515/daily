@@ -1,4 +1,4 @@
-> 原文链接：[C++ ABI 兼容性实战：改一行头文件为什么会让程序崩溃 - 码日新 · 每日文章](https://daily.xplanc.org/cpp/C%2B%2B-ABI-%E5%85%BC%E5%AE%B9%E6%80%A7%E5%AE%9E%E6%88%98%EF%BC%9A%E6%94%B9%E4%B8%80%E8%A1%8C%E5%A4%B4%E6%96%87%E4%BB%B6%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%AE%A9%E7%A8%8B%E5%BA%8F%E5%B4%A9%E6%BA%83.md)
+> 原文链接：[C++ ABI 兼容性实战：改一行头文件为什么会让程序崩溃 - 码日新 · 每日文章](https://daily.xplanc.org/cpp/C++-ABI-兼容性实战：改一行头文件为什么会让程序崩溃.md)
 
 ---
 

@@ -1,4 +1,4 @@
-> 原文链接：[structuredClone 复制不了什么 - 码日新 · 每日文章](https://daily.xplanc.org/js/structuredClone-%E5%A4%8D%E5%88%B6%E4%B8%8D%E4%BA%86%E4%BB%80%E4%B9%88.md)
+> 原文链接：[structuredClone 复制不了什么 - 码日新 · 每日文章](https://daily.xplanc.org/js/structuredClone-复制不了什么.md)
 
 ---
 

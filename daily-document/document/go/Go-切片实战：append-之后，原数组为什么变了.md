@@ -1,4 +1,4 @@
-> 原文链接：[Go 切片实战：append 之后，原数组为什么变了 - 码日新 · 每日文章](https://daily.xplanc.org/go/Go-%E5%88%87%E7%89%87%E5%AE%9E%E6%88%98%EF%BC%9Aappend-%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%8E%9F%E6%95%B0%E7%BB%84%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%98%E4%BA%86.md)
+> 原文链接：[Go 切片实战：append 之后，原数组为什么变了 - 码日新 · 每日文章](https://daily.xplanc.org/go/Go-切片实战：append-之后，原数组为什么变了.md)
 
 ---
 

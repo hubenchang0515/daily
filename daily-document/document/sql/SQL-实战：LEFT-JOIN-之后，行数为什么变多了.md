@@ -1,4 +1,4 @@
-> 原文链接：[SQL 实战：LEFT JOIN 之后，行数为什么变多了 - 码日新 · 每日文章](https://daily.xplanc.org/sql/SQL-%E5%AE%9E%E6%88%98%EF%BC%9ALEFT-JOIN-%E4%B9%8B%E5%90%8E%EF%BC%8C%E8%A1%8C%E6%95%B0%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%98%E5%A4%9A%E4%BA%86.md)
+> 原文链接：[SQL 实战：LEFT JOIN 之后，行数为什么变多了 - 码日新 · 每日文章](https://daily.xplanc.org/sql/SQL-实战：LEFT-JOIN-之后，行数为什么变多了.md)
 
 ---
 

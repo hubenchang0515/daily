@@ -1,4 +1,4 @@
-> 原文链接：[告别手写遮罩层：用原生 dialog 实现弹窗 - 码日新 · 每日文章](https://daily.xplanc.org/html/%E5%91%8A%E5%88%AB%E6%89%8B%E5%86%99%E9%81%AE%E7%BD%A9%E5%B1%82%EF%BC%9A%E7%94%A8%E5%8E%9F%E7%94%9F-dialog-%E5%AE%9E%E7%8E%B0%E5%BC%B9%E7%AA%97.md)
+> 原文链接：[告别手写遮罩层：用原生 dialog 实现弹窗 - 码日新 · 每日文章](https://daily.xplanc.org/html/告别手写遮罩层：用原生-dialog-实现弹窗.md)
 
 ---
 

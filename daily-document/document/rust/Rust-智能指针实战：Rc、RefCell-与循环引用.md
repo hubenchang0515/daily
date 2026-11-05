@@ -1,4 +1,4 @@
-> 原文链接：[Rust 智能指针实战：Rc、RefCell 与循环引用 - 码日新 · 每日文章](https://daily.xplanc.org/rust/Rust-%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E5%AE%9E%E6%88%98%EF%BC%9ARc%E3%80%81RefCell-%E4%B8%8E%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8.md)
+> 原文链接：[Rust 智能指针实战：Rc、RefCell 与循环引用 - 码日新 · 每日文章](https://daily.xplanc.org/rust/Rust-智能指针实战：Rc、RefCell-与循环引用.md)
 
 ---
 

@@ -1,4 +1,4 @@
-> 原文链接：[Python 的哈希契约：为什么 list 不能当字典的键 - 码日新 · 每日文章](https://daily.xplanc.org/python/Python-%E7%9A%84%E5%93%88%E5%B8%8C%E5%A5%91%E7%BA%A6%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88-list-%E4%B8%8D%E8%83%BD%E5%BD%93%E5%AD%97%E5%85%B8%E7%9A%84%E9%94%AE.md)
+> 原文链接：[Python 的哈希契约：为什么 list 不能当字典的键 - 码日新 · 每日文章](https://daily.xplanc.org/python/Python-的哈希契约：为什么-list-不能当字典的键.md)
 
 ---
 

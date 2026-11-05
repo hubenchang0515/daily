@@ -1,4 +1,4 @@
-> 原文链接：[CompletableFuture 吞掉的异常去哪了 - 码日新 · 每日文章](https://daily.xplanc.org/java/CompletableFuture-%E5%90%9E%E6%8E%89%E7%9A%84%E5%BC%82%E5%B8%B8%E5%8E%BB%E5%93%AA%E4%BA%86.md)
+> 原文链接：[CompletableFuture 吞掉的异常去哪了 - 码日新 · 每日文章](https://daily.xplanc.org/java/CompletableFuture-吞掉的异常去哪了.md)
 
 ---
 

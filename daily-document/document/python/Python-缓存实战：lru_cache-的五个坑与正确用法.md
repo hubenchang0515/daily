@@ -1,4 +1,4 @@
-> 原文链接：[Python 缓存实战：lru_cache 的五个坑与正确用法 - 码日新 · 每日文章](https://daily.xplanc.org/python/Python-%E7%BC%93%E5%AD%98%E5%AE%9E%E6%88%98%EF%BC%9Alru_cache-%E7%9A%84%E4%BA%94%E4%B8%AA%E5%9D%91%E4%B8%8E%E6%AD%A3%E7%A1%AE%E7%94%A8%E6%B3%95.md)
+> 原文链接：[Python 缓存实战：lru_cache 的五个坑与正确用法 - 码日新 · 每日文章](https://daily.xplanc.org/python/Python-缓存实战：lru_cache-的五个坑与正确用法.md)
 
 ---
 

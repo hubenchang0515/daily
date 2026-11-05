@@ -1,4 +1,4 @@
-> 原文链接：[Rust 的 Drop 顺序：谁先走，谁后走 - 码日新 · 每日文章](https://daily.xplanc.org/rust/Rust-%E7%9A%84-Drop-%E9%A1%BA%E5%BA%8F%EF%BC%9A%E8%B0%81%E5%85%88%E8%B5%B0%EF%BC%8C%E8%B0%81%E5%90%8E%E8%B5%B0.md)
+> 原文链接：[Rust 的 Drop 顺序：谁先走，谁后走 - 码日新 · 每日文章](https://daily.xplanc.org/rust/Rust-的-Drop-顺序：谁先走，谁后走.md)
 
 ---
 

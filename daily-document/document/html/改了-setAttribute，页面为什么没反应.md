@@ -1,4 +1,4 @@
-> 原文链接：[改了 setAttribute，页面为什么没反应 - 码日新 · 每日文章](https://daily.xplanc.org/html/%E6%94%B9%E4%BA%86-setAttribute%EF%BC%8C%E9%A1%B5%E9%9D%A2%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E5%8F%8D%E5%BA%94.md)
+> 原文链接：[改了 setAttribute，页面为什么没反应 - 码日新 · 每日文章](https://daily.xplanc.org/html/改了-setAttribute，页面为什么没反应.md)
 
 ---
 

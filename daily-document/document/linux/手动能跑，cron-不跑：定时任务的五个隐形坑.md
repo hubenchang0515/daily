@@ -1,4 +1,4 @@
-> 原文链接：[手动能跑，cron 不跑：定时任务的五个隐形坑 - 码日新 · 每日文章](https://daily.xplanc.org/linux/%E6%89%8B%E5%8A%A8%E8%83%BD%E8%B7%91%EF%BC%8Ccron-%E4%B8%8D%E8%B7%91%EF%BC%9A%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E4%BA%94%E4%B8%AA%E9%9A%90%E5%BD%A2%E5%9D%91.md)
+> 原文链接：[手动能跑，cron 不跑：定时任务的五个隐形坑 - 码日新 · 每日文章](https://daily.xplanc.org/linux/手动能跑，cron-不跑：定时任务的五个隐形坑.md)
 
 ---
 

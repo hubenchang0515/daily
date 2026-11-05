@@ -1,4 +1,4 @@
-> 原文链接：[chmod 777 之后，为什么还是 Permission denied - 码日新 · 每日文章](https://daily.xplanc.org/linux/chmod-777-%E4%B9%8B%E5%90%8E%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E6%98%AF-Permission-denied.md)
+> 原文链接：[chmod 777 之后，为什么还是 Permission denied - 码日新 · 每日文章](https://daily.xplanc.org/linux/chmod-777-之后，为什么还是-Permission-denied.md)
 
 ---
 

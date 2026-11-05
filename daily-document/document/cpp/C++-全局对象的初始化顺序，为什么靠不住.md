@@ -1,4 +1,4 @@
-> 原文链接：[C++ 全局对象的初始化顺序，为什么靠不住 - 码日新 · 每日文章](https://daily.xplanc.org/cpp/C%2B%2B-%E5%85%A8%E5%B1%80%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%BA%E5%BA%8F%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9D%A0%E4%B8%8D%E4%BD%8F.md)
+> 原文链接：[C++ 全局对象的初始化顺序，为什么靠不住 - 码日新 · 每日文章](https://daily.xplanc.org/cpp/C++-全局对象的初始化顺序，为什么靠不住.md)
 
 ---
 

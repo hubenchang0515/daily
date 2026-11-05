@@ -1,4 +1,4 @@
-> 原文链接：[block、proc 和 lambda 不是一回事 - 码日新 · 每日文章](https://daily.xplanc.org/ruby/block%E3%80%81proc-%E5%92%8C-lambda-%E4%B8%8D%E6%98%AF%E4%B8%80%E5%9B%9E%E4%BA%8B.md)
+> 原文链接：[block、proc 和 lambda 不是一回事 - 码日新 · 每日文章](https://daily.xplanc.org/ruby/block、proc-和-lambda-不是一回事.md)
 
 ---
 

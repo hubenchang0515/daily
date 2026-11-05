@@ -1,4 +1,4 @@
-> 原文链接：[NULL 的三值逻辑：查不到、排不掉、算不准 - 码日新 · 每日文章](https://daily.xplanc.org/sql/NULL-%E7%9A%84%E4%B8%89%E5%80%BC%E9%80%BB%E8%BE%91%EF%BC%9A%E6%9F%A5%E4%B8%8D%E5%88%B0%E3%80%81%E6%8E%92%E4%B8%8D%E6%8E%89%E3%80%81%E7%AE%97%E4%B8%8D%E5%87%86.md)
+> 原文链接：[NULL 的三值逻辑：查不到、排不掉、算不准 - 码日新 · 每日文章](https://daily.xplanc.org/sql/NULL-的三值逻辑：查不到、排不掉、算不准.md)
 
 ---
 

@@ -1,4 +1,4 @@
-> 原文链接：[负载 12，CPU 却在摸鱼：读懂 Linux 的 load average - 码日新 · 每日文章](https://daily.xplanc.org/linux/%E8%B4%9F%E8%BD%BD-12%EF%BC%8CCPU-%E5%8D%B4%E5%9C%A8%E6%91%B8%E9%B1%BC%EF%BC%9A%E8%AF%BB%E6%87%82-Linux-%E7%9A%84-load-average.md)
+> 原文链接：[负载 12，CPU 却在摸鱼：读懂 Linux 的 load average - 码日新 · 每日文章](https://daily.xplanc.org/linux/负载-12，CPU-却在摸鱼：读懂-Linux-的-load-average.md)
 
 ---
 

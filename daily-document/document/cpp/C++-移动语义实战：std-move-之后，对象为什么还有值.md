@@ -1,4 +1,4 @@
-> 原文链接：[C++ 移动语义实战：std::move 之后，对象为什么还有值 - 码日新 · 每日文章](https://daily.xplanc.org/cpp/C%2B%2B-%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89%E5%AE%9E%E6%88%98%EF%BC%9Astd-move-%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%AF%B9%E8%B1%A1%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E6%9C%89%E5%80%BC.md)
+> 原文链接：[C++ 移动语义实战：std::move 之后，对象为什么还有值 - 码日新 · 每日文章](https://daily.xplanc.org/cpp/C++-移动语义实战：std-move-之后，对象为什么还有值.md)
 
 ---
 

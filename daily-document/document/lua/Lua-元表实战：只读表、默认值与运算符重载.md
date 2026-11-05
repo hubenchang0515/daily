@@ -1,4 +1,4 @@
-> 原文链接：[Lua 元表实战：只读表、默认值与运算符重载 - 码日新 · 每日文章](https://daily.xplanc.org/lua/Lua-%E5%85%83%E8%A1%A8%E5%AE%9E%E6%88%98%EF%BC%9A%E5%8F%AA%E8%AF%BB%E8%A1%A8%E3%80%81%E9%BB%98%E8%AE%A4%E5%80%BC%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD.md)
+> 原文链接：[Lua 元表实战：只读表、默认值与运算符重载 - 码日新 · 每日文章](https://daily.xplanc.org/lua/Lua-元表实战：只读表、默认值与运算符重载.md)
 
 ---
 
