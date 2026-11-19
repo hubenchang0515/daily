@@ -106,10 +106,11 @@ npm run deploy:gh
 ## 文章目录
 
 <!-- ARTICLES:BEGIN -->
-共 70 篇。
+共 71 篇。
 
-### linux（15）
+### linux（16）
 
+- 2026-11-19 [连接早就关了，端口为什么还占着](https://daily.xplanc.org/linux/连接早就关了，端口为什么还占着.md)
 - 2026-11-19 [DNS 又变了：谁在偷偷改写 resolv.conf](https://daily.xplanc.org/linux/DNS-又变了：谁在偷偷改写-resolv.conf.md)
 - 2026-11-16 [删掉的大文件，空间为什么没回来](https://daily.xplanc.org/linux/删掉的大文件，空间为什么没回来.md)
 - 2026-11-09 [改了 /etc/hosts，为什么还是连到旧地址](https://daily.xplanc.org/linux/hosts，为什么还是连到旧地址.md)
