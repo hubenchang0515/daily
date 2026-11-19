@@ -4,11 +4,11 @@
 
 # with 离开之后：读懂 Python 的上下文管理器
 
-写 Python 时，我们几乎每天都在用 `with`：打开文件、加锁、创建数据库连接、临时切换目录。它看起来像一种“语法糖”，但真正有价值的地方在于：**无论代码块如何结束，清理逻辑都能被可靠执行**。
+写 Python 时，我们几乎每天都在用 [`with`](https://primers.xplanc.org/document/zh/02.Python/06.%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/00.%E6%96%87%E4%BB%B6%20IO.md#0695b5)：打开文件、加锁、创建数据库连接、临时切换目录。它看起来像一种“语法糖”，但真正有价值的地方在于：**无论代码块如何结束，清理逻辑都能被可靠执行**。
 
-这篇文章从 `with` 的执行规则讲起，带你手写一个上下文管理器，再用 `contextlib` 写出更简洁的实现，最后补上几个容易踩的坑。
+这篇文章从 [`with`](https://primers.xplanc.org/document/zh/02.Python/06.%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/00.%E6%96%87%E4%BB%B6%20IO.md#0695b5) 的执行规则讲起，带你手写一个上下文管理器，再用 `contextlib` 写出更简洁的实现，最后补上几个容易踩的坑。
 
-## `with` 解决的是什么问题
+## [`with`](https://primers.xplanc.org/document/zh/02.Python/06.%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/00.%E6%96%87%E4%BB%B6%20IO.md#0695b5) 解决的是什么问题
 
 先看一段典型代码：
 
@@ -28,7 +28,7 @@ finally:
     f.close()
 ```
 
-`with` 做的事情本质上就是把“进入资源”和“退出时清理”这组动作固定下来：
+[`with`](https://primers.xplanc.org/document/zh/02.Python/06.%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/00.%E6%96%87%E4%BB%B6%20IO.md#0695b5) 做的事情本质上就是把“进入资源”和“退出时清理”这组动作固定下来：
 
 ```python
 with open("data.txt", "w", encoding="utf-8") as f:
@@ -39,12 +39,12 @@ with open("data.txt", "w", encoding="utf-8") as f:
 
 ## 上下文管理协议：`__enter__` 与 `__exit__`
 
-一个对象只要实现了下面两个方法，就可以被 `with` 使用：
+一个对象只要实现了下面两个方法，就可以被 [`with`](https://primers.xplanc.org/document/zh/02.Python/06.%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/00.%E6%96%87%E4%BB%B6%20IO.md#0695b5) 使用：
 
 - `__enter__(self)`：进入上下文时调用，返回值会绑定给 `as` 后面的变量
 - `__exit__(self, exc_type, exc, tb)`：离开上下文时调用，负责清理；如果块内发生异常，异常信息会传进来
 
-可以把 `with` 近似理解为：
+可以把 [`with`](https://primers.xplanc.org/document/zh/02.Python/06.%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/00.%E6%96%87%E4%BB%B6%20IO.md#0695b5) 近似理解为：
 
 ```python
 manager = EXPR
@@ -153,7 +153,7 @@ with managed_resource("db-conn") as r:
 
 ## 同时管理多个资源
 
-需要多个上下文时，可以在一条 `with` 语句里并列写出：
+需要多个上下文时，可以在一条 [`with`](https://primers.xplanc.org/document/zh/02.Python/06.%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/00.%E6%96%87%E4%BB%B6%20IO.md#0695b5) 语句里并列写出：
 
 ```python
 with open("in.txt", "r", encoding="utf-8") as src, \
@@ -186,13 +186,13 @@ with ExitStack() as stack:
 | 生成器管理器 | `yield` 没放进 `try/finally` | 清理逻辑必须写在 `finally` 中 |
 | 想吞掉异常 | 随手 `return True` | 只在明确知道如何恢复时才吞异常，并限制异常类型 |
 | `as` 的理解偏差 | 以为总是拿到管理器本身 | 记住 `as` 绑定的是 `__enter__` 的返回值 |
-| 多资源管理 | 手写多层嵌套，可读性差 | 优先用一条 `with` 管理多个，动态场景用 `ExitStack` |
+| 多资源管理 | 手写多层嵌套，可读性差 | 优先用一条 [`with`](https://primers.xplanc.org/document/zh/02.Python/06.%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/00.%E6%96%87%E4%BB%B6%20IO.md#0695b5) 管理多个，动态场景用 `ExitStack` |
 
-还有一个容易忽略的点：并不是所有“有关闭方法”的对象都适合作为上下文管理器，但大多数需要成对打开/释放的资源都应该优先支持 `with`。如果你在写库代码，给资源对象实现上下文协议，通常比只提供 `close()` 更稳妥，也更符合 Python 使用者的预期。
+还有一个容易忽略的点：并不是所有“有关闭方法”的对象都适合作为上下文管理器，但大多数需要成对打开/释放的资源都应该优先支持 [`with`](https://primers.xplanc.org/document/zh/02.Python/06.%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/00.%E6%96%87%E4%BB%B6%20IO.md#0695b5)。如果你在写库代码，给资源对象实现上下文协议，通常比只提供 `close()` 更稳妥，也更符合 Python 使用者的预期。
 
 ## 小结
 
-`with` 的本质不是少写 `finally`，而是把“使用资源”和“释放资源”绑定成一个明确的生命周期。理解它时，抓住三句话就够了：
+[`with`](https://primers.xplanc.org/document/zh/02.Python/06.%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/00.%E6%96%87%E4%BB%B6%20IO.md#0695b5) 的本质不是少写 `finally`，而是把“使用资源”和“释放资源”绑定成一个明确的生命周期。理解它时，抓住三句话就够了：
 
 - `__enter__` 决定进入时做什么，以及 `as` 得到什么；
 - `__exit__` 决定离开时如何清理，以及是否吞掉异常；
