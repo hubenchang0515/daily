@@ -283,3 +283,5 @@ Box<dyn std::error::Error + Send + Sync>
 - 需要控制退出码时，用 `ExitCode` 加 `{error:#}`，不要依赖默认的 `Debug` 输出。
 
 `?` 本身很简单，复杂的是它背后的错误类型设计。把“库用枚举、应用用 anyhow、边界加 context”这三件事做好，大部分 Rust 错误处理问题都会变得清晰。
+
+> 本文由 AI 辅助生成并经人工校验，如有疏漏欢迎指正。

@@ -239,3 +239,5 @@ npx madge --circular --extensions js,jsx,ts,tsx src
 - 循环依赖里的 `undefined` 和 `ReferenceError`，本质都是“在错误的时机访问了绑定”。
 
 真正的修复不是把 `const` 改成 `var` 让它“不报错”，而是调整依赖方向，或者把访问推迟到模块求值完成之后。前者消除问题，后者只是把爆炸时间往后挪。
+
+> 本文由 AI 辅助生成并经人工校验，如有疏漏欢迎指正。

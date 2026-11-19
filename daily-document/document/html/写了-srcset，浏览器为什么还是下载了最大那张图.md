@@ -184,3 +184,5 @@ console.log(window.devicePixelRatio);
 ```
 
 `srcset` 的语法十分钟就能学会，难的是让 `sizes` 和真实布局始终说同一句话。每次改完响应式布局，顺手检查一下 `currentSrc`，比上线后看 CDN 账单便宜得多。
+
+> 本文由 AI 辅助生成并经人工校验，如有疏漏欢迎指正。

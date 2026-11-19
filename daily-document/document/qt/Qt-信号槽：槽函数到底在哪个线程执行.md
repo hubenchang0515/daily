@@ -184,3 +184,5 @@ connect(worker, &Worker::valueReady, this, [this](int v) {
 - 不要从别的线程直接调用 `QObject` 的方法，用信号槽或 `QMetaObject::invokeMethod` 把调用送回对象所属线程。
 
 信号槽的线程行为并不神秘，记住一句话就够了：**槽函数在哪里执行，看的是发射信号的那一刻，接收者住在哪个线程，以及你选了哪种连接方式。**
+
+> 本文由 AI 辅助生成并经人工校验，如有疏漏欢迎指正。

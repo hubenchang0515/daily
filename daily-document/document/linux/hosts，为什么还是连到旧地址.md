@@ -133,3 +133,5 @@ connect(5, {sa_family=AF_INET, sin_port=htons(8080),
 ## 小结
 
 `/etc/hosts` 不是“改完就生效”的开关，它只是解析链的起点之一。排查时按这个顺序走：**`getent` 看 NSS → `nsswitch.conf` 看顺序 → `resolvectl`/`nscd` 看缓存 → `/proc/PID/root` 看 namespace → `strace` 看真实连接**。大多数“改了没生效”，最后都落在缓存和 namespace 这两层。
+
+> 本文由 AI 辅助生成并经人工校验，如有疏漏欢迎指正。

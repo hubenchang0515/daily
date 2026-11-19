@@ -299,3 +299,5 @@ if ($report.Ok -contains $false) {
 ## 小结
 
 记住三句话就够了：内置 cmdlet 默认「报错但继续」，要捕获就加 `-ErrorAction Stop`；原生命令只看 `$LASTEXITCODE`，`try/catch` 管不着；需要让调用方感知失败时，用 `throw` 而不是 `Write-Error`。把这三点落实到脚本骨架里，凌晨两点那类「显示成功但其实没干活」的问题，基本可以绝迹。
+
+> 本文由 AI 辅助生成并经人工校验，如有疏漏欢迎指正。

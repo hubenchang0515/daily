@@ -206,3 +206,5 @@ docker inspect -f '{{.State.OOMKilled}}' api
 7. 在 Kubernetes 里还要看 `terminationGracePeriodSeconds` 和 `preStop`，它们的超时逻辑和 `docker stop` 是一回事。
 
 容器并没有改变信号机制，它只是把“谁是 1 号进程”这件事摆到了你面前。把 `SIGTERM` 当成一个需要认真实现的接口，那十秒的等待自然就消失了。
+
+> 本文由 AI 辅助生成并经人工校验，如有疏漏欢迎指正。

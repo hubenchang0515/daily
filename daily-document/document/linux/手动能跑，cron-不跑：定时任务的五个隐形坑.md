@@ -194,3 +194,5 @@ journalctl -u backup.service -n 50
 `Persistent=true` 会在关机期间错过的任务下次开机后补跑，`RandomizedDelaySec` 则能避免一堆机器在同一秒涌向同一台服务器。
 
 回到开头那个空备份目录：先看日志确认 cron 有没有调用，再看 PATH 和 shell 配置，最后把工作目录和输出固定下来。这四步走完，绝大多数“手动能跑、cron 不跑”的问题都会现出原形。
+
+> 本文由 AI 辅助生成并经人工校验，如有疏漏欢迎指正。

@@ -155,3 +155,5 @@ dig +short www.example.com
 容器里尤其要注意：Docker 可能把 `127.0.0.11` 作为嵌入式 DNS 写进 `/etc/resolv.conf`，Kubernetes 则由 kubelet 生成。镜像里 `RUN echo nameserver ... > /etc/resolv.conf` 通常会在启动时被覆盖，应该改 Docker 的 `--dns`，或配置集群的 CoreDNS 与 `dnsConfig`。
 
 排查这类问题只要记住一句话：**先找到写文件的那个服务，再去改它的配置**。`resolv.conf` 变了不是故障本身，它只是告诉你：上面的某一层网络配置发生了变更。
+
+> 本文由 AI 辅助生成并经人工校验，如有疏漏欢迎指正。

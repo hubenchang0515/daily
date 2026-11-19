@@ -227,3 +227,5 @@ $json = ConvertTo-JsonDeep -InputObject $payload -Compress
 | 中文乱码或解析失败 | 5.1 默认 UTF-16/ANSI、BOM | 写文件用无 BOM UTF-8，发请求用字节数组 |
 
 JSON 本身不复杂，复杂的是 PowerShell 在类型、管道和默认参数上替你做的那些决定。把 `-Depth`、`-InputObject` 和编码这三件事固定下来，大部分“数据发过去就变了”的问题就不会再出现。
+
+> 本文由 AI 辅助生成并经人工校验，如有疏漏欢迎指正。

@@ -151,3 +151,5 @@ list.cloneNode(true)  // 克隆出来的输入框是空的
 最后补一个容易忽略的点：`<option>` 没有 `value` attribute 时，`option.value` 会退化成它的文本内容。这是 property 自己的行为，attribute 那边依然是 `null`。
 
 一句话收尾：attribute 是初始配置，property 是运行时状态。它们有时同步，有时不同步，而不同步的那几个，恰好是表单里最常用的。
+
+> 本文由 AI 辅助生成并经人工校验，如有疏漏欢迎指正。

@@ -140,3 +140,5 @@ Access-Control-Allow-Origin: https://example.com
 - [ ] 只 preload 首屏真的会用到的子集和字重
 
 preload 不是“提前下载就行”，它是在提前发起一个必须能被精确认领的请求。把上面几项对齐，那次多出来的下载才会消失。
+
+> 本文由 AI 辅助生成并经人工校验，如有疏漏欢迎指正。

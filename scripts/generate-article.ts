@@ -6,6 +6,12 @@ import { DOCUMENT_CONFIG, SITE_CONFIG } from '../src/config';
 import { originalLinkBlock } from '../src/utils/markdown';
 import { readableUrl } from '../src/utils/seo';
 
+const AI_DISCLAIMER = '> 本文由 AI 辅助生成并经人工校验，如有疏漏欢迎指正。';
+
+// 文末“相关文章”随机挑选的数量范围
+const RELATED_MIN = 3;
+const RELATED_MAX = 5;
+
 const USAGE = `用法: npm run gen -- <分类> [主题] [选项]
 
 示例:
@@ -207,6 +213,73 @@ function normalizeSlug(value: string): string {
     return name.replace(/[\\/:*?"<>|\s]+/g, '-').replace(/^[.-]+|[.-]+$/g, '');
 }
 
+// 链接地址保留中文，只转义 Markdown 中有特殊含义的字符
+const URL_ESCAPES: Record<string, string> = {
+    '(': '%28',
+    ')': '%29',
+    '<': '%3C',
+    '>': '%3E',
+    ' ': '%20',
+};
+
+function articleUrl(category: string, file: string): string {
+    const pathname = `/${category}/${file}`.replace(/[()<>\s]/g, (ch) => URL_ESCAPES[ch] ?? ch);
+    return readableUrl(pathname);
+}
+
+function escapeLinkText(text: string): string {
+    return text.replace(/([\\[\]]+)/g, '\\$1');
+}
+
+// 随机打乱数组（Fisher–Yates）
+function shuffle<T>(items: T[]): T[] {
+    const result = [...items];
+    for (let i = result.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [result[i], result[j]] = [result[j], result[i]];
+    }
+    return result;
+}
+
+// 随机挑选同分类下的其他文章，生成文末“相关文章”区块
+async function relatedSection(category: string, slug: string): Promise<string> {
+    const directory = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document', category);
+
+    let files: string[];
+    try {
+        files = (await fs.readdir(directory)).filter(
+            (name) => name.toLowerCase().endsWith('.md') && name.slice(0, -3) !== slug,
+        );
+    } catch (err) {
+        if ((err as NodeJS.ErrnoException).code === 'ENOENT') {
+            return '';
+        }
+        throw err;
+    }
+
+    if (files.length === 0) {
+        return '';
+    }
+
+    const count = Math.min(
+        files.length,
+        RELATED_MIN + Math.floor(Math.random() * (RELATED_MAX - RELATED_MIN + 1)),
+    );
+
+    const links: string[] = [];
+    for (const file of shuffle(files).slice(0, count)) {
+        let title = file.replace(/\.md$/i, '');
+        try {
+            title = titleOf(await fs.readFile(path.join(directory, file), 'utf8')) ?? title;
+        } catch {
+            // 读取失败时退回文件名
+        }
+        links.push(`- [${escapeLinkText(title)}](${articleUrl(category, file)})`);
+    }
+
+    return `## 相关文章\n\n${links.join('\n')}`;
+}
+
 function validCategory(category: string): boolean {
     return category !== '.' && category !== '..' && !/[\\/]/.test(category) && path.basename(category) === category;
 }
@@ -273,7 +346,12 @@ async function main(): Promise<void> {
     // 开头插入原文链接，便于转载时保留出处（页面渲染时隐藏）
     const title = titleOf(content) ?? slug
     const url = readableUrl(`/${category}/${slug}.md`);
-    const article = `${originalLinkBlock(title, url)}\n\n---\n\n${content}\n`;
+
+    // 文末追加同分类的随机文章链接，最后一行固定为 AI 声明
+    const related = await relatedSection(category, slug);
+    const article = [originalLinkBlock(title, url), '---', content, related, AI_DISCLAIMER]
+        .filter(Boolean)
+        .join('\n\n') + '\n';
 
     const directory = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document', category);
     const file = path.join(directory, `${slug}.md`);

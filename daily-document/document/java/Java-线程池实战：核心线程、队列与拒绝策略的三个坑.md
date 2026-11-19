@@ -194,3 +194,5 @@ public final class Pools {
 最后，给线程起名字、把 `getActiveCount()`、`getQueue().size()`、`getCompletedTaskCount()` 暴露到监控里。线程池出问题时，最先能救你的不是参数，而是“队列什么时候开始堆积”这条曲线。
 
 不同业务用不同的池，别让一个慢接口把全站的线程占满——这条经验，比任何参数配置都值钱。
+
+> 本文由 AI 辅助生成并经人工校验，如有疏漏欢迎指正。
