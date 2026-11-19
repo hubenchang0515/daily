@@ -37,6 +37,7 @@ cd $PROJECT_DIR
 retry git pull --rebase --autostash
 retry npm run gen -- "$1" -m "$2"
 retry npm run build
+retry npm run index
 git add daily-document 
 git commit -a -m '自动提交' 
 retry git push origin master

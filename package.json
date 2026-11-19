@@ -9,6 +9,8 @@
     "build": "next build",
     "fetch:sitemap": "tsx scripts/fetch-primers-sitemap.ts",
     "gen": "tsx scripts/generate-article.ts",
+    "postgen": "npm run index",
+    "index": "tsx scripts/generate-readme-index.ts",
     "start": "next start",
     "lint": "eslint",
     "deploy": "npm run deploy:cf",
