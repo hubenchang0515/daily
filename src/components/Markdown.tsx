@@ -26,7 +26,8 @@ export async function anchorHash(text:string) {
 export interface MarkdownProps {
     content:string;
     href:string;
-    lang?:string;       // 文章分类，用于匹配 Primer 文档链接
+    lang?:string;               // 文章分类，用于匹配 Primer 文档链接
+    showPrimerList?:boolean;    // 是否在文末汇总 Primers 文档（仅文章正文）
 }
 
 function CodeNode(props:{node:rendererNode, stylesheet: { [key: string]: React.CSSProperties }, context:string, rows:number, allow?:Set<string>, used?:Set<string>}) {
@@ -64,9 +65,12 @@ function CodeNode(props:{node:rendererNode, stylesheet: { [key: string]: React.C
 
 export default function Markdown(props: MarkdownProps) {
     const languages = articleLanguages(props.lang, props.content);
-    // 行内代码与代码块中的 Primers 文档只在首次出现时转换，并在文末汇总
+    // 行内代码与代码块中的 Primers 文档只在首次出现时转换
     const prepared = preparePrimerLinks(stripOriginalLink(props.content), languages);
-    const markdown = insertPrimerSection(prepared.markdown, prepared.links);
+    // 文末汇总只用于文章正文，列表预览不插入
+    const markdown = props.showPrimerList
+        ? insertPrimerSection(prepared.markdown, prepared.links)
+        : prepared.markdown;
 
     return (
         <article className='markdown-body text-[15px] leading-7 text-[var(--fg)]'>

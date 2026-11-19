@@ -189,7 +189,7 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
                     </div>
                 </div>
                 <div className="p-5 sm:p-8">
-                    <Markdown content={text} href={href} lang={category}/>
+                    <Markdown content={text} href={href} lang={category} showPrimerList/>
                 </div>
                 <ArticleNav previous={previous} next={next}/>
             </Card>
