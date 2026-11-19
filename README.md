@@ -106,10 +106,11 @@ npm run deploy:gh
 ## 文章目录
 
 <!-- ARTICLES:BEGIN -->
-共 67 篇。
+共 69 篇。
 
-### linux（14）
+### linux（15）
 
+- 2026-11-19 [DNS 又变了：谁在偷偷改写 resolv.conf](https://daily.xplanc.org/linux/DNS-又变了：谁在偷偷改写-resolv.conf.md)
 - 2026-11-16 [删掉的大文件，空间为什么没回来](https://daily.xplanc.org/linux/删掉的大文件，空间为什么没回来.md)
 - 2026-11-09 [改了 /etc/hosts，为什么还是连到旧地址](https://daily.xplanc.org/linux/hosts，为什么还是连到旧地址.md)
 - 2026-11-05 [文件变了，inotify 为什么没反应](https://daily.xplanc.org/linux/文件变了，inotify-为什么没反应.md)
@@ -206,6 +207,11 @@ npm run deploy:gh
 - 2026-10-29 [Lua 协程：让函数停在半句话上](https://daily.xplanc.org/lua/Lua-协程：让函数停在半句话上.md)
 - 2026-10-25 [Lua 元表实战：只读表、默认值与运算符重载](https://daily.xplanc.org/lua/Lua-元表实战：只读表、默认值与运算符重载.md)
 
+### qt（2）
+
+- 2026-11-19 [Qt 链接报 vtable 未定义，问题常常不在你的代码里](https://daily.xplanc.org/qt/Qt-链接报-vtable-未定义，问题常常不在你的代码里.md)
+- 2026-10-31 [Qt 信号槽：槽函数到底在哪个线程执行](https://daily.xplanc.org/qt/Qt-信号槽：槽函数到底在哪个线程执行.md)
+
 ### sql（2）
 
 - 2026-11-05 [NULL 的三值逻辑：查不到、排不掉、算不准](https://daily.xplanc.org/sql/NULL-的三值逻辑：查不到、排不掉、算不准.md)
@@ -214,10 +220,6 @@ npm run deploy:gh
 ### docker（1）
 
 - 2026-11-02 [docker stop 之后，那十秒在等什么](https://daily.xplanc.org/docker/docker-stop-之后，那十秒在等什么.md)
-
-### qt（1）
-
-- 2026-10-31 [Qt 信号槽：槽函数到底在哪个线程执行](https://daily.xplanc.org/qt/Qt-信号槽：槽函数到底在哪个线程执行.md)
 
 ### ruby（1）
 
