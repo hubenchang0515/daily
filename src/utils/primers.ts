@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { LINKS } from '@/config';
 import { decodeUrl } from './markdown';
 
 export interface SitemapNode {
@@ -183,4 +184,273 @@ export function getPrimerLink(text: string, languages: string | string[]): strin
     }
 
     return undefined;
+}
+
+// 是否为 Primers 文档链接
+export function isPrimerUrl(href: string): boolean {
+    return /^https?:\/\/(?:www\.)?primers\.xplanc\.org\//i.test(href);
+}
+
+// 同一篇文档的归一化标识：忽略 #锚点，并统一百分号转义
+export function primerKey(href: string): string {
+    return decodeUrl(href).replace(/#.*$/, '');
+}
+
+// 文末汇总列表里的 Primers 文档
+export interface PrimerLink {
+    href: string;
+}
+
+// Primers 站点名称，取自外链配置
+const PRIMER_TITLE = LINKS.find((link) => /primers\.xplanc\.org/i.test(link.url))?.title ?? 'Primers';
+
+// 从文档地址得到可读标题，如：
+// https://primers.xplanc.org/document/zh/10.Bash/90.帮助手册/EX.test.md
+// -> Bash/帮助手册/test - Primers 编程伙伴
+export function primerTitle(href: string): string {
+    let pathname: string;
+
+    try {
+        pathname = new URL(href).pathname;
+    } catch {
+        return href;
+    }
+
+    const segments = pathname
+        .split('/')
+        .filter(Boolean)
+        .map((segment) => {
+            try {
+                return decodeURIComponent(segment);
+            } catch {
+                return segment;
+            }
+        });
+
+    // 去掉 document 与语言前缀
+    if (segments[0] === 'document') {
+        segments.shift();
+        if (segments.length > 0 && /^(zh|en)$/i.test(segments[0])) {
+            segments.shift();
+        }
+    }
+
+    const parts = segments
+        .map((segment, index) => {
+            let value = segment;
+            if (index === segments.length - 1) {
+                value = value.replace(/\.md$/i, '');
+            }
+            return value
+                .replace(/^\d+\./, '')      // 10.Bash -> Bash
+                .replace(/^EX\./, '')       // EX.test -> test
+                .replace(/\.hide$/i, '')    // 标准库.hide -> 标准库
+                .replace(/-module$/i, '');  // string-module -> string
+        })
+        .filter(Boolean);
+
+    if (parts.length === 0) {
+        return href;
+    }
+
+    return `${parts.join('/')} - ${PRIMER_TITLE}`;
+}
+
+// 代码块内允许转换为链接的文档（行号基于预处理后的 Markdown）
+export interface PrimerBlockLinks {
+    startLine: number;
+    endLine: number;
+    keys: Set<string>;
+}
+
+export interface PreparedPrimers {
+    markdown: string;
+    links: PrimerLink[];
+    blocks: PrimerBlockLinks[];
+}
+
+// 行内代码、Markdown 链接、代码块标识符
+const INLINE_CODE = /(?<!`)(`+)(?!`)([^`\n]*?)\1(?!`)/g;
+const INLINE_LINK = /(?<!!)\[([^\]]*)\]\(\s*([^)\s]+)(?:\s+(?:"[^"]*"|'[^']*'))?\s*\)/g;
+const FENCE_LINE = /^\s*(`{3,}|~{3,})\s*([^\s`~]*)/;
+const FENCE_CLOSE = /^\s*(`{3,}|~{3,})\s*$/;
+const BLOCK_TOKEN = /[A-Za-z_$][\w$]*/g;
+
+interface InlineToken {
+    type: 'link' | 'code';
+    index: number;
+    raw: string;
+    text?: string;
+    href?: string;
+    ticks?: string;
+    content?: string;
+}
+
+// 取行内下一个链接或代码片段，按出现位置区分先后
+function nextInlineToken(line: string, from: number): InlineToken | undefined {
+    INLINE_LINK.lastIndex = from;
+    INLINE_CODE.lastIndex = from;
+
+    const link = INLINE_LINK.exec(line);
+    const code = INLINE_CODE.exec(line);
+
+    if (link && (!code || link.index < code.index)) {
+        return {
+            type: 'link',
+            index: link.index,
+            raw: link[0],
+            text: link[1],
+            href: link[2],
+        };
+    }
+
+    if (!code) {
+        return undefined;
+    }
+
+    return {
+        type: 'code',
+        index: code.index,
+        raw: code[0],
+        ticks: code[1],
+        content: code[2],
+    };
+}
+
+// 处理一行普通文本：首次出现的 Primers 文档转为链接，重复出现保留原文
+// 标题本身会再包一层链接，行内代码不再插入链接，避免出现嵌套 <a>
+function convertInlineLine(line: string, languages: string[], remember: (href: string) => boolean): string {
+    const linkCode = !/^\s{0,3}#{1,6}\s/.test(line);
+    let result = '';
+    let cursor = 0;
+
+    while (cursor < line.length) {
+        const token = nextInlineToken(line, cursor);
+        if (!token) {
+            result += line.slice(cursor);
+            break;
+        }
+
+        result += line.slice(cursor, token.index);
+
+        if (token.type === 'link') {
+            const href = token.href ?? '';
+            const text = token.text ?? '';
+
+            if (!isPrimerUrl(href)) {
+                result += token.raw;
+            } else {
+                // 已转换过：退化为纯文本，避免全文重复出现同一个链接
+                result += remember(href) ? token.raw : text;
+            }
+        } else {
+            const content = token.content ?? '';
+            const href = linkCode ? getPrimerLink(content, languages) : undefined;
+
+            if (href && remember(href)) {
+                result += `[${token.ticks}${content}${token.ticks}](${href})`;
+            } else {
+                result += token.raw;
+            }
+        }
+
+        cursor = token.index + token.raw.length;
+    }
+
+    return result;
+}
+
+// 预处理文章：每个 Primers 文档只在首次出现处转换一次，并收集文末列表所需信息
+export function preparePrimerLinks(markdown: string, languages: string | string[]): PreparedPrimers {
+    const langs = Array.isArray(languages) ? languages : [languages];
+    const lines = markdown.split('\n');
+    const output: string[] = [];
+    const links: PrimerLink[] = [];
+    const blocks: PrimerBlockLinks[] = [];
+    const used = new Set<string>();
+
+    const remember = (href: string): boolean => {
+        const key = primerKey(href);
+        if (used.has(key)) {
+            return false;
+        }
+        used.add(key);
+        links.push({ href });
+        return true;
+    };
+
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        const fence = FENCE_LINE.exec(line);
+
+        if (!fence) {
+            output.push(convertInlineLine(line, langs, remember));
+            continue;
+        }
+
+        // 代码块：整段扫描一次，确定其中可以转换的文档，避免重复
+        const marker = fence[1];
+        const language = fence[2];
+        const content: string[] = [];
+        output.push(line);
+
+        let j = i + 1;
+        for (; j < lines.length; j++) {
+            output.push(lines[j]);
+
+            const close = FENCE_CLOSE.exec(lines[j]);
+            if (close && close[1][0] === marker[0] && close[1].length >= marker.length) {
+                break;
+            }
+
+            content.push(lines[j]);
+        }
+
+        const keys = new Set<string>();
+        if (language) {
+            for (const match of content.join('\n').matchAll(BLOCK_TOKEN)) {
+                const href = getPrimerLink(match[0], language);
+                if (href && remember(href)) {
+                    keys.add(primerKey(href));
+                }
+            }
+        }
+
+        blocks.push({ startLine: i + 1, endLine: j + 1, keys });
+        i = j;
+    }
+
+    return { markdown: output.join('\n'), links, blocks };
+}
+
+// 生成本文涉及的 Primers 文档列表
+function primerSection(links: PrimerLink[]): string {
+    const items = links.map(({ href }) => {
+        const label = primerTitle(href).replace(/([\\[\]])/g, '\\$1');
+        return `- [${label}](${href})`;
+    });
+
+    return `## 参考文档\n\n${items.join('\n')}`;
+}
+
+// 在文末追加 Primers 文档列表，尽量保持 AI 声明位于最后一行
+export function insertPrimerSection(markdown: string, links: PrimerLink[]): string {
+    if (links.length === 0) {
+        return markdown;
+    }
+
+    const section = primerSection(links);
+    const lines = markdown.split('\n');
+
+    let tail = lines.length - 1;
+    while (tail >= 0 && lines[tail].trim() === '') {
+        tail--;
+    }
+
+    if (tail >= 0 && /^>\s*本文由\s*AI/.test(lines[tail])) {
+        lines.splice(tail, 0, section, '');
+        return lines.join('\n');
+    }
+
+    return `${markdown.replace(/\s*$/, '')}\n\n${section}\n`;
 }

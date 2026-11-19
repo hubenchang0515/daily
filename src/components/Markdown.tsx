@@ -5,7 +5,8 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus as highlight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Link from './Link';
 import DocLink from './DocLink';
-import { articleLanguages } from '@/utils/primers';
+import { ARTICLE_LINK_CLASS } from './linkStyles';
+import { articleLanguages, insertPrimerSection, preparePrimerLinks, PrimerBlockLinks } from '@/utils/primers';
 import { stripOriginalLink } from '@/utils/markdown';
 
 export async function hash(algorithm:string, data:BufferSource) {
@@ -28,14 +29,14 @@ export interface MarkdownProps {
     lang?:string;       // 文章分类，用于匹配 Primer 文档链接
 }
 
-function CodeNode(props:{node:rendererNode, stylesheet: { [key: string]: React.CSSProperties }, context:string, rows:number}) {
+function CodeNode(props:{node:rendererNode, stylesheet: { [key: string]: React.CSSProperties }, context:string, rows:number, allow?:Set<string>, used?:Set<string>}) {
     if (props.node.type === 'text') {
         if (props.node.value === undefined || props.node.value === "") {                        // 空字符串
             return null
         } else if (/^\s+$/.test(props.node.value.toString())) {                                 // 空白字符串
             return <span>{props.node.value}</span>
         } else if (/^\S+$/.test(props.node.value.toString())) {                                 // 不含空白字符
-            return <DocLink text={props.node.value.toString()} lang={props.context}/>
+            return <DocLink text={props.node.value.toString()} lang={props.context} allow={props.allow} used={props.used}/>
         } else {
             const items = props.node.value.toString().split(/(\s+)/)
             return items.map((item, i) => <CodeNode key={i} {...props} node={{type:'text', value:item}}/>)
@@ -63,20 +64,23 @@ function CodeNode(props:{node:rendererNode, stylesheet: { [key: string]: React.C
 
 export default function Markdown(props: MarkdownProps) {
     const languages = articleLanguages(props.lang, props.content);
+    // 行内代码与代码块中的 Primers 文档只在首次出现时转换，并在文末汇总
+    const prepared = preparePrimerLinks(stripOriginalLink(props.content), languages);
+    const markdown = insertPrimerSection(prepared.markdown, prepared.links);
 
     return (
         <article className='markdown-body text-[15px] leading-7 text-[var(--fg)]'>
             <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
-                components={MakeComponents(props.href, languages)}
+                components={MakeComponents(props.href, prepared.blocks)}
             >
-                {stripOriginalLink(props.content)}
+                {markdown}
             </ReactMarkdown>
         </article>
     )
 }
 
-const MakeComponents = (href:string, languages:string[]):Components => {
+const MakeComponents = (href:string, blocks:PrimerBlockLinks[]):Components => {
     return {
         async h1(props) { 
             return (
@@ -227,14 +231,17 @@ const MakeComponents = (href:string, languages:string[]):Components => {
         },
 
         a({href, title, children}) {
-            return <Link href={href} title={title} className='text-[var(--accent-2)] underline decoration-dotted underline-offset-4 hover:text-[var(--accent)]'>{children}</Link>
+            return <Link href={href} title={title} className={ARTICLE_LINK_CLASS}>{children}</Link>
         },
 
-        code({className, children}) {
+        code({className, children, node}) {
             const match = /language-(\w+)/.exec(className || '');
 
             if (match) {
                 const lang = match[1].toLocaleLowerCase();
+                // 代码块行号与预处理阶段记录的范围对应
+                const line = node?.position?.start.line;
+                const allow = blocks.find(block => line !== undefined && line >= block.startLine && line <= block.endLine)?.keys;
                 return (
                     <SyntaxHighlighter
                         showLineNumbers
@@ -242,11 +249,12 @@ const MakeComponents = (href:string, languages:string[]):Components => {
                         className={className} 
                         language={lang === 'shell' ? 'shell-session' : lang}
                         renderer={({ rows, stylesheet }) => {
+                            const used = new Set<string>();
                             return (
                                 <code className={className} style={{whiteSpace:'pre'}}>
                                 {
                                     rows.map((row) => {
-                                        return row.children?.map((node, i) => <CodeNode key={i} node={node} stylesheet={stylesheet} context={match[1]} rows={rows.length.toString().length}/>)
+                                        return row.children?.map((node, i) => <CodeNode key={i} node={node} stylesheet={stylesheet} context={match[1]} rows={rows.length.toString().length} allow={allow} used={used}/>)
                                     })
                                 }
                                 </code>
@@ -267,9 +275,10 @@ const MakeComponents = (href:string, languages:string[]):Components => {
                     </SyntaxHighlighter>
                 )
             } else {
+                // 首次出现的行内代码已在预处理中转成链接，这里不再重复转换
                 return (
                     <code className="border border-[var(--border)] bg-[var(--panel-2)] px-1 text-[var(--accent-2)] [overflow-wrap:anywhere]">
-                        <DocLink text={children?.toString() ?? ''} lang={languages}/>
+                        {children}
                     </code>
                 )
             }
