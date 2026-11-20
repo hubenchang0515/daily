@@ -106,7 +106,7 @@ npm run deploy:gh
 ## 文章目录
 
 <!-- ARTICLES:BEGIN -->
-共 71 篇。
+共 72 篇。
 
 ### linux（16）
 
@@ -137,6 +137,15 @@ npm run deploy:gh
 - 2026-10-29 [C++ string_view 实战：不拷贝，也不保证活着](https://daily.xplanc.org/cpp/C++-string_view-实战：不拷贝，也不保证活着.md)
 - 2026-10-26 [C++ ABI 兼容性实战：改一行头文件为什么会让程序崩溃](https://daily.xplanc.org/cpp/C++-ABI-兼容性实战：改一行头文件为什么会让程序崩溃.md)
 
+### go（6）
+
+- 2026-11-20 [Go 的 defer：return 之后发生的事](https://daily.xplanc.org/go/Go-的-defer：return-之后发生的事.md)
+- 2026-11-13 [Go 的 goroutine 泄漏：没人接收的消息去哪了](https://daily.xplanc.org/go/Go-的-goroutine-泄漏：没人接收的消息去哪了.md)
+- 2026-11-06 [nil 指针，为什么不等于 nil](https://daily.xplanc.org/go/nil-指针，为什么不等于-nil.md)
+- 2026-10-30 [Go 的 map 被并发写时，为什么连 recover 都救不了](https://daily.xplanc.org/go/Go-的-map-被并发写时，为什么连-recover-都救不了.md)
+- 2026-10-28 [Go 切片实战：扩容、共享底层数组与隐藏的内存泄漏](https://daily.xplanc.org/go/Go-切片实战：扩容、共享底层数组与隐藏的内存泄漏.md)
+- 2026-10-28 [Go 切片实战：append 之后，原数组为什么变了](https://daily.xplanc.org/go/Go-切片实战：append-之后，原数组为什么变了.md)
+
 ### html（6）
 
 - 2026-11-18 [preload 写了，字体为什么还是下载两遍](https://daily.xplanc.org/html/preload-写了，字体为什么还是下载两遍.md)
@@ -162,14 +171,6 @@ npm run deploy:gh
 - 2026-10-31 [「在我机器上是好的」：程序员最诚实的谎言](https://daily.xplanc.org/编程笑话/「在我机器上是好的」：程序员最诚实的谎言.md)
 - 2026-10-31 [代码考古指南：如何调查一行祖传代码](https://daily.xplanc.org/编程笑话/代码考古指南：如何调查一行祖传代码.md)
 - 2026-10-31 [Git 提交信息鉴赏：从 fix 到 fix again](https://daily.xplanc.org/编程笑话/Git-提交信息鉴赏：从-fix-到-fix-again.md)
-
-### go（5）
-
-- 2026-11-13 [Go 的 goroutine 泄漏：没人接收的消息去哪了](https://daily.xplanc.org/go/Go-的-goroutine-泄漏：没人接收的消息去哪了.md)
-- 2026-11-06 [nil 指针，为什么不等于 nil](https://daily.xplanc.org/go/nil-指针，为什么不等于-nil.md)
-- 2026-10-30 [Go 的 map 被并发写时，为什么连 recover 都救不了](https://daily.xplanc.org/go/Go-的-map-被并发写时，为什么连-recover-都救不了.md)
-- 2026-10-28 [Go 切片实战：扩容、共享底层数组与隐藏的内存泄漏](https://daily.xplanc.org/go/Go-切片实战：扩容、共享底层数组与隐藏的内存泄漏.md)
-- 2026-10-28 [Go 切片实战：append 之后，原数组为什么变了](https://daily.xplanc.org/go/Go-切片实战：append-之后，原数组为什么变了.md)
 
 ### rust（5）
 
