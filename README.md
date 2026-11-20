@@ -106,7 +106,7 @@ npm run deploy:gh
 ## 文章目录
 
 <!-- ARTICLES:BEGIN -->
-共 76 篇。
+共 77 篇。
 
 ### linux（20）
 
@@ -198,6 +198,12 @@ npm run deploy:gh
 - 2026-11-01 [别用字符串思维写 PowerShell 管道](https://daily.xplanc.org/pwsh/别用字符串思维写-PowerShell-管道.md)
 - 2026-10-27 [PowerShell 错误处理：try/catch 为什么抓不住你的错误](https://daily.xplanc.org/pwsh/catch-为什么抓不住你的错误.md)
 
+### js（3）
+
+- 2026-11-20 [setTimeout(fn, 0) 从来不是立即执行：读懂事件循环](https://daily.xplanc.org/js/setTimeout%28fn,-0%29-从来不是立即执行：读懂事件循环.md)
+- 2026-10-31 [ESM 循环依赖：为什么 import 进来的是 undefined](https://daily.xplanc.org/js/ESM-循环依赖：为什么-import-进来的是-undefined.md)
+- 2026-10-29 [structuredClone 复制不了什么](https://daily.xplanc.org/js/structuredClone-复制不了什么.md)
+
 ### qt（3）
 
 - 2026-11-19 [QSettings 写了，重启怎么又没了](https://daily.xplanc.org/qt/QSettings-写了，重启怎么又没了.md)
@@ -208,11 +214,6 @@ npm run deploy:gh
 
 - 2026-10-29 [CompletableFuture 吞掉的异常去哪了](https://daily.xplanc.org/java/CompletableFuture-吞掉的异常去哪了.md)
 - 2026-10-28 [Java 线程池实战：核心线程、队列与拒绝策略的三个坑](https://daily.xplanc.org/java/Java-线程池实战：核心线程、队列与拒绝策略的三个坑.md)
-
-### js（2）
-
-- 2026-10-31 [ESM 循环依赖：为什么 import 进来的是 undefined](https://daily.xplanc.org/js/ESM-循环依赖：为什么-import-进来的是-undefined.md)
-- 2026-10-29 [structuredClone 复制不了什么](https://daily.xplanc.org/js/structuredClone-复制不了什么.md)
 
 ### lua（2）
 
