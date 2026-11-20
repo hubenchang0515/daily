@@ -106,11 +106,14 @@ npm run deploy:gh
 ## 文章目录
 
 <!-- ARTICLES:BEGIN -->
-共 73 篇。
+共 76 篇。
 
-### linux（17）
+### linux（20）
 
+- 2026-11-20 [管道里的 count，出了循环就归零](https://daily.xplanc.org/linux/管道里的-count，出了循环就归零.md)
 - 2026-11-20 [终端突然卡住，敲什么都不动：先按 Ctrl+Q](https://daily.xplanc.org/linux/终端突然卡住，敲什么都不动：先按-Ctrl+Q.md)
+- 2026-11-20 [Argument list too long：参数撞上的那堵墙](https://daily.xplanc.org/linux/Argument-list-too-long：参数撞上的那堵墙.md)
+- 2026-11-20 [tail -f 跟着跟着就跟丢了：日志轮转后发生了什么](https://daily.xplanc.org/linux/tail--f-跟着跟着就跟丢了：日志轮转后发生了什么.md)
 - 2026-11-19 [连接早就关了，端口为什么还占着](https://daily.xplanc.org/linux/连接早就关了，端口为什么还占着.md)
 - 2026-11-19 [DNS 又变了：谁在偷偷改写 resolv.conf](https://daily.xplanc.org/linux/DNS-又变了：谁在偷偷改写-resolv.conf.md)
 - 2026-11-16 [删掉的大文件，空间为什么没回来](https://daily.xplanc.org/linux/删掉的大文件，空间为什么没回来.md)
