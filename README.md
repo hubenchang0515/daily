@@ -106,7 +106,7 @@ npm run deploy:gh
 ## 文章目录
 
 <!-- ARTICLES:BEGIN -->
-共 77 篇。
+共 78 篇。
 
 ### linux（20）
 
@@ -168,6 +168,15 @@ npm run deploy:gh
 - 2026-10-27 [Python 缓存实战：lru_cache 的五个坑与正确用法](https://daily.xplanc.org/python/Python-缓存实战：lru_cache-的五个坑与正确用法.md)
 - 2026-10-25 [异步 IO 入门：从阻塞到 asyncio](https://daily.xplanc.org/python/异步-IO-入门：从阻塞到-asyncio.md)
 
+### rust（6）
+
+- 2026-11-21 [写给线程的闭包，为什么带不走一个借用](https://daily.xplanc.org/rust/写给线程的闭包，为什么带不走一个借用.md)
+- 2026-11-14 [Rust 闭包的三张面孔：Fn、FnMut 与 FnOnce](https://daily.xplanc.org/rust/Rust-闭包的三张面孔：Fn、FnMut-与-FnOnce.md)
+- 2026-11-07 [Rust 的整数溢出：debug 会崩，release 为什么不会](https://daily.xplanc.org/rust/Rust-的整数溢出：debug-会崩，release-为什么不会.md)
+- 2026-10-31 [Rust 的 Drop 顺序：谁先走，谁后走](https://daily.xplanc.org/rust/Rust-的-Drop-顺序：谁先走，谁后走.md)
+- 2026-10-28 [Rust 错误处理实战：? 运算符到底替你做成了什么](https://daily.xplanc.org/rust/Rust-错误处理实战：-运算符到底替你做成了什么.md)
+- 2026-10-28 [Rust 智能指针实战：Rc、RefCell 与循环引用](https://daily.xplanc.org/rust/Rust-智能指针实战：Rc、RefCell-与循环引用.md)
+
 ### 编程笑话（5）
 
 - 2026-11-14 [代码评审黑话词典：LGTM 的十种语气](https://daily.xplanc.org/编程笑话/代码评审黑话词典：LGTM-的十种语气.md)
@@ -175,14 +184,6 @@ npm run deploy:gh
 - 2026-10-31 [「在我机器上是好的」：程序员最诚实的谎言](https://daily.xplanc.org/编程笑话/「在我机器上是好的」：程序员最诚实的谎言.md)
 - 2026-10-31 [代码考古指南：如何调查一行祖传代码](https://daily.xplanc.org/编程笑话/代码考古指南：如何调查一行祖传代码.md)
 - 2026-10-31 [Git 提交信息鉴赏：从 fix 到 fix again](https://daily.xplanc.org/编程笑话/Git-提交信息鉴赏：从-fix-到-fix-again.md)
-
-### rust（5）
-
-- 2026-11-14 [Rust 闭包的三张面孔：Fn、FnMut 与 FnOnce](https://daily.xplanc.org/rust/Rust-闭包的三张面孔：Fn、FnMut-与-FnOnce.md)
-- 2026-11-07 [Rust 的整数溢出：debug 会崩，release 为什么不会](https://daily.xplanc.org/rust/Rust-的整数溢出：debug-会崩，release-为什么不会.md)
-- 2026-10-31 [Rust 的 Drop 顺序：谁先走，谁后走](https://daily.xplanc.org/rust/Rust-的-Drop-顺序：谁先走，谁后走.md)
-- 2026-10-28 [Rust 错误处理实战：? 运算符到底替你做成了什么](https://daily.xplanc.org/rust/Rust-错误处理实战：-运算符到底替你做成了什么.md)
-- 2026-10-28 [Rust 智能指针实战：Rc、RefCell 与循环引用](https://daily.xplanc.org/rust/Rust-智能指针实战：Rc、RefCell-与循环引用.md)
 
 ### 每周报告（4）
 
