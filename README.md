@@ -106,7 +106,7 @@ npm run deploy:gh
 ## 文章目录
 
 <!-- ARTICLES:BEGIN -->
-共 78 篇。
+共 79 篇。
 
 ### linux（20）
 
@@ -140,6 +140,15 @@ npm run deploy:gh
 - 2026-10-29 [C++ 移动语义实战：std::move 之后，对象为什么还有值](https://daily.xplanc.org/cpp/C++-移动语义实战：std-move-之后，对象为什么还有值.md)
 - 2026-10-29 [C++ string_view 实战：不拷贝，也不保证活着](https://daily.xplanc.org/cpp/C++-string_view-实战：不拷贝，也不保证活着.md)
 - 2026-10-26 [C++ ABI 兼容性实战：改一行头文件为什么会让程序崩溃](https://daily.xplanc.org/cpp/C++-ABI-兼容性实战：改一行头文件为什么会让程序崩溃.md)
+
+### 编程笑话（6）
+
+- 2026-11-21 [「删掉那行代码试试」：程序员的调试玄学](https://daily.xplanc.org/编程笑话/「删掉那行代码试试」：程序员的调试玄学.md)
+- 2026-11-14 [代码评审黑话词典：LGTM 的十种语气](https://daily.xplanc.org/编程笑话/代码评审黑话词典：LGTM-的十种语气.md)
+- 2026-11-07 [所有的临时方案，最后都成了基础设施](https://daily.xplanc.org/编程笑话/所有的临时方案，最后都成了基础设施.md)
+- 2026-10-31 [「在我机器上是好的」：程序员最诚实的谎言](https://daily.xplanc.org/编程笑话/「在我机器上是好的」：程序员最诚实的谎言.md)
+- 2026-10-31 [代码考古指南：如何调查一行祖传代码](https://daily.xplanc.org/编程笑话/代码考古指南：如何调查一行祖传代码.md)
+- 2026-10-31 [Git 提交信息鉴赏：从 fix 到 fix again](https://daily.xplanc.org/编程笑话/Git-提交信息鉴赏：从-fix-到-fix-again.md)
 
 ### go（6）
 
@@ -176,14 +185,6 @@ npm run deploy:gh
 - 2026-10-31 [Rust 的 Drop 顺序：谁先走，谁后走](https://daily.xplanc.org/rust/Rust-的-Drop-顺序：谁先走，谁后走.md)
 - 2026-10-28 [Rust 错误处理实战：? 运算符到底替你做成了什么](https://daily.xplanc.org/rust/Rust-错误处理实战：-运算符到底替你做成了什么.md)
 - 2026-10-28 [Rust 智能指针实战：Rc、RefCell 与循环引用](https://daily.xplanc.org/rust/Rust-智能指针实战：Rc、RefCell-与循环引用.md)
-
-### 编程笑话（5）
-
-- 2026-11-14 [代码评审黑话词典：LGTM 的十种语气](https://daily.xplanc.org/编程笑话/代码评审黑话词典：LGTM-的十种语气.md)
-- 2026-11-07 [所有的临时方案，最后都成了基础设施](https://daily.xplanc.org/编程笑话/所有的临时方案，最后都成了基础设施.md)
-- 2026-10-31 [「在我机器上是好的」：程序员最诚实的谎言](https://daily.xplanc.org/编程笑话/「在我机器上是好的」：程序员最诚实的谎言.md)
-- 2026-10-31 [代码考古指南：如何调查一行祖传代码](https://daily.xplanc.org/编程笑话/代码考古指南：如何调查一行祖传代码.md)
-- 2026-10-31 [Git 提交信息鉴赏：从 fix 到 fix again](https://daily.xplanc.org/编程笑话/Git-提交信息鉴赏：从-fix-到-fix-again.md)
 
 ### 每周报告（4）
 
