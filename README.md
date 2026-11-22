@@ -106,7 +106,7 @@ npm run deploy:gh
 ## 文章目录
 
 <!-- ARTICLES:BEGIN -->
-共 79 篇。
+共 80 篇。
 
 ### linux（20）
 
@@ -186,19 +186,20 @@ npm run deploy:gh
 - 2026-10-28 [Rust 错误处理实战：? 运算符到底替你做成了什么](https://daily.xplanc.org/rust/Rust-错误处理实战：-运算符到底替你做成了什么.md)
 - 2026-10-28 [Rust 智能指针实战：Rc、RefCell 与循环引用](https://daily.xplanc.org/rust/Rust-智能指针实战：Rc、RefCell-与循环引用.md)
 
+### pwsh（5）
+
+- 2026-11-22 [别把 PowerShell 的三种遍历写法当成同义词](https://daily.xplanc.org/pwsh/别把-PowerShell-的三种遍历写法当成同义词.md)
+- 2026-11-15 [PowerShell 没有“返回数组”这回事](https://daily.xplanc.org/pwsh/PowerShell-没有“返回数组”这回事.md)
+- 2026-11-08 [ConvertTo-Json 默认只转两层，剩下的去哪了](https://daily.xplanc.org/pwsh/ConvertTo-Json-默认只转两层，剩下的去哪了.md)
+- 2026-11-01 [别用字符串思维写 PowerShell 管道](https://daily.xplanc.org/pwsh/别用字符串思维写-PowerShell-管道.md)
+- 2026-10-27 [PowerShell 错误处理：try/catch 为什么抓不住你的错误](https://daily.xplanc.org/pwsh/catch-为什么抓不住你的错误.md)
+
 ### 每周报告（4）
 
 - 2026-11-15 [本周折腾：监控装好了，告警却没响](https://daily.xplanc.org/每周报告/本周折腾：监控装好了，告警却没响.md)
 - 2026-11-08 [本周实验：备份只有恢复过才算数](https://daily.xplanc.org/每周报告/本周实验：备份只有恢复过才算数.md)
 - 2026-11-01 [本周清单：让终端活得久一点](https://daily.xplanc.org/每周报告/本周清单：让终端活得久一点.md)
 - 2026-10-26 [本周迁移实录：把 pip 换成 uv](https://daily.xplanc.org/每周报告/本周迁移实录：把-pip-换成-uv.md)
-
-### pwsh（4）
-
-- 2026-11-15 [PowerShell 没有“返回数组”这回事](https://daily.xplanc.org/pwsh/PowerShell-没有“返回数组”这回事.md)
-- 2026-11-08 [ConvertTo-Json 默认只转两层，剩下的去哪了](https://daily.xplanc.org/pwsh/ConvertTo-Json-默认只转两层，剩下的去哪了.md)
-- 2026-11-01 [别用字符串思维写 PowerShell 管道](https://daily.xplanc.org/pwsh/别用字符串思维写-PowerShell-管道.md)
-- 2026-10-27 [PowerShell 错误处理：try/catch 为什么抓不住你的错误](https://daily.xplanc.org/pwsh/catch-为什么抓不住你的错误.md)
 
 ### js（3）
 
