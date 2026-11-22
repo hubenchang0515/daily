@@ -1,5 +1,5 @@
 import GitHubIcon from "@/assets/icons/GitHubIcon";
-import { DEFAULT_LANGUAGE, LANGUAGES, LANGUAGE_CONFIG, Language, LINKS, OWNER_CONFIG, SITE_CONFIG } from "@/config";
+import { DEFAULT_LANGUAGE, LANGUAGE_CONFIG, Language, LINKS, OWNER_CONFIG, SITE_CONFIG } from "@/config";
 import React from "react";
 import Link from "./Link";
 import Card from './Card';
@@ -46,25 +46,6 @@ export default function Frame(props:FrameProps)
                         </span>
                     </Link>
                     <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-                        <div className="flex items-center gap-1" aria-label={config.ui.language}>
-                            {
-                                LANGUAGES.map((code) => {
-                                    const active = code === language;
-                                    return (
-                                        <Link
-                                            key={code}
-                                            href={languagePath(code)}
-                                            title={LANGUAGE_CONFIG[code].name}
-                                            className={active
-                                                ? 'retro-chip px-2 py-1 text-[10px] tracking-[0.12em]'
-                                                : 'retro-button px-2 py-1 text-[10px] tracking-[0.12em]'}
-                                        >
-                                            {LANGUAGE_CONFIG[code].shortName}
-                                        </Link>
-                                    );
-                                })
-                            }
-                        </div>
                         <ThemeToggle/>
                         <Link
                             href={SITE_CONFIG.repo}
