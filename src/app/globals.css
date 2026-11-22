@@ -375,6 +375,19 @@ body::after {
   display: inline;
 }
 
+/* 根路径先显示跳转中的加载态，识别出语言后再显示选择页 */
+#language-select {
+  display: none;
+}
+
+html[data-language-ready="true"] #language-select {
+  display: flex;
+}
+
+html[data-language-ready="true"] #language-redirect {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

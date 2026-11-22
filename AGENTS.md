@@ -43,7 +43,7 @@ scripts/generate-article.ts                      # AI 生成文章（唯一的�
 scripts/generate-readme-index.ts                 # README 文章目录（按语言分组）
 scripts/fetch-primers-sitemap.ts                 # Primers 外链数据
 scripts/pipeline.sh                              # 定时发布流水线
-src/app/page.tsx                                 # 语言选择首页
+src/app/page.tsx                                 # 按浏览器语言跳转，无法识别时显示语言选择
 src/app/[lang]/                                  # 路由：/<语言>、/<语言>/page/N、/<语言>/<分类>、/<语言>/<分类>/page/N、/<语言>/<分类>/<文章>
 src/components/Markdown.tsx                      # Markdown 渲染（代码高亮、锚点、外链跳转）
 src/utils/document.ts                            # 读取文章列表与内容（创建时间取自 git log）
@@ -109,6 +109,7 @@ src/config.ts                                    # 语言、站点、站长、�
   - 页面/元数据：`languagePath`、`absoluteUrl`、`categoryPath`、`articlePath`（后两者第一个参数是语言）；
   - Markdown 文本中的链接：`readableUrl`（保留中文，不转义）。
   - 文件名含 `()`、空格等字符时按 `scripts/generate-readme-index.ts` 的方式转义。
+- 根路径 `/` 先显示跳转加载态；静态页面中的内联脚本读取 `navigator.languages`，中文跳 `/zh`、英文跳 `/en`，都不是时再显示语言选择页。
 - 新增路由时同步更新 `src/app/sitemap.ts`、`src/app/robots.ts`，并实现 `generateStaticParams`（静态导出要求所有路径可枚举）。
 - 元数据用 `generateMetadata`，必要时补充 JSON-LD（参考 `src/app/[lang]/[category]/[article]/page.tsx`）。
 - 语言列表与文案在 `src/config.ts` 的 `LANGUAGE_CONFIG` 中维护；组件通过 `language` 参数读取，不要硬编码 `zh` 或中文文案。
