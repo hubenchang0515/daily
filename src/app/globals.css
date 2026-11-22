@@ -388,6 +388,19 @@ html[data-language-ready="true"] #language-redirect {
   display: none;
 }
 
+/* 旧链接缺少语言前缀时先显示跳转态，其他 404 才显示提示 */
+#not-found-content {
+  display: none;
+}
+
+html[data-not-found-ready="true"] #not-found-content {
+  display: flex;
+}
+
+html[data-not-found-ready="true"] #not-found-redirect {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

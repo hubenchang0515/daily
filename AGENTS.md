@@ -110,6 +110,7 @@ src/config.ts                                    # 语言、站点、站长、�
   - Markdown 文本中的链接：`readableUrl`（保留中文，不转义）。
   - 文件名含 `()`、空格等字符时按 `scripts/generate-readme-index.ts` 的方式转义。
 - 根路径 `/` 先显示跳转加载态；静态页面中的内联脚本读取 `navigator.languages`，中文跳 `/zh`、英文跳 `/en`，都不是时再显示语言选择页。
+- 旧链接缺少语言前缀时（如 `/linux/xxx.md`），`src/app/not-found.tsx` 会跳转到 `/zh` 加原路径，兼容站内链接迁移前的地址。
 - 新增路由时同步更新 `src/app/sitemap.ts`、`src/app/robots.ts`，并实现 `generateStaticParams`（静态导出要求所有路径可枚举）。
 - 元数据用 `generateMetadata`，必要时补充 JSON-LD（参考 `src/app/[lang]/[category]/[article]/page.tsx`）。
 - 语言列表与文案在 `src/config.ts` 的 `LANGUAGE_CONFIG` 中维护；组件通过 `language` 参数读取，不要硬编码 `zh` 或中文文案。
