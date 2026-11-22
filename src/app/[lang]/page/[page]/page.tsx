@@ -3,9 +3,10 @@ import { notFound } from "next/navigation";
 import ArticleCard from "@/components/ArticleCard";
 import Frame from "@/components/Frame";
 import Pagination from "@/components/Pagination";
-import { DOCUMENT_CONFIG, isLanguage, LANGUAGES, LANGUAGE_CONFIG } from "@/config";
+import Redirect from "@/components/Redirect";
+import { DEFAULT_LANGUAGE, DOCUMENT_CONFIG, isLanguage, LANGUAGES, LANGUAGE_CONFIG } from "@/config";
 import { categories as getGategories } from "@/utils/document";
-import { absoluteUrl, languagePath } from "@/utils/seo";
+import { absoluteUrl, categoryPath, languagePath } from "@/utils/seo";
 
 export interface PageParams {
     lang:string;        // 语言：zh / en
@@ -48,6 +49,8 @@ export async function generateMetadata({params}:{params:Promise<PageParams>}): P
 // 生成静态页面路径
 export async function generateStaticParams() {
     const paramsList:PageParams[] = []
+    const development = process.env.NODE_ENV === 'development';
+
     for (const lang of LANGUAGES) {
         const categories = await getGategories(lang);
         const articles = categories.flatMap(category => category.articles);
@@ -59,12 +62,31 @@ export async function generateStaticParams() {
         }
     }
 
+    // 旧分类分页：/<分类>/page/<页码>
+    for (const category of await getGategories(DEFAULT_LANGUAGE)) {
+        if (isLanguage(category.name)) continue;
+        const pages = Math.ceil(category.articles.length / DOCUMENT_CONFIG.pageSize);
+        for (let i = 1; i <= pages; i += 1) {
+            paramsList.push({
+                lang: development ? encodeURIComponent(category.name) : category.name,
+                page: `${i}`,
+            });
+        }
+    }
+
     return paramsList;
 }
 
 export default async function Page({params}:{params:Promise<PageParams>}) {
     const path = await params;
-    if (!isLanguage(path.lang)) notFound();
+
+    if (!isLanguage(path.lang)) {
+        return (
+            <Redirect
+                href={`${categoryPath(DEFAULT_LANGUAGE, decodeURIComponent(path.lang))}/page/${path.page}`}
+            />
+        );
+    }
 
     const page = Number(path.page);
     const config = LANGUAGE_CONFIG[path.lang];

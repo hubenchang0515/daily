@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Card from "@/components/Card";
+import LegacyRedirect from "@/components/LegacyRedirect";
 import Link from "@/components/Link";
-import { LANGUAGES, LANGUAGE_CONFIG, SITE_CONFIG } from "@/config";
+import { LANGUAGES, LANGUAGE_CONFIG } from "@/config";
 import { languagePath } from "@/utils/seo";
 
 export const metadata: Metadata = {
@@ -11,25 +12,6 @@ export const metadata: Metadata = {
         follow: false,
     },
 };
-
-const redirectScript = `
-(function () {
-  try {
-    var basePath = ${JSON.stringify(SITE_CONFIG.basePath)};
-    var pathname = window.location.pathname;
-    if (basePath && pathname.indexOf(basePath) === 0) {
-      pathname = pathname.slice(basePath.length) || '/';
-    }
-    var first = (pathname.split('/').filter(Boolean)[0] || '').toLowerCase();
-    if (first && first !== 'zh' && first !== 'en') {
-      window.location.replace(basePath + '/zh' + pathname + window.location.search + window.location.hash);
-      return;
-    }
-  } catch (error) {}
-
-  document.documentElement.dataset.notFoundReady = 'true';
-})();
-`;
 
 const fallbackStyle = `#not-found-redirect{display:none!important}#not-found-content{display:flex!important}`;
 
@@ -86,7 +68,7 @@ export default function NotFound() {
                 </Card>
             </main>
 
-            <script dangerouslySetInnerHTML={{ __html: redirectScript }} />
+            <LegacyRedirect />
             <noscript>
                 <style>{fallbackStyle}</style>
             </noscript>

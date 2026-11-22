@@ -57,7 +57,7 @@ src/config.ts                                    # 语言、站点、站长、�
 ### 文件与标题
 
 - 文件名即 URL slug，也是页面路径 `/<语言>/<分类>/文件名.md`；使用文章标题作文件名（可含中文）。
-- 文章 URL 由文件名直接生成，没有重定向机制：改名等于旧链接 404，优先新增而不是重命名。
+- 文章 URL 由文件名直接生成：改名等于旧链接 404，优先新增而不是重命名；只有迁移到 `/zh` 之前缺少语言前缀的外链会重定向兼容。
 - 新增分类只需在 `daily-document/document/<语言>/` 下新建目录，无需改代码；分类按文章数量排序。
 - 中英文文章互不翻译、各自独立成文，同一分类名在两种语言下可以复用。
 - `normalizeSlug` 会把空白和 `\ / : * ? " < > |` 替换为 `-`，并去掉首尾的 `.`/`-`。
@@ -110,7 +110,7 @@ src/config.ts                                    # 语言、站点、站长、�
   - Markdown 文本中的链接：`readableUrl`（保留中文，不转义）。
   - 文件名含 `()`、空格等字符时按 `scripts/generate-readme-index.ts` 的方式转义。
 - 根路径 `/` 先显示跳转加载态；静态页面中的内联脚本读取 `navigator.languages`，中文跳 `/zh`、英文跳 `/en`，都不是时再显示语言选择页。
-- 旧链接缺少语言前缀时（如 `/linux/xxx.md`），`src/app/not-found.tsx` 会跳转到 `/zh` 加原路径，兼容站内链接迁移前的地址。
+- 旧链接缺少语言前缀时（如 `/linux/xxx.md`），各 `[lang]` 路由会在 `generateStaticParams` 中生成旧路径并渲染 `src/components/Redirect.tsx` 跳转到 `/zh` 加原路径；未覆盖的路径由 `src/app/not-found.tsx` 兜底。
 - 新增路由时同步更新 `src/app/sitemap.ts`、`src/app/robots.ts`，并实现 `generateStaticParams`（静态导出要求所有路径可枚举）。
 - 元数据用 `generateMetadata`，必要时补充 JSON-LD（参考 `src/app/[lang]/[category]/[article]/page.tsx`）。
 - 语言列表与文案在 `src/config.ts` 的 `LANGUAGE_CONFIG` 中维护；组件通过 `language` 参数读取，不要硬编码 `zh` 或中文文案。

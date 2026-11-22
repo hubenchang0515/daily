@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import ArticleCard from "@/components/ArticleCard";
 import Card from "@/components/Card";
 import Frame from "@/components/Frame";
 import Pagination from "@/components/Pagination";
-import { DOCUMENT_CONFIG, isLanguage, LANGUAGES, LANGUAGE_CONFIG } from "@/config";
+import Redirect from "@/components/Redirect";
+import { DEFAULT_LANGUAGE, DOCUMENT_CONFIG, isLanguage, LANGUAGES, LANGUAGE_CONFIG } from "@/config";
 import { categories as getGategories } from "@/utils/document";
-import { absoluteUrl, categoryPath, languagePath } from "@/utils/seo";
+import { absoluteUrl, articlePath, categoryPath, languagePath } from "@/utils/seo";
 
 export interface PageParams {
     lang:string;        // 语言：zh / en
@@ -51,20 +51,37 @@ export async function generateMetadata({params}:{params:Promise<PageParams>}): P
 // 生成静态页面路径
 export async function generateStaticParams() {
     const paramsList:PageParams[] = []
+    const development = process.env.NODE_ENV === 'development';
+
     for (const lang of LANGUAGES) {
         for (const category of await getGategories(lang)) {
-            if (process.env.NODE_ENV === 'development') {
-                paramsList.push({
-                    lang,
-                    category: encodeURIComponent(category.name),
-                });
-            } else {
-                paramsList.push({
-                    lang,
-                    category: category.name,
-                });
-            }
+            paramsList.push({
+                lang,
+                category: development ? encodeURIComponent(category.name) : category.name,
+            });
         }
+    }
+
+    // 旧文章链接：/<分类>/<文章>
+    const legacyCategories = await getGategories(DEFAULT_LANGUAGE);
+    for (const category of legacyCategories) {
+        if (isLanguage(category.name)) continue;
+        for (const article of category.articles) {
+            paramsList.push({
+                lang: development ? encodeURIComponent(category.name) : category.name,
+                category: development ? encodeURIComponent(article.name) : article.name,
+            });
+        }
+    }
+
+    // 旧首页分页：/page/<页码>
+    const legacyArticles = legacyCategories.flatMap(category => category.articles);
+    const legacyPages = Math.ceil(legacyArticles.length / DOCUMENT_CONFIG.pageSize);
+    for (let page = 1; page <= legacyPages; page += 1) {
+        paramsList.push({
+            lang: 'page',
+            category: `${page}`,
+        });
     }
 
     return paramsList;
@@ -72,7 +89,18 @@ export async function generateStaticParams() {
 
 export default async function Page({params}:{params:Promise<PageParams>}) {
     const path = await params;
-    if (!isLanguage(path.lang)) notFound();
+
+    if (!isLanguage(path.lang)) {
+        return (
+            <Redirect
+                href={articlePath(
+                    DEFAULT_LANGUAGE,
+                    decodeURIComponent(path.lang),
+                    decodeURIComponent(path.category),
+                )}
+            />
+        );
+    }
 
     const config = LANGUAGE_CONFIG[path.lang];
     const categories = await getGategories(path.lang);

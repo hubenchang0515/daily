@@ -1,24 +1,38 @@
-import { notFound } from "next/navigation";
 import ArticleCard from "@/components/ArticleCard";
 import Card from "@/components/Card";
 import Frame from "@/components/Frame";
 import Pagination from "@/components/Pagination";
-import { DOCUMENT_CONFIG, isLanguage, LANGUAGES, LANGUAGE_CONFIG } from "@/config";
+import Redirect from "@/components/Redirect";
+import { DEFAULT_LANGUAGE, DOCUMENT_CONFIG, isLanguage, LANGUAGES, LANGUAGE_CONFIG } from "@/config";
 import { categories as getGategories } from "@/utils/document";
-import { languagePath } from "@/utils/seo";
+import { categoryPath, languagePath } from "@/utils/seo";
 
 export interface PageParams {
     lang: string;
 }
 
 // 生成静态页面路径
-export function generateStaticParams() {
-    return LANGUAGES.map((lang) => ({ lang }));
+export async function generateStaticParams() {
+    const paramsList: PageParams[] = LANGUAGES.map((lang) => ({ lang }));
+
+    for (const category of await getGategories(DEFAULT_LANGUAGE)) {
+        if (isLanguage(category.name)) continue;
+        paramsList.push({
+            lang: process.env.NODE_ENV === 'development'
+                ? encodeURIComponent(category.name)
+                : category.name,
+        });
+    }
+
+    return paramsList;
 }
 
 export default async function Home({ params }: { params: Promise<PageParams> }) {
     const { lang } = await params;
-    if (!isLanguage(lang)) notFound();
+
+    if (!isLanguage(lang)) {
+        return <Redirect href={categoryPath(DEFAULT_LANGUAGE, decodeURIComponent(lang))} />;
+    }
 
     const config = LANGUAGE_CONFIG[lang];
     const categories = await getGategories(lang);
