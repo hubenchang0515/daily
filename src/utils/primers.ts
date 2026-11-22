@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { LANGUAGE_CONFIG, LINKS, Language } from '@/config';
+import { DEFAULT_LANGUAGE, LANGUAGE_CONFIG, LINKS, Language } from '@/config';
 import { decodeUrl } from './markdown';
 
 export interface SitemapNode {
@@ -13,44 +13,58 @@ interface Pattern {
 }
 
 // 匹配列表
-const PATTERNS: Pattern[] = [
+const PATTERNS_ZH: Pattern[] = [
     {
         lang: ["html"],
         regexps: [
-            /https:\/\/primers.xplanc\.org\/document\/zh\/03\.HTML\/EX\.HTML%20%E5%85%83%E7%B4%A0\/EX\.(.+?)\.md/g
+            /https:\/\/primers\.xplanc\.org\/document\/zh\/03\.HTML\/EX\.HTML%20%E5%85%83%E7%B4%A0\/EX\.(.+?)\.md/g
         ],
     },
 
     {
         lang: ["python", "py"],
         regexps: [
-            /https:\/\/primers.xplanc\.org\/document\/zh\/02\.Python\/EX\.%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0\/EX\.(.+?)\.md/g
+            /https:\/\/primers\.xplanc\.org\/document\/zh\/02\.Python\/EX\.%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0\/EX\.(.+?)\.md/g
         ],
     },
 
     {
         lang: ["lua"],
         regexps: [
-            /https:\/\/primers.xplanc\.org\/document\/zh\/09\.Lua\/91\.%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0\/EX\.(.+?)\.md/g,
-            /https:\/\/primers.xplanc\.org\/document\/zh\/09\.Lua\/92\.%E5%86%85%E7%BD%AE%E6%A8%A1%E5%9D%97\/EX\.(.+?)-module\.md/g,
+            /https:\/\/primers\.xplanc\.org\/document\/zh\/09\.Lua\/91\.%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0\/EX\.(.+?)\.md/g,
+            /https:\/\/primers\.xplanc\.org\/document\/zh\/09\.Lua\/92\.%E5%86%85%E7%BD%AE%E6%A8%A1%E5%9D%97\/EX\.(.+?)-module\.md/g,
         ],
     },
 
     {
         lang: ["c", "cpp", "c++"],
         regexps: [
-            /https:\/\/primers.xplanc\.org\/document\/zh\/06\.C\/EX\.%E6%A0%87%E5%87%86%E5%BA%93\.hide\/EX\.(.+?)\.md/g,
-            /https:\/\/primers.xplanc\.org\/document\/zh\/06\.C\/99\.API%20%E5%B8%AE%E5%8A%A9%E6%89%8B%E5%86%8C\/EX\.(.+?)\.md/g,
+            /https:\/\/primers\.xplanc\.org\/document\/zh\/06\.C\/EX\.%E6%A0%87%E5%87%86%E5%BA%93\.hide\/EX\.(.+?)\.md/g,
+            /https:\/\/primers\.xplanc\.org\/document\/zh\/06\.C\/99\.API%20%E5%B8%AE%E5%8A%A9%E6%89%8B%E5%86%8C\/EX\.(.+?)\.md/g,
         ]
     },
 
     {
         lang: ["bash", "shell", "sh"],
         regexps: [
-            /https:\/\/primers.xplanc\.org\/document\/zh\/10.Bash\/90\.%E5%B8%AE%E5%8A%A9%E6%89%8B%E5%86%8C\/EX\.(.+?)\.md/g
+            /https:\/\/primers\.xplanc\.org\/document\/zh\/10\.Bash\/90\.%E5%B8%AE%E5%8A%A9%E6%89%8B%E5%86%8C\/EX\.(.+?)\.md/g
         ],
     },
 ]
+
+const PATTERNS_EN: Pattern[] = [
+    {
+        lang: ["python"],
+        regexps: [
+            /https:\/\/primers\.xplanc\.org\/document\/en\/02\.Python\/EX\.Built-in%20functions\/EX\.(.+?)\.md/g
+        ],
+    }
+]
+
+const PATTERNS: Record<Language, Pattern[]> = {
+    zh: PATTERNS_ZH,
+    en: PATTERNS_EN,
+}
 
 // 文章分类对应的 Primer 语言
 const CATEGORY_LANGUAGES: Record<string, string[]> = {
@@ -99,12 +113,12 @@ export function articleLanguages(category: string | undefined, markdown: string)
 // 构建时由 scripts/fetch-primers-sitemap.mjs 生成
 const SITEMAP_FILE = path.join(process.cwd(), '.cache', 'primers-sitemap.xml');
 
-let sitemap: Record<string, SitemapNode> | undefined;
+let sitemaps: Record<Language, Record<string, SitemapNode>> | undefined;
 
-function parseSitemap(data: string): Record<string, SitemapNode> {
+function parseSitemap(data: string, language: Language): Record<string, SitemapNode> {
     const result: Record<string, SitemapNode> = {};
 
-    for (const pattern of PATTERNS) {
+    for (const pattern of PATTERNS[language]) {
         let links: [string, string][] = [];
 
         for (const regexp of pattern.regexps) {
@@ -122,19 +136,27 @@ function parseSitemap(data: string): Record<string, SitemapNode> {
     return result;
 }
 
-export function getPrimerSitemap(): Record<string, SitemapNode> {
-    if (sitemap) {
-        return sitemap;
+function loadSitemaps(): Record<Language, Record<string, SitemapNode>> {
+    if (sitemaps) {
+        return sitemaps;
     }
 
     try {
-        sitemap = parseSitemap(fs.readFileSync(SITEMAP_FILE, 'utf-8'));
+        const data = fs.readFileSync(SITEMAP_FILE, 'utf-8');
+        sitemaps = {
+            zh: parseSitemap(data, 'zh'),
+            en: parseSitemap(data, 'en'),
+        };
     } catch (err) {
         console.warn('读取 sitemap 缓存失败，请先执行 npm run fetch:sitemap:', err);
-        sitemap = {};
+        sitemaps = { zh: {}, en: {} };
     }
 
-    return sitemap;
+    return sitemaps;
+}
+
+export function getPrimerSitemap(language: Language = DEFAULT_LANGUAGE): Record<string, SitemapNode> {
+    return loadSitemaps()[language];
 }
 
 // 文本开头的限定名，如 `setmetatable(t, mt)`、`table.insert`、`du -x -h`
@@ -167,11 +189,11 @@ function primerKeys(text: string): string[] {
 }
 
 // 根据文本查找对应的 Primer 文档链接
-export function getPrimerLink(text: string, languages: string | string[]): string | undefined {
-    const data = getPrimerSitemap();
+export function getPrimerLink(text: string, languages: string | string[], language: Language = DEFAULT_LANGUAGE): string | undefined {
+    const data = getPrimerSitemap(language);
 
-    for (const language of Array.isArray(languages) ? languages : [languages]) {
-        const links = data[language.toLocaleLowerCase()]?.links;
+    for (const codeLanguage of Array.isArray(languages) ? languages : [languages]) {
+        const links = data[codeLanguage.toLocaleLowerCase()]?.links;
         if (!links) {
             continue;
         }
@@ -207,7 +229,7 @@ const PRIMER_TITLE = LINKS.find((link) => /primers\.xplanc\.org/i.test(link.url)
 // 从文档地址得到可读标题，如：
 // https://primers.xplanc.org/document/zh/10.Bash/90.帮助手册/EX.test.md
 // -> Bash/帮助手册/test - Primers 编程伙伴
-export function primerTitle(href: string, language: Language = 'zh'): string {
+export function primerTitle(href: string, language: Language = DEFAULT_LANGUAGE): string {
     let pathname: string;
 
     try {
@@ -320,7 +342,7 @@ function nextInlineToken(line: string, from: number): InlineToken | undefined {
 
 // 处理一行普通文本：首次出现的 Primers 文档转为链接，重复出现保留原文
 // 标题本身会再包一层链接，行内代码不再插入链接，避免出现嵌套 <a>
-function convertInlineLine(line: string, languages: string[], remember: (href: string) => boolean): string {
+function convertInlineLine(line: string, languages: string[], language: Language, remember: (href: string) => boolean): string {
     const linkCode = !/^\s{0,3}#{1,6}\s/.test(line);
     let result = '';
     let cursor = 0;
@@ -346,7 +368,7 @@ function convertInlineLine(line: string, languages: string[], remember: (href: s
             }
         } else {
             const content = token.content ?? '';
-            const href = linkCode ? getPrimerLink(content, languages) : undefined;
+            const href = linkCode ? getPrimerLink(content, languages, language) : undefined;
 
             if (href && remember(href)) {
                 result += `[${token.ticks}${content}${token.ticks}](${href})`;
@@ -362,7 +384,7 @@ function convertInlineLine(line: string, languages: string[], remember: (href: s
 }
 
 // 预处理文章：每个 Primers 文档只在首次出现处转换一次，并收集文末列表所需信息
-export function preparePrimerLinks(markdown: string, languages: string | string[]): PreparedPrimers {
+export function preparePrimerLinks(markdown: string, languages: string | string[], language: Language = DEFAULT_LANGUAGE): PreparedPrimers {
     const langs = Array.isArray(languages) ? languages : [languages];
     const lines = markdown.split('\n');
     const output: string[] = [];
@@ -385,13 +407,13 @@ export function preparePrimerLinks(markdown: string, languages: string | string[
         const fence = FENCE_LINE.exec(line);
 
         if (!fence) {
-            output.push(convertInlineLine(line, langs, remember));
+            output.push(convertInlineLine(line, langs, language, remember));
             continue;
         }
 
         // 代码块：整段扫描一次，确定其中可以转换的文档，避免重复
         const marker = fence[1];
-        const language = fence[2];
+        const fenceLanguage = fence[2];
         const content: string[] = [];
         output.push(line);
 
@@ -408,9 +430,9 @@ export function preparePrimerLinks(markdown: string, languages: string | string[
         }
 
         const keys = new Set<string>();
-        if (language) {
+        if (fenceLanguage) {
             for (const match of content.join('\n').matchAll(BLOCK_TOKEN)) {
-                const href = getPrimerLink(match[0], language);
+                const href = getPrimerLink(match[0], fenceLanguage, language);
                 if (href && remember(href)) {
                     keys.add(primerKey(href));
                 }
@@ -435,7 +457,7 @@ function primerSection(links: PrimerLink[], language: Language): string {
 }
 
 // 在文末追加 Primers 文档列表，尽量保持 AI 声明位于最后一行
-export function insertPrimerSection(markdown: string, links: PrimerLink[], language: Language = 'zh'): string {
+export function insertPrimerSection(markdown: string, links: PrimerLink[], language: Language = DEFAULT_LANGUAGE): string {
     if (links.length === 0) {
         return markdown;
     }

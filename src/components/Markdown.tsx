@@ -32,14 +32,14 @@ export interface MarkdownProps {
     showPrimerList?:boolean;    // 是否在文末汇总 Primers 文档（仅文章正文）
 }
 
-function CodeNode(props:{node:rendererNode, stylesheet: { [key: string]: React.CSSProperties }, context:string, rows:number, allow?:Set<string>, used?:Set<string>}) {
+function CodeNode(props:{node:rendererNode, stylesheet: { [key: string]: React.CSSProperties }, context:string, language:Language, rows:number, allow?:Set<string>, used?:Set<string>}) {
     if (props.node.type === 'text') {
         if (props.node.value === undefined || props.node.value === "") {                        // 空字符串
             return null
         } else if (/^\s+$/.test(props.node.value.toString())) {                                 // 空白字符串
             return <span>{props.node.value}</span>
         } else if (/^\S+$/.test(props.node.value.toString())) {                                 // 不含空白字符
-            return <DocLink text={props.node.value.toString()} lang={props.context} allow={props.allow} used={props.used}/>
+            return <DocLink text={props.node.value.toString()} lang={props.context} language={props.language} allow={props.allow} used={props.used}/>
         } else {
             const items = props.node.value.toString().split(/(\s+)/)
             return items.map((item, i) => <CodeNode key={i} {...props} node={{type:'text', value:item}}/>)
@@ -69,7 +69,7 @@ export default function Markdown(props: MarkdownProps) {
     const language = props.language ?? DEFAULT_LANGUAGE;
     const languages = articleLanguages(props.category, props.content);
     // 行内代码与代码块中的 Primers 文档只在首次出现时转换
-    const prepared = preparePrimerLinks(stripOriginalLink(props.content), languages);
+    const prepared = preparePrimerLinks(stripOriginalLink(props.content), languages, language);
     // 文末汇总只用于文章正文，列表预览不插入
     const markdown = props.showPrimerList
         ? insertPrimerSection(prepared.markdown, prepared.links, language)
@@ -79,7 +79,7 @@ export default function Markdown(props: MarkdownProps) {
         <article className='markdown-body text-[15px] leading-7 text-[var(--fg)]'>
             <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
-                components={MakeComponents(props.href, prepared.blocks)}
+                components={MakeComponents(props.href, prepared.blocks, language)}
             >
                 {markdown}
             </ReactMarkdown>
@@ -87,7 +87,7 @@ export default function Markdown(props: MarkdownProps) {
     )
 }
 
-const MakeComponents = (href:string, blocks:PrimerBlockLinks[]):Components => {
+const MakeComponents = (href:string, blocks:PrimerBlockLinks[], language:Language):Components => {
     return {
         async h1(props) { 
             return (
@@ -261,7 +261,7 @@ const MakeComponents = (href:string, blocks:PrimerBlockLinks[]):Components => {
                                 <code className={className} style={{whiteSpace:'pre'}}>
                                 {
                                     rows.map((row) => {
-                                        return row.children?.map((node, i) => <CodeNode key={i} node={node} stylesheet={stylesheet} context={match[1]} rows={rows.length.toString().length} allow={allow} used={used}/>)
+                                        return row.children?.map((node, i) => <CodeNode key={i} node={node} stylesheet={stylesheet} context={match[1]} language={language} rows={rows.length.toString().length} allow={allow} used={used}/>)
                                     })
                                 }
                                 </code>
