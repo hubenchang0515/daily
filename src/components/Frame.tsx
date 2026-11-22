@@ -1,30 +1,35 @@
 import GitHubIcon from "@/assets/icons/GitHubIcon";
-import { LINKS, OWNER_CONFIG, SITE_CONFIG } from "@/config";
+import { DEFAULT_LANGUAGE, LANGUAGES, LANGUAGE_CONFIG, Language, LINKS, OWNER_CONFIG, SITE_CONFIG } from "@/config";
 import React from "react";
 import Link from "./Link";
 import Card from './Card';
 import ThemeToggle from "./ThemeToggle";
 import AdCarousel from "./AdCarousel";
 import { Article, Category } from "@/utils/document";
+import { articlePath, categoryPath, languagePath } from "@/utils/seo";
 
 export interface FrameProps
 {
+    language?: Language;
     categories?: Category[];
     articles?: Article[];
     children?: React.ReactNode;
 }
 
-function formatDate(date: Date): string {
-    return new Intl.DateTimeFormat('zh-CN', { month: '2-digit', day: '2-digit' }).format(date);
+function formatDate(date: Date, language: Language): string {
+    return new Intl.DateTimeFormat(LANGUAGE_CONFIG[language].dateLocale, { month: '2-digit', day: '2-digit' }).format(date);
 }
 
 export default function Frame(props:FrameProps)
 {
+    const language = props.language ?? DEFAULT_LANGUAGE;
+    const config = LANGUAGE_CONFIG[language];
+
     return (
         <div className="min-h-screen">
             <header className="mx-auto w-full max-w-[1500px] px-3 pt-3 sm:px-4 sm:pt-4">
                 <div className="retro-panel flex items-center justify-between gap-3 px-4 py-3">
-                    <Link href="/" className="group flex min-w-0 items-center gap-3">
+                    <Link href={languagePath(language)} className="group flex min-w-0 items-center gap-3">
                         <img
                             src={`${SITE_CONFIG.basePath}/favicon.svg`}
                             alt=""
@@ -34,13 +39,32 @@ export default function Frame(props:FrameProps)
                         />
                         <span className="min-w-0">
                             <span className="block truncate text-lg font-bold tracking-[0.18em] text-[var(--fg)]">
-                                {SITE_CONFIG.title}
+                                {config.title}
                                 <span className="blink ml-1 text-[var(--accent)]">_</span>
                             </span>
-                            <span className="block truncate text-[11px] tracking-[0.16em] text-[var(--muted)]">{SITE_CONFIG.slogan}</span>
+                            <span className="block truncate text-[11px] tracking-[0.16em] text-[var(--muted)]">{config.slogan}</span>
                         </span>
                     </Link>
-                    <div className="flex shrink-0 items-center gap-3">
+                    <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+                        <div className="flex items-center gap-1" aria-label={config.ui.language}>
+                            {
+                                LANGUAGES.map((code) => {
+                                    const active = code === language;
+                                    return (
+                                        <Link
+                                            key={code}
+                                            href={languagePath(code)}
+                                            title={LANGUAGE_CONFIG[code].name}
+                                            className={active
+                                                ? 'retro-chip px-2 py-1 text-[10px] tracking-[0.12em]'
+                                                : 'retro-button px-2 py-1 text-[10px] tracking-[0.12em]'}
+                                        >
+                                            {LANGUAGE_CONFIG[code].shortName}
+                                        </Link>
+                                    );
+                                })
+                            }
+                        </div>
                         <ThemeToggle/>
                         <Link
                             href={SITE_CONFIG.repo}
@@ -58,14 +82,14 @@ export default function Frame(props:FrameProps)
                         <AdCarousel className="md:hidden"/>
                         <Card className="p-5 text-center">
                             <p className="retro-label mb-3">[ OPERATOR ]</p>
-                            <Link href="/" className="group mx-auto block w-fit">
+                            <Link href={languagePath(language)} className="group mx-auto block w-fit">
                                 <span className="block border-2 border-[var(--border)] bg-[var(--panel-2)] p-1 shadow-[4px_4px_0_var(--shadow)] transition-transform duration-150 group-hover:-translate-y-0.5">
-                                    <img src={OWNER_CONFIG.avatar} alt={OWNER_CONFIG.name} width={112} height={112} className="h-28 w-28 object-cover" />
+                                    <img src={OWNER_CONFIG.avatar} alt={config.owner.name} width={112} height={112} className="h-28 w-28 object-cover" />
                                 </span>
                             </Link>
-                            <h2 className="mt-4 text-xl font-bold tracking-[0.12em] text-[var(--fg)]"><Link href="/">{OWNER_CONFIG.name}</Link></h2>
+                            <h2 className="mt-4 text-xl font-bold tracking-[0.12em] text-[var(--fg)]"><Link href={languagePath(language)}>{config.owner.name}</Link></h2>
                             <p className="mt-1 text-xs tracking-[0.12em] text-[var(--muted)]">@{OWNER_CONFIG.username}</p>
-                            <p className="mt-3 border-t border-dashed border-[var(--border)] pt-3 text-sm leading-6 text-[var(--muted)]">{OWNER_CONFIG.brief}</p>
+                            <p className="mt-3 border-t border-dashed border-[var(--border)] pt-3 text-sm leading-6 text-[var(--muted)]">{config.owner.brief}</p>
                         </Card>
                         <Card className="p-4">
                             <p className="retro-label mb-3">[ LINKS ]</p>
@@ -96,7 +120,7 @@ export default function Frame(props:FrameProps)
                                             return (
                                                 <Link
                                                     key={i}
-                                                    href={`/${encodeURIComponent(item.name)}`}
+                                                    href={categoryPath(language, item.name)}
                                                     title={item.name}
                                                     className="retro-link flex items-center justify-between gap-2 px-2 py-1.5 text-sm"
                                                 >
@@ -125,7 +149,7 @@ export default function Frame(props:FrameProps)
                                 {
                                     props.articles?.map((item, i) => {
                                         return (
-                                            <Link key={i} title={item.name.replace(/\.md$/, '')} href={`/${encodeURIComponent(item.category)}/${encodeURIComponent(item.name)}`} className="retro-link group flex items-start gap-2 px-2 py-1.5">
+                                            <Link key={i} title={item.name.replace(/\.md$/, '')} href={articlePath(language, item.category, item.name)} className="retro-link group flex items-start gap-2 px-2 py-1.5">
                                                 <span className="mt-1 text-[10px] text-[var(--accent)]">&gt;</span>
                                                 <span className="min-w-0 flex-1">
                                                     <span className="block truncate text-sm text-[var(--fg)] transition-colors group-hover:text-[var(--accent)]">
@@ -134,7 +158,7 @@ export default function Frame(props:FrameProps)
                                                     <span className="mt-0.5 flex items-center gap-1 text-[10px] tracking-[0.08em] text-[var(--muted)]">
                                                         <span className="truncate">{item.category}</span>
                                                         <span>·</span>
-                                                        <span>{formatDate(item.state.createdTime)}</span>
+                                                        <span>{formatDate(item.state.createdTime, language)}</span>
                                                     </span>
                                                 </span>
                                             </Link>
@@ -148,7 +172,7 @@ export default function Frame(props:FrameProps)
                 </aside>
             </main>
             <footer className="mx-auto w-full max-w-[1500px] px-4 pb-6 pt-1 text-center text-[10px] tracking-[0.18em] text-[var(--muted)]">
-                © {new Date().getFullYear()} {OWNER_CONFIG.name} · {SITE_CONFIG.brand}
+                © {new Date().getFullYear()} {config.owner.name} · {config.brand}
                 <span className="blink ml-1 text-[var(--accent)]">_</span>
             </footer>
         </div>

@@ -1,6 +1,7 @@
 "use client";
 import Giscus from '@giscus/react';
 import { useEffect, useState } from 'react';
+import { DEFAULT_LANGUAGE, LANGUAGE_CONFIG, Language } from '@/config';
 import Card from './Card';
 
 type Theme = 'light' | 'dark';
@@ -9,7 +10,12 @@ function currentTheme(): Theme {
     return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
 }
 
-export default function Discussion() {
+export interface DiscussionProps {
+    language?: Language;
+}
+
+export default function Discussion(props: DiscussionProps) {
+    const language = props.language ?? DEFAULT_LANGUAGE;
     const [theme, setTheme] = useState<Theme>('light');
 
     useEffect(() => {
@@ -41,7 +47,7 @@ export default function Discussion() {
                     emitMetadata="0"
                     inputPosition="top"
                     theme={theme === 'dark' ? 'gruvbox_dark' : 'gruvbox_light'}
-                    lang='zh-CN'
+                    lang={LANGUAGE_CONFIG[language].htmlLang}
                     loading="lazy"
                     strict="1"
                 />

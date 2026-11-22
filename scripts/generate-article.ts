@@ -2,11 +2,9 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
 import { parseArgs } from 'node:util';
-import { DOCUMENT_CONFIG, SITE_CONFIG } from '../src/config';
+import { DEFAULT_LANGUAGE, DOCUMENT_CONFIG, isLanguage, LANGUAGES, LANGUAGE_CONFIG, Language } from '../src/config';
 import { originalLinkBlock } from '../src/utils/markdown';
 import { readableUrl } from '../src/utils/seo';
-
-const AI_DISCLAIMER = '> 本文由 AI 辅助生成并经人工校验，如有疏漏欢迎指正。';
 
 // 文末“相关文章”随机挑选的数量范围
 const RELATED_MIN = 3;
@@ -18,10 +16,12 @@ const USAGE = `用法: npm run gen -- <分类> [主题] [选项]
   npm run gen -- linux
   npm run gen -- linux "lsof 命令详解"
   npm run gen -- linux "Git 常用技巧" --slug git-tips
+  npm run gen -- linux "Understanding load average" --lang en
 
 省略主题时由 AI 自拟，并避开已有文章。
 
 选项:
+  -l, --lang <语言>   文章语言：zh（默认）或 en
   -s, --slug <名称>   指定文件名（默认取文章标题）
   -m, --model <模型>  指定 opencode 模型，省略时使用 opencode 当前配置的默认模型
   -f, --force         覆盖同名文件
@@ -47,13 +47,30 @@ interface RunResult {
     preview: string;
 }
 
-function buildPrompt(category: string, topic: string | undefined, existing: string[]): string {
+function buildPrompt(language: Language, category: string, topic: string | undefined, existing: string[]): string {
+    const existingList = existing.map((item) => `- ${item}`).join('\n');
+
+    if (language === 'en') {
+        const instruction = topic
+            ? `Please write about "${topic}"`
+            : 'Please choose a new topic suitable for publishing on a personal blog that does not duplicate the existing articles';
+        const existingSection = existing.length ? `\n\nExisting articles:\n${existingList}` : '';
+
+        return `You are a seasoned technical writer. ${instruction}. The category is "${category}".${existingSection}
+
+Requirements:
+1. Output the Markdown body directly. The first line must be a level-1 heading. Do not wrap the whole article in a code fence.
+2. Use a clear structure and a length of about 800–1500 words. Use subheadings, lists, tables, and code blocks where appropriate.
+3. Be accurate, specific, and actionable. Include runnable examples for commands or code.
+4. Do not use any tools, do not read or write files, and do not ask questions.
+5. Write the article in English. Output only the article content, with no explanations, notes, or closing remarks.
+6. Keep the title reasonably short (preferably one line) and vary the style; avoid repeatedly using titles like "xx in action".`;
+    }
+
     const instruction = topic
         ? `请以“${topic}”为主题`
         : '请自行拟定一个适合发布在个人博客上的新主题，且不要与已有文章重复';
-    const existingSection = existing.length
-        ? `\n\n已有文章：\n${existing.map((item) => `- ${item}`).join('\n')}`
-        : '';
+    const existingSection = existing.length ? `\n\n已有文章：\n${existingList}` : '';
 
     return `你是一位擅长技术写作的中文作者。${instruction}，写一篇适合发布在个人博客上的文章，文章分类为“${category}”。${existingSection}
 
@@ -176,8 +193,8 @@ function titleOf(content: string): string | undefined {
     return line?.replace(/^#\s+/, '').trim();
 }
 
-async function existingArticles(): Promise<string[]> {
-    const root = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document', 'zh');
+async function existingArticles(language: Language): Promise<string[]> {
+    const root = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document', language);
     let categories;
     try {
         categories = await fs.readdir(root, { withFileTypes: true });
@@ -222,8 +239,8 @@ const URL_ESCAPES: Record<string, string> = {
     ' ': '%20',
 };
 
-function articleUrl(category: string, file: string): string {
-    const pathname = `/${category}/${file}`.replace(/[()<>\s]/g, (ch) => URL_ESCAPES[ch] ?? ch);
+function articleUrl(language: Language, category: string, file: string): string {
+    const pathname = `/${language}/${category}/${file}`.replace(/[()<>\s]/g, (ch) => URL_ESCAPES[ch] ?? ch);
     return readableUrl(pathname);
 }
 
@@ -242,8 +259,8 @@ function shuffle<T>(items: T[]): T[] {
 }
 
 // 随机挑选同分类下的其他文章，生成文末“相关文章”区块
-async function relatedSection(category: string, slug: string): Promise<string> {
-    const directory = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document', 'zh', category);
+async function relatedSection(language: Language, category: string, slug: string): Promise<string> {
+    const directory = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document', language, category);
 
     let files: string[];
     try {
@@ -274,10 +291,10 @@ async function relatedSection(category: string, slug: string): Promise<string> {
         } catch {
             // 读取失败时退回文件名
         }
-        links.push(`- [${escapeLinkText(title)}](${articleUrl(category, file)})`);
+        links.push(`- [${escapeLinkText(title)}](${articleUrl(language, category, file)})`);
     }
 
-    return `## 相关文章\n\n${links.join('\n')}`;
+    return `## ${LANGUAGE_CONFIG[language].ui.related}\n\n${links.join('\n')}`;
 }
 
 function validCategory(category: string): boolean {
@@ -297,6 +314,7 @@ async function main(): Promise<void> {
     const { values, positionals } = parseArgs({
         allowPositionals: true,
         options: {
+            lang: { type: 'string', short: 'l' },
             slug: { type: 'string', short: 's' },
             model: { type: 'string', short: 'm' },
             force: { type: 'boolean', short: 'f' },
@@ -319,7 +337,14 @@ async function main(): Promise<void> {
         return;
     }
 
-    const existing = await existingArticles();
+    if (values.lang && !isLanguage(values.lang)) {
+        console.error(`不支持的语言: ${values.lang}（可选：${LANGUAGES.join(', ')}）`);
+        process.exitCode = 1;
+        return;
+    }
+    const language: Language = isLanguage(values.lang) ? values.lang : DEFAULT_LANGUAGE;
+
+    const existing = await existingArticles(language);
     const dryRun = Boolean(values['dry-run']);
     const args = ['run', '--format', 'json'];
     if (dryRun) {
@@ -328,9 +353,9 @@ async function main(): Promise<void> {
     if (values.model) {
         args.push('--model', values.model);
     }
-    args.push(buildPrompt(category, topic || undefined, existing));
+    args.push(buildPrompt(language, category, topic || undefined, existing));
 
-    console.error('正在调用 opencode 生成文章...');
+    console.error(`正在调用 opencode 生成${language === 'en' ? '英文' : '中文'}文章...`);
 
     const result = await runOpenCode(args, dryRun);
     if (!result.text.trim()) {
@@ -345,15 +370,21 @@ async function main(): Promise<void> {
 
     // 开头插入原文链接，便于转载时保留出处（页面渲染时隐藏）
     const title = titleOf(content) ?? slug
-    const url = readableUrl(`/${category}/${slug}.md`);
+    const url = readableUrl(`/${language}/${category}/${slug}.md`);
 
     // 文末追加同分类的随机文章链接，最后一行固定为 AI 声明
-    const related = await relatedSection(category, slug);
-    const article = [originalLinkBlock(title, url), '---', content, related, AI_DISCLAIMER]
+    const related = await relatedSection(language, category, slug);
+    const article = [
+        originalLinkBlock(language, title, url),
+        '---',
+        content,
+        related,
+        LANGUAGE_CONFIG[language].ui.disclaimer,
+    ]
         .filter(Boolean)
         .join('\n\n') + '\n';
 
-    const directory = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document', 'zh', category);
+    const directory = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document', language, category);
     const file = path.join(directory, `${slug}.md`);
     const relative = path.relative(process.cwd(), file);
 

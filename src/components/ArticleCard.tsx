@@ -1,34 +1,40 @@
 import { content, type Article as ArticleProps} from '@/utils/document'
 import { stripOriginalLink } from '@/utils/markdown';
+import { LANGUAGE_CONFIG } from '@/config';
+import { articlePath } from '@/utils/seo';
 import Markdown from './Markdown';
 import Link from './Link';
 import Card from './Card';
 
-function formatDate(date: Date): string {
-    return new Intl.DateTimeFormat('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(date);
+function formatDate(date: Date, locale: string): string {
+    return new Intl.DateTimeFormat(locale, { year: 'numeric', month: '2-digit', day: '2-digit' }).format(date);
 }
 
 export default async function ArticleCard(props:ArticleProps) {
-    const text = await content(props.category, props.name);
+    const config = LANGUAGE_CONFIG[props.language];
+    const text = await content(props.language, props.category, props.name);
+    const href = articlePath(props.language, props.category, props.name);
+
     return (
         <Card className="group animate-rise overflow-hidden p-0 transition-all duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[7px_7px_0_var(--shadow)]">
             <div className='p-5'>
                 <div className="mb-3 flex flex-wrap items-center gap-2 text-[10px] tracking-[0.14em]">
                     <span className="retro-chip">{props.category}</span>
-                    <time dateTime={props.state.createdTime.toISOString()} className="text-[var(--muted)]">{formatDate(props.state.createdTime)}</time>
+                    <time dateTime={props.state.createdTime.toISOString()} className="text-[var(--muted)]">{formatDate(props.state.createdTime, config.dateLocale)}</time>
                     <span className="ml-auto text-[var(--accent-2)]">●</span>
                 </div>
                 <Markdown 
                     content={stripOriginalLink(text).split('\n').slice(0, 10).join('\n')}
-                    href={`/zh/${encodeURIComponent(props.category)}/${encodeURIComponent(props.name)}`} 
-                    lang={props.category}
+                    href={href}
+                    category={props.category}
+                    language={props.language}
                 />
             </div>
             <Link 
-                href={`/zh/${encodeURIComponent(props.category)}/${encodeURIComponent(props.name)}`} 
+                href={href}
                 className='flex items-center justify-between border-t-2 border-[var(--border)] bg-[var(--panel-2)] px-5 py-3 text-xs tracking-[0.16em] text-[var(--muted)] transition-colors duration-150 group-hover:bg-[var(--accent)] group-hover:text-[var(--on-accent)]'
             >
-                <span>[ 查看全文 ]</span>
+                <span>[ {config.ui.readMore} ]</span>
                 <span className="transition-transform duration-150 group-hover:translate-x-1">→</span>
             </Link>
         </Card>

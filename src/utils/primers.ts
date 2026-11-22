@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { LINKS } from '@/config';
+import { LANGUAGE_CONFIG, LINKS, Language } from '@/config';
 import { decodeUrl } from './markdown';
 
 export interface SitemapNode {
@@ -207,7 +207,7 @@ const PRIMER_TITLE = LINKS.find((link) => /primers\.xplanc\.org/i.test(link.url)
 // 从文档地址得到可读标题，如：
 // https://primers.xplanc.org/document/zh/10.Bash/90.帮助手册/EX.test.md
 // -> Bash/帮助手册/test - Primers 编程伙伴
-export function primerTitle(href: string): string {
+export function primerTitle(href: string, language: Language = 'zh'): string {
     let pathname: string;
 
     try {
@@ -253,7 +253,8 @@ export function primerTitle(href: string): string {
         return href;
     }
 
-    return `${parts.join('/')} - ${PRIMER_TITLE}`;
+    const suffix = language === 'en' ? 'Primers' : PRIMER_TITLE;
+    return `${parts.join('/')} - ${suffix}`;
 }
 
 // 代码块内允许转换为链接的文档（行号基于预处理后的 Markdown）
@@ -424,22 +425,22 @@ export function preparePrimerLinks(markdown: string, languages: string | string[
 }
 
 // 生成本文涉及的 Primers 文档列表
-function primerSection(links: PrimerLink[]): string {
+function primerSection(links: PrimerLink[], language: Language): string {
     const items = links.map(({ href }) => {
-        const label = primerTitle(href).replace(/([\\[\]])/g, '\\$1');
+        const label = primerTitle(href, language).replace(/([\\[\]])/g, '\\$1');
         return `- [${label}](${href})`;
     });
 
-    return `## 参考文档\n\n${items.join('\n')}`;
+    return `## ${LANGUAGE_CONFIG[language].ui.references}\n\n${items.join('\n')}`;
 }
 
 // 在文末追加 Primers 文档列表，尽量保持 AI 声明位于最后一行
-export function insertPrimerSection(markdown: string, links: PrimerLink[]): string {
+export function insertPrimerSection(markdown: string, links: PrimerLink[], language: Language = 'zh'): string {
     if (links.length === 0) {
         return markdown;
     }
 
-    const section = primerSection(links);
+    const section = primerSection(links, language);
     const lines = markdown.split('\n');
 
     let tail = lines.length - 1;
@@ -447,7 +448,7 @@ export function insertPrimerSection(markdown: string, links: PrimerLink[]): stri
         tail--;
     }
 
-    if (tail >= 0 && /^>\s*本文由\s*AI/.test(lines[tail])) {
+    if (tail >= 0 && /^>\s*(?:本文由\s*AI|This article was generated with AI)/i.test(lines[tail])) {
         lines.splice(tail, 0, section, '');
         return lines.join('\n');
     }

@@ -2,13 +2,12 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { execFile } from 'node:child_process';
 import { parseArgs, promisify } from 'node:util';
-import { DOCUMENT_CONFIG } from '../src/config';
+import { DOCUMENT_CONFIG, LANGUAGES, LANGUAGE_CONFIG, Language } from '../src/config';
 import { readableUrl } from '../src/utils/seo';
 
 const execFileAsync = promisify(execFile);
 
 const README_FILE = path.join(process.cwd(), 'README.md');
-const DOCUMENT_DIR = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document', 'zh');
 const SECTION_TITLE = '## 文章目录';
 const BEGIN_MARK = '<!-- ARTICLES:BEGIN -->';
 const END_MARK = '<!-- ARTICLES:END -->';
@@ -16,7 +15,7 @@ const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 
 const USAGE = `用法: npm run index [选项]
 
-按分类在 README.md 末尾生成文章目录。
+按语言和分类在 README.md 末尾生成文章目录。
 
 选项:
   -c, --check    只检查目录是否为最新，不写入文件（过期时以非零码退出）
@@ -34,8 +33,9 @@ interface Category {
 }
 
 // 读取 Git 历史中每个文件的首次提交日期（格式为 YYYY-MM-DD）
-async function creationDates(repo: string): Promise<Map<string, string>> {
+async function creationDates(repo: string, language: Language): Promise<Map<string, string>> {
     const dates = new Map<string, string>();
+    const prefix = `${DOCUMENT_CONFIG.root}/document/${language}/`;
 
     try {
         const { stdout } = await execFileAsync(
@@ -58,11 +58,11 @@ async function creationDates(repo: string): Promise<Map<string, string>> {
                 continue;
             }
 
-            // 仓库根目录可能高于 daily-document，只保留 document 之后的相对路径
-            const index = line.indexOf(`${DOCUMENT_CONFIG.root}/document/zh/`);
+            // 仓库根目录可能高于 daily-document，只保留语言目录之后的相对路径
+            const index = line.indexOf(prefix);
             const key = index >= 0
-                ? line.slice(index + DOCUMENT_CONFIG.root.length + '/document/zh/'.length)
-                : line.startsWith('document/zh/') ? line.slice('document/zh/'.length) : '';
+                ? line.slice(index + prefix.length)
+                : line.startsWith(`document/${language}/`) ? line.slice(`document/${language}/`.length) : '';
             if (key && !dates.has(key)) {
                 dates.set(key, current);
             }
@@ -87,8 +87,8 @@ const URL_ESCAPES: Record<string, string> = {
     ' ': '%20',
 };
 
-function articleUrl(category: string, file: string): string {
-    const pathname = `/zh/${category}/${file}`.replace(/[()<>\s]/g, (ch) => URL_ESCAPES[ch] ?? ch);
+function articleUrl(language: Language, category: string, file: string): string {
+    const pathname = `/${language}/${category}/${file}`.replace(/[()<>\s]/g, (ch) => URL_ESCAPES[ch] ?? ch);
     return readableUrl(pathname);
 }
 
@@ -101,13 +101,24 @@ function formatDate(date: Date): string {
     return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
 }
 
-async function collect(): Promise<Category[]> {
-    const dates = await creationDates(path.join(process.cwd(), DOCUMENT_CONFIG.root));
-    const entries = await fs.readdir(DOCUMENT_DIR, { withFileTypes: true });
+async function collect(language: Language): Promise<Category[]> {
+    const dates = await creationDates(path.join(process.cwd(), DOCUMENT_CONFIG.root), language);
+    const documentDir = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document', language);
+    let entries;
+    try {
+        entries = await fs.readdir(documentDir, { withFileTypes: true });
+    } catch (err) {
+        if ((err as NodeJS.ErrnoException).code === 'ENOENT') {
+            return [];
+        }
+        throw err;
+    }
+
     const categories: Category[] = [];
+    const locale = LANGUAGE_CONFIG[language].dateLocale;
 
     for (const entry of entries.filter((item) => item.isDirectory())) {
-        const directory = path.join(DOCUMENT_DIR, entry.name);
+        const directory = path.join(documentDir, entry.name);
         const files = (await fs.readdir(directory, { withFileTypes: true }))
             .filter((file) => !file.isDirectory() && file.name.toLowerCase().endsWith('.md'));
 
@@ -125,29 +136,41 @@ async function collect(): Promise<Category[]> {
 
             articles.push({
                 title: titleOf(text) ?? file.name.replace(/\.md$/i, ''),
-                url: articleUrl(entry.name, file.name),
+                url: articleUrl(language, entry.name, file.name),
                 date: dates.get(`${entry.name}/${file.name}`) ?? formatDate(modified),
             });
         }
 
-        articles.sort((x, y) => y.date.localeCompare(x.date) || x.title.localeCompare(y.title, 'zh'));
+        articles.sort((x, y) => y.date.localeCompare(x.date) || x.title.localeCompare(y.title, locale));
         if (articles.length > 0) {
             categories.push({ name: entry.name, articles });
         }
     }
 
     // 与站点分类列表保持一致：文章多的分类在前
-    return categories.sort((x, y) => y.articles.length - x.articles.length || x.name.localeCompare(y.name, 'zh'));
+    return categories.sort((x, y) => y.articles.length - x.articles.length || x.name.localeCompare(y.name, locale));
 }
 
-function buildSection(categories: Category[]): string {
-    const total = categories.reduce((sum, category) => sum + category.articles.length, 0);
-    const lines = [`共 ${total} 篇。`];
+function buildSection(grouped: Record<Language, Category[]>): string {
+    const counts = LANGUAGES.map((language) => grouped[language]);
+    const total = counts.reduce((sum, categories) => sum + categories.reduce((count, category) => count + category.articles.length, 0), 0);
+    const summary = LANGUAGES
+        .map((language) => `${LANGUAGE_CONFIG[language].name} ${grouped[language].reduce((sum, category) => sum + category.articles.length, 0)} 篇`)
+        .join('，');
+    const lines = [`共 ${total} 篇（${summary}）。`];
 
-    for (const category of categories) {
-        lines.push('', `### ${category.name}（${category.articles.length}）`, '');
-        for (const article of category.articles) {
-            lines.push(`- ${article.date} [${escapeLinkText(article.title)}](${article.url})`);
+    for (const language of LANGUAGES) {
+        const categories = grouped[language];
+        if (categories.length === 0) {
+            continue;
+        }
+
+        lines.push('', `### ${LANGUAGE_CONFIG[language].name}`);
+        for (const category of categories) {
+            lines.push('', `#### ${category.name}（${category.articles.length}）`, '');
+            for (const article of category.articles) {
+                lines.push(`- ${article.date} [${escapeLinkText(article.title)}](${article.url})`);
+            }
         }
     }
 
@@ -184,7 +207,11 @@ async function main(): Promise<void> {
     }
 
     const readme = await fs.readFile(README_FILE, 'utf8');
-    const section = buildSection(await collect());
+    const grouped = {} as Record<Language, Category[]>;
+    for (const language of LANGUAGES) {
+        grouped[language] = await collect(language);
+    }
+    const section = buildSection(grouped);
     const updated = merge(readme, section);
 
     if (updated === readme) {

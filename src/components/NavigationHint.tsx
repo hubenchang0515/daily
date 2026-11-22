@@ -23,6 +23,7 @@ function isInternalNavigation(anchor: HTMLAnchorElement, event: MouseEvent): boo
 export default function NavigationHint() {
     const pathname = usePathname();
     const [visible, setVisible] = useState(false);
+    const [text, setText] = useState('正在跳转…');
     const shownAt = useRef(0);
     const hideTimer = useRef<number | undefined>(undefined);
 
@@ -60,6 +61,7 @@ export default function NavigationHint() {
 
             clearHideTimer();
             shownAt.current = performance.now();
+            setText(document.documentElement.lang.toLowerCase().startsWith('en') ? 'Navigating…' : '正在跳转…');
             setVisible(true);
             hideTimer.current = window.setTimeout(hide, SAFETY_TIMEOUT);
         };
@@ -79,7 +81,7 @@ export default function NavigationHint() {
     return (
         <div className="nav-hint" role="status" aria-live="polite">
             <span className="blink" aria-hidden="true">▶</span>
-            <span>正在跳转…</span>
+            <span>{text}</span>
         </div>
     );
 }

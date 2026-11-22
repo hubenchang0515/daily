@@ -1,10 +1,12 @@
 "use client";
 
 import ShareIcon from "@/assets/icons/ShareIcon";
+import { DEFAULT_LANGUAGE, LANGUAGE_CONFIG, Language } from "@/config";
 import { useEffect, useRef, useState } from "react";
 
 export interface RepostButtonProps {
     content: string;
+    language?: Language;
 }
 
 async function copyText(text: string): Promise<void> {
@@ -24,6 +26,8 @@ async function copyText(text: string): Promise<void> {
 }
 
 export default function RepostButton(props: RepostButtonProps) {
+    const language = props.language ?? DEFAULT_LANGUAGE;
+    const config = LANGUAGE_CONFIG[language];
     const [copied, setCopied] = useState(false);
     const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
 
@@ -44,11 +48,11 @@ export default function RepostButton(props: RepostButtonProps) {
         <button
             type="button"
             onClick={handleClick}
-            title="转载（复制 Markdown）"
+            title={config.ui.repostTitle}
             className="retro-button inline-flex cursor-pointer items-center gap-1.5 px-2 py-1 text-[10px] tracking-[0.12em]"
         >
             <span className="[&_svg]:h-4 [&_svg]:w-4"><ShareIcon/></span>
-            <span aria-live="polite">{copied ? '已复制' : '转载'}</span>
+            <span aria-live="polite">{copied ? config.ui.copied : config.ui.repost}</span>
         </button>
     );
 }

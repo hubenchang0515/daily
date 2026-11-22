@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import ListIcon from "@/assets/icons/ListIcon";
 import ArticleNav from "@/components/ArticleNav";
 import Card from "@/components/Card";
@@ -7,44 +8,48 @@ import Frame from "@/components/Frame";
 import Link from "@/components/Link";
 import Markdown from "@/components/Markdown";
 import RepostButton from "@/components/RepostButton";
-import { OWNER_CONFIG, SITE_CONFIG } from "@/config";
+import { isLanguage, LANGUAGES, LANGUAGE_CONFIG, OWNER_CONFIG } from "@/config";
 import { categories as getGategories, content, state } from "@/utils/document";
 import { markdownForRepost } from "@/utils/repost";
 import { originalLink, originalLinkBlock, stripOriginalLink } from "@/utils/markdown";
-import { absoluteUrl, articlePath, categoryPath, documentSourceUrl, markdownDescription, markdownTitle, readableUrl } from "@/utils/seo";
+import { absoluteUrl, articlePath, categoryPath, documentSourceUrl, languagePath, markdownDescription, markdownTitle, readableUrl } from "@/utils/seo";
 
 export interface PageParams {
+    lang:string;        // 语言：zh / en
     category:string;    // 分类： 例如 Python 等
     article:string;     // 文章： xxx.md
 }
 
 export async function generateMetadata({params}:{params:Promise<PageParams>}): Promise<Metadata> {
     const path = await params;
+    if (!isLanguage(path.lang)) return {};
+    const language = path.lang;
+    const config = LANGUAGE_CONFIG[language];
     const category = decodeURIComponent(path.category);
     const article = decodeURIComponent(path.article);
-    const text = await content(category, article);
+    const text = await content(language, category, article);
     const title = markdownTitle(text) ?? article.replace(/\.md$/, '');
-    const description = markdownDescription(text);
-    const url = absoluteUrl(articlePath(category, article));
-    const { createdTime, updatedTime } = await state(category, article);
+    const description = markdownDescription(text, language);
+    const url = absoluteUrl(articlePath(language, category, article));
+    const { createdTime, updatedTime } = await state(language, category, article);
 
     return {
         title,
         description,
-        keywords: [category, SITE_CONFIG.brand, '编程', '技术文章'],
+        keywords: [category, ...config.keywords],
         alternates: {
             canonical: url,
         },
         openGraph: {
             type: 'article',
-            locale: SITE_CONFIG.locale,
+            locale: config.locale,
             url,
-            siteName: SITE_CONFIG.brand,
+            siteName: config.brand,
             title,
             description,
             publishedTime: createdTime.toISOString(),
             modifiedTime: updatedTime.toISOString(),
-            authors: [OWNER_CONFIG.name],
+            authors: [config.owner.name],
             section: category,
             tags: [category],
         },
@@ -59,42 +64,49 @@ export async function generateMetadata({params}:{params:Promise<PageParams>}): P
 // 生成静态页面路径
 export async function generateStaticParams() {
     const paramsList:PageParams[] = []
-    for (const category of await getGategories()) {
-        for (const article of category.articles) {
-            if (process.env.NODE_ENV === 'development') {
-                paramsList.push({
-                    category: encodeURIComponent(category.name),
-                    article: encodeURIComponent(article.name),
-                });
-            } else {
-                paramsList.push({
-                    category: category.name,
-                    article: article.name,
-                });
+    for (const lang of LANGUAGES) {
+        for (const category of await getGategories(lang)) {
+            for (const article of category.articles) {
+                if (process.env.NODE_ENV === 'development') {
+                    paramsList.push({
+                        lang,
+                        category: encodeURIComponent(category.name),
+                        article: encodeURIComponent(article.name),
+                    });
+                } else {
+                    paramsList.push({
+                        lang,
+                        category: category.name,
+                        article: article.name,
+                    });
+                }
             }
         }
     }
-    
+
     return paramsList;
 }
 
 export default async function Page({params}:{params:Promise<PageParams>}) {
     const path = await params;
+    if (!isLanguage(path.lang)) notFound();
+    const language = path.lang;
+    const config = LANGUAGE_CONFIG[language];
     const category = decodeURIComponent(path.category);
     const articleName = decodeURIComponent(path.article);
-    const text = await content(category, articleName);
-    const categories = await getGategories();
+    const text = await content(language, category, articleName);
+    const categories = await getGategories(language);
     const articles = categories.flatMap(item => item.articles).sort((x, y) => y.state.createdTime.getTime() - x.state.createdTime.getTime());
-    const href = absoluteUrl(articlePath(category, articleName));
+    const href = absoluteUrl(articlePath(language, category, articleName));
     const article = articleName.replace(/\.md$/, '');
     const title = markdownTitle(text) ?? article;
-    const { createdTime, updatedTime } = await state(category, articleName);
+    const { createdTime, updatedTime } = await state(language, category, articleName);
     const index = articles.findIndex(item => item.category === category && item.name === articleName);
     const previous = index > 0 ? articles[index - 1] : undefined;                     // 列表中较新的一篇
     const next = index >= 0 && index < articles.length - 1 ? articles[index + 1] : undefined;  // 列表中较旧的一篇
     // 转载时原文链接固定在开头
-    const original = originalLink(text) ?? originalLinkBlock(title, readableUrl(`/${category}/${articleName}`));
-    const repost = `${original}\n\n---\n\n${markdownForRepost(stripOriginalLink(text), category).trimEnd()}\n`;
+    const original = originalLink(text) ?? originalLinkBlock(language, title, readableUrl(`/${language}/${category}/${articleName}`));
+    const repost = `${original}\n\n---\n\n${markdownForRepost(stripOriginalLink(text), category, language).trimEnd()}\n`;
 
     const jsonLd = {
         '@context': 'https://schema.org',
@@ -102,26 +114,26 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
             {
                 '@type': 'Article',
                 headline: title,
-                description: markdownDescription(text),
+                description: markdownDescription(text, language),
                 datePublished: createdTime.toISOString(),
                 dateModified: updatedTime.toISOString(),
                 author: {
                     '@type': 'Person',
-                    name: OWNER_CONFIG.name,
+                    name: config.owner.name,
                     url: OWNER_CONFIG.url,
                 },
                 publisher: {
                     '@type': 'Organization',
-                    name: SITE_CONFIG.brand,
-                    url: SITE_CONFIG.origin,
+                    name: config.brand,
+                    url: absoluteUrl(languagePath(language)),
                 },
                 mainEntityOfPage: {
                     '@type': 'WebPage',
                     '@id': href,
                 },
                 articleSection: category,
-                inLanguage: 'zh-CN',
-                keywords: [category, '编程'].join(', '),
+                inLanguage: config.htmlLang,
+                keywords: [category, 'programming'].join(', '),
                 url: href,
             },
             {
@@ -130,14 +142,14 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
                     {
                         '@type': 'ListItem',
                         position: 1,
-                        name: '首页',
-                        item: absoluteUrl('/'),
+                        name: config.ui.home,
+                        item: absoluteUrl(languagePath(language)),
                     },
                     {
                         '@type': 'ListItem',
                         position: 2,
                         name: category,
-                        item: absoluteUrl(categoryPath(category)),
+                        item: absoluteUrl(categoryPath(language, category)),
                     },
                     {
                         '@type': 'ListItem',
@@ -156,11 +168,11 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
-            <Frame categories={categories} articles={articles.slice(0,30)}>
-            <nav aria-label="面包屑" className="flex flex-nowrap items-center gap-2 overflow-hidden px-1 text-[10px] tracking-[0.14em] text-[var(--muted)]">
-                <Link href="/" className="shrink-0 transition-colors hover:text-[var(--accent)]">~</Link>
+            <Frame language={language} categories={categories} articles={articles.slice(0,30)}>
+            <nav aria-label={config.ui.breadcrumb} className="flex flex-nowrap items-center gap-2 overflow-hidden px-1 text-[10px] tracking-[0.14em] text-[var(--muted)]">
+                <Link href={languagePath(language)} className="shrink-0 transition-colors hover:text-[var(--accent)]">~</Link>
                 <span className="shrink-0">/</span>
-                <Link href={categoryPath(category)} className="shrink-0 transition-colors hover:text-[var(--accent)]">{category}</Link>
+                <Link href={categoryPath(language, category)} className="shrink-0 transition-colors hover:text-[var(--accent)]">{category}</Link>
                 <span className="shrink-0">/</span>
                 <span className="min-w-0 truncate text-[var(--fg)]">{article}.md</span>
             </nav>
@@ -169,18 +181,18 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
                     <span className="truncate">
                         FILE:{' '}
                         <Link
-                            href={documentSourceUrl(category, articleName)}
-                            title="在 GitHub 查看源文件"
+                            href={documentSourceUrl(language, category, articleName)}
+                            title={config.ui.source}
                             className="transition-colors hover:text-[var(--accent)]"
                         >
                             {article}.md
                         </Link>
                     </span>
                     <div className="flex items-center gap-2">
-                        <RepostButton content={repost}/>
+                        <RepostButton content={repost} language={language}/>
                         <Link
-                            href={categoryPath(category)}
-                            title="返回分类"
+                            href={categoryPath(language, category)}
+                            title={config.ui.backToCategory}
                             className="retro-button inline-flex items-center gap-1.5 px-2 py-1 text-[10px] tracking-[0.12em]"
                         >
                             <span className="[&_svg]:h-4 [&_svg]:w-4"><ListIcon/></span>
@@ -189,11 +201,11 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
                     </div>
                 </div>
                 <div className="p-5 sm:p-8">
-                    <Markdown content={text} href={href} lang={category} showPrimerList/>
+                    <Markdown content={text} href={href} category={category} language={language} showPrimerList/>
                 </div>
-                <ArticleNav previous={previous} next={next}/>
+                <ArticleNav language={language} previous={previous} next={next}/>
             </Card>
-            <Discussion/>
+            <Discussion language={language}/>
             </Frame>
         </>
     )

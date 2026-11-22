@@ -1,4 +1,4 @@
-import { DOCUMENT_CONFIG, SITE_CONFIG } from '@/config';
+import { DOCUMENT_CONFIG, LANGUAGE_CONFIG, Language, SITE_CONFIG } from '@/config';
 import { stripOriginalLink } from '@/utils/markdown';
 
 // 将站内路径转换为绝对地址
@@ -13,17 +13,21 @@ export function readableUrl(pathname = '/') {
     return `${SITE_CONFIG.origin}${SITE_CONFIG.basePath}${path}`;
 }
 
-export function categoryPath(category: string) {
-    return `/zh/${encodeURIComponent(category)}`;
+export function languagePath(language: Language) {
+    return `/${language}`;
 }
 
-export function articlePath(category: string, article: string) {
-    return `/zh/${encodeURIComponent(category)}/${encodeURIComponent(article)}`;
+export function categoryPath(language: Language, category: string) {
+    return `/${language}/${encodeURIComponent(category)}`;
+}
+
+export function articlePath(language: Language, category: string, article: string) {
+    return `/${language}/${encodeURIComponent(category)}/${encodeURIComponent(article)}`;
 }
 
 // 文章源文件在 GitHub 仓库中的地址
-export function documentSourceUrl(category: string, article: string) {
-    const file = [DOCUMENT_CONFIG.root, 'document', 'zh', category, article]
+export function documentSourceUrl(language: Language, category: string, article: string) {
+    const file = [DOCUMENT_CONFIG.root, 'document', language, category, article]
         .map(encodeURIComponent)
         .join('/');
     return `${SITE_CONFIG.repo}/blob/HEAD/${file}`;
@@ -35,7 +39,7 @@ export function markdownTitle(text: string) {
 }
 
 // 提取正文首段作为摘要
-export function markdownDescription(text: string, limit = 150) {
+export function markdownDescription(text: string, language: Language, limit = 150) {
     const buffer: string[] = [];
     let inCode = false;
 
@@ -65,6 +69,6 @@ export function markdownDescription(text: string, limit = 150) {
         .replace(/\s+/g, ' ')
         .trim();
 
-    if (plain.length === 0) return SITE_CONFIG.description;
+    if (plain.length === 0) return LANGUAGE_CONFIG[language].description;
     return plain.length > limit ? `${plain.slice(0, limit).trim()}…` : plain;
 }

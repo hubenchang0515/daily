@@ -1,12 +1,14 @@
-import { SITE_CONFIG } from '@/config';
+import { LANGUAGE_CONFIG, Language } from '@/config';
 
-const ORIGINAL_LINK = /^\s*>\s*原文链接[：:]/;
+const ORIGINAL_LINK = /^\s*>\s*(?:原文链接|Original link)[：:]/i;
 const SEPARATOR = /^\s*---\s*$/;
 const BLANK = /^\s*$/;
 
 // 生成原文链接块
-export function originalLinkBlock(title: string, url: string) {
-    return `> 原文链接：[${title} - ${SITE_CONFIG.brand}](${url})`;
+export function originalLinkBlock(language: Language, title: string, url: string) {
+    const config = LANGUAGE_CONFIG[language];
+    const separator = language === 'zh' ? '：' : ': ';
+    return `> ${config.ui.originalLink}${separator}[${title} - ${config.brand}](${url})`;
 }
 
 // 可安全还原到 Markdown 链接中的 ASCII 字符（不含空格、括号、分隔符等）

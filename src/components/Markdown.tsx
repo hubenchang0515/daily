@@ -8,6 +8,7 @@ import DocLink from './DocLink';
 import { ARTICLE_LINK_CLASS } from './linkStyles';
 import { articleLanguages, insertPrimerSection, preparePrimerLinks, PrimerBlockLinks } from '@/utils/primers';
 import { stripOriginalLink } from '@/utils/markdown';
+import { DEFAULT_LANGUAGE, Language } from '@/config';
 
 export async function hash(algorithm:string, data:BufferSource) {
     const hashBuffer = await crypto.subtle.digest(algorithm, data);
@@ -26,7 +27,8 @@ export async function anchorHash(text:string) {
 export interface MarkdownProps {
     content:string;
     href:string;
-    lang?:string;               // 文章分类，用于匹配 Primer 文档链接
+    category?:string;           // 文章分类，用于匹配 Primer 文档链接
+    language?:Language;         // 文章语言，用于文末“参考文档”等文案
     showPrimerList?:boolean;    // 是否在文末汇总 Primers 文档（仅文章正文）
 }
 
@@ -64,12 +66,13 @@ function CodeNode(props:{node:rendererNode, stylesheet: { [key: string]: React.C
 }
 
 export default function Markdown(props: MarkdownProps) {
-    const languages = articleLanguages(props.lang, props.content);
+    const language = props.language ?? DEFAULT_LANGUAGE;
+    const languages = articleLanguages(props.category, props.content);
     // 行内代码与代码块中的 Primers 文档只在首次出现时转换
     const prepared = preparePrimerLinks(stripOriginalLink(props.content), languages);
     // 文末汇总只用于文章正文，列表预览不插入
     const markdown = props.showPrimerList
-        ? insertPrimerSection(prepared.markdown, prepared.links)
+        ? insertPrimerSection(prepared.markdown, prepared.links, language)
         : prepared.markdown;
 
     return (

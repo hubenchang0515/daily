@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { OWNER_CONFIG, SITE_CONFIG } from "@/config";
+import { LANGUAGES, LANGUAGE_CONFIG, OWNER_CONFIG, SITE_CONFIG } from "@/config";
 import { absoluteUrl } from "@/utils/seo";
 import NavigationHint from "@/components/NavigationHint";
 
@@ -90,7 +90,7 @@ const websiteJsonLd = {
   alternateName: SITE_CONFIG.title,
   url: absoluteUrl("/"),
   description: SITE_CONFIG.description,
-  inLanguage: "zh-CN",
+  inLanguage: LANGUAGES.map((language) => LANGUAGE_CONFIG[language].htmlLang),
   publisher: {
     "@type": "Person",
     name: OWNER_CONFIG.name,

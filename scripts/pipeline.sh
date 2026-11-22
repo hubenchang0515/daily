@@ -34,8 +34,17 @@ export PATH=$HOME/.opencode/bin:$PATH
 
 cd $PROJECT_DIR
 
+CATEGORY="${1:?用法: $0 <分类> [语言：zh/en] [模型]}"
+ARTICLE_LANG="${2:-zh}"
+MODEL="${3:-}"
+
+GEN_ARGS=("$CATEGORY" "--lang" "$ARTICLE_LANG")
+if [ -n "$MODEL" ]; then
+  GEN_ARGS+=("-m" "$MODEL")
+fi
+
 retry git pull --rebase --autostash
-retry npm run gen -- "$1" -m "$2"
+retry npm run gen -- "${GEN_ARGS[@]}"
 retry npm run build
 retry npm run index
 git add daily-document 
