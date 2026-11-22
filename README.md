@@ -131,7 +131,7 @@ npm run deploy:gh
 ## 文章目录
 
 <!-- ARTICLES:BEGIN -->
-共 84 篇（中文 83 篇，English 1 篇）。
+共 85 篇（中文 84 篇，English 1 篇）。
 
 ### 中文
 
@@ -260,6 +260,10 @@ npm run deploy:gh
 #### docker（1）
 
 - 2026-11-22 [docker stop 之后，那十秒在等什么](https://daily.xplanc.org/zh/docker/docker-stop-之后，那十秒在等什么.md)
+
+#### kotlin（1）
+
+- 2026-11-22 [Kotlin 扩展函数：写在类外面的方法，运行时去哪了](https://daily.xplanc.org/zh/kotlin/Kotlin-扩展函数：写在类外面的方法，运行时去哪了.md)
 
 #### ruby（1）
 
