@@ -177,7 +177,7 @@ function titleOf(content: string): string | undefined {
 }
 
 async function existingArticles(): Promise<string[]> {
-    const root = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document');
+    const root = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document', 'zh');
     let categories;
     try {
         categories = await fs.readdir(root, { withFileTypes: true });
@@ -243,7 +243,7 @@ function shuffle<T>(items: T[]): T[] {
 
 // 随机挑选同分类下的其他文章，生成文末“相关文章”区块
 async function relatedSection(category: string, slug: string): Promise<string> {
-    const directory = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document', category);
+    const directory = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document', 'zh', category);
 
     let files: string[];
     try {
@@ -353,7 +353,7 @@ async function main(): Promise<void> {
         .filter(Boolean)
         .join('\n\n') + '\n';
 
-    const directory = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document', category);
+    const directory = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document', 'zh', category);
     const file = path.join(directory, `${slug}.md`);
     const relative = path.relative(process.cwd(), file);
 

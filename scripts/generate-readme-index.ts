@@ -8,7 +8,7 @@ import { readableUrl } from '../src/utils/seo';
 const execFileAsync = promisify(execFile);
 
 const README_FILE = path.join(process.cwd(), 'README.md');
-const DOCUMENT_DIR = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document');
+const DOCUMENT_DIR = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document', 'zh');
 const SECTION_TITLE = '## 文章目录';
 const BEGIN_MARK = '<!-- ARTICLES:BEGIN -->';
 const END_MARK = '<!-- ARTICLES:END -->';
@@ -59,10 +59,10 @@ async function creationDates(repo: string): Promise<Map<string, string>> {
             }
 
             // 仓库根目录可能高于 daily-document，只保留 document 之后的相对路径
-            const index = line.indexOf(`${DOCUMENT_CONFIG.root}/document/`);
+            const index = line.indexOf(`${DOCUMENT_CONFIG.root}/document/zh/`);
             const key = index >= 0
-                ? line.slice(index + DOCUMENT_CONFIG.root.length + '/document/'.length)
-                : line.startsWith('document/') ? line.slice('document/'.length) : '';
+                ? line.slice(index + DOCUMENT_CONFIG.root.length + '/document/zh/'.length)
+                : line.startsWith('document/zh/') ? line.slice('document/zh/'.length) : '';
             if (key && !dates.has(key)) {
                 dates.set(key, current);
             }
@@ -88,7 +88,7 @@ const URL_ESCAPES: Record<string, string> = {
 };
 
 function articleUrl(category: string, file: string): string {
-    const pathname = `/${category}/${file}`.replace(/[()<>\s]/g, (ch) => URL_ESCAPES[ch] ?? ch);
+    const pathname = `/zh/${category}/${file}`.replace(/[()<>\s]/g, (ch) => URL_ESCAPES[ch] ?? ch);
     return readableUrl(pathname);
 }
 
