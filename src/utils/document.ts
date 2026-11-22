@@ -22,7 +22,7 @@ export interface Category {
 // 获取文档状态（创建与更新时间）
 export async function state(category:string, article:string): Promise<State> {
     const dir = path.join(process.cwd(), DOCUMENT_CONFIG.root);
-    const file = path.join(process.cwd(), DOCUMENT_CONFIG.root, "document", category, article);
+    const file = path.join(process.cwd(), DOCUMENT_CONFIG.root, "document", "zh", category, article);
 
     return new Promise((resolve) => {
         execFile('git', ['-C', dir, 'log', '--format="%ai"', file], (err, stdout) => {
@@ -48,7 +48,7 @@ export async function state(category:string, article:string): Promise<State> {
 
 // 获取文章列表
 export async function articles(category:string): Promise<Article[]> {
-    const dir = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document', category);
+    const dir = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document', "zh", category);
     const files = (await fs.readdir(dir, { withFileTypes: true }));
     const results = await Promise.all(files.filter(file=>!file.isDirectory()).map(async (file) => ({name:file.name, category:category, state: await state(category, file.name)})));
     return results.sort((x, y) => y.state.createdTime.getTime() - x.state.createdTime.getTime());
@@ -56,7 +56,7 @@ export async function articles(category:string): Promise<Article[]> {
 
 // 获取分类列表
 export async function categories(): Promise<Category[]> {
-    const dir = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document');
+    const dir = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document', "zh");
     const files = (await fs.readdir(dir, { withFileTypes: true }));
     const results =  await Promise.all(files.filter(file=>file.isDirectory()).map(async (file) => ({name:file.name, articles: await articles(file.name)})));
     return results.sort((x, y) => y.articles.length - x.articles.length);
@@ -65,7 +65,7 @@ export async function categories(): Promise<Category[]> {
 // 获取文档内容
 export async function content(category:string, article:string) {
     try {
-        const file = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document', category, article);
+        const file = path.join(process.cwd(), DOCUMENT_CONFIG.root, 'document', "zh", category, article);
         const text = await fs.readFile(file, 'utf-8');
         return text;
     } catch (err) {

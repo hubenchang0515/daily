@@ -14,16 +14,16 @@ export function readableUrl(pathname = '/') {
 }
 
 export function categoryPath(category: string) {
-    return `/${encodeURIComponent(category)}`;
+    return `/zh/${encodeURIComponent(category)}`;
 }
 
 export function articlePath(category: string, article: string) {
-    return `/${encodeURIComponent(category)}/${encodeURIComponent(article)}`;
+    return `/zh/${encodeURIComponent(category)}/${encodeURIComponent(article)}`;
 }
 
 // 文章源文件在 GitHub 仓库中的地址
 export function documentSourceUrl(category: string, article: string) {
-    const file = [DOCUMENT_CONFIG.root, 'document', category, article]
+    const file = [DOCUMENT_CONFIG.root, 'document', 'zh', category, article]
         .map(encodeURIComponent)
         .join('/');
     return `${SITE_CONFIG.repo}/blob/HEAD/${file}`;

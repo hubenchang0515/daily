@@ -20,12 +20,12 @@ export default async function ArticleCard(props:ArticleProps) {
                 </div>
                 <Markdown 
                     content={stripOriginalLink(text).split('\n').slice(0, 10).join('\n')}
-                    href={`/${encodeURIComponent(props.category)}/${encodeURIComponent(props.name)}`} 
+                    href={`/zh/${encodeURIComponent(props.category)}/${encodeURIComponent(props.name)}`} 
                     lang={props.category}
                 />
             </div>
             <Link 
-                href={`/${encodeURIComponent(props.category)}/${encodeURIComponent(props.name)}`} 
+                href={`/zh/${encodeURIComponent(props.category)}/${encodeURIComponent(props.name)}`} 
                 className='flex items-center justify-between border-t-2 border-[var(--border)] bg-[var(--panel-2)] px-5 py-3 text-xs tracking-[0.16em] text-[var(--muted)] transition-colors duration-150 group-hover:bg-[var(--accent)] group-hover:text-[var(--on-accent)]'
             >
                 <span>[ 查看全文 ]</span>
