@@ -131,7 +131,7 @@ npm run deploy:gh
 ## 文章目录
 
 <!-- ARTICLES:BEGIN -->
-共 87 篇（中文 86 篇，English 1 篇）。
+共 89 篇（中文 86 篇，English 3 篇）。
 
 ### 中文
 
@@ -276,6 +276,11 @@ npm run deploy:gh
 - 2026-11-22 [Zig 没有隐藏的 malloc](https://daily.xplanc.org/zh/zig/Zig-没有隐藏的-malloc.md)
 
 ### English
+
+#### linux（2）
+
+- 2026-11-23 [Reclaiming Disk Space from Open-but-Deleted Files](https://daily.xplanc.org/en/linux/Reclaiming-Disk-Space-from-Open-but-Deleted-Files.md)
+- 2026-11-23 [Running One-Off Tasks Safely with systemd-run](https://daily.xplanc.org/en/linux/Running-One-Off-Tasks-Safely-with-systemd-run.md)
 
 #### python（1）
 
