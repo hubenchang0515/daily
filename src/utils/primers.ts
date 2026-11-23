@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { DEFAULT_LANGUAGE, LANGUAGE_CONFIG, LINKS, Language } from '@/config';
+import { DEFAULT_LANGUAGE, LANGUAGE_CONFIG, Language } from '@/config';
 import { decodeUrl } from './markdown';
 
 export interface SitemapNode {
@@ -223,8 +223,10 @@ export interface PrimerLink {
     href: string;
 }
 
-// Primers 站点名称，取自外链配置
-const PRIMER_TITLE = LINKS.find((link) => /primers\.xplanc\.org/i.test(link.url))?.title ?? 'Primers';
+// Primers 站点名称，取自当前语言的外链配置
+function primerSiteName(language: Language): string {
+    return LANGUAGE_CONFIG[language].links.find((link) => /primers\.xplanc\.org/i.test(link.url))?.title ?? 'Primers';
+}
 
 // 从文档地址得到可读标题，如：
 // https://primers.xplanc.org/document/zh/10.Bash/90.帮助手册/EX.test.md
@@ -275,7 +277,7 @@ export function primerTitle(href: string, language: Language = DEFAULT_LANGUAGE)
         return href;
     }
 
-    const suffix = language === 'en' ? 'Primers' : PRIMER_TITLE;
+    const suffix = primerSiteName(language);
     return `${parts.join('/')} - ${suffix}`;
 }
 

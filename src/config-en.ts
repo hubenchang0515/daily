@@ -1,0 +1,103 @@
+import type { LanguageConfig } from './config';
+
+// 英文语言配置
+export const EN_CONFIG: LanguageConfig = {
+    code: 'en',
+    name: 'English',
+    shortName: 'EN',
+    locale: 'en_US',
+    htmlLang: 'en',
+    dateLocale: 'en-US',
+    title: 'Daily Coding Articles',
+    brand: 'Code Daily · Daily Articles',
+    slogan: 'A little progress every day goes a long way.',
+    description: 'One approachable programming article every day, covering Python, Linux, Lua, HTML and more.',
+    keywords: ['programming', 'daily articles', 'tutorials', 'Python', 'Linux', 'Lua', 'HTML', 'AI-assisted writing', 'tech blog'],
+    owner: {
+        name: 'AI Assistant',
+        brief: 'Written with AI assistance.',
+    },
+    links: [
+        {
+            icon: 'https://hubenchang0515.github.io/icons/launcher.svg',
+            title: 'My Homepage',
+            url: 'https://hubenchang0515.github.io/',
+        },
+        {
+            icon: 'https://primers.xplanc.org/favicon.svg',
+            title: 'Primers',
+            url: 'https://primers.xplanc.org/',
+        },
+        {
+            icon: 'https://shift.js.org/favicon.svg',
+            title: 'Shift Online Coding',
+            url: 'https://shift.js.org/',
+        },
+        {
+            icon: 'https://idea.xplanc.org/favicon.svg',
+            title: 'Ideas',
+            url: 'https://idea.xplanc.org/',
+        },
+        {
+            icon: 'https://hubenchang0515.github.io/moe-tools/favicon.svg',
+            title: 'Moe Toolbox',
+            url: 'https://hubenchang0515.github.io/moe-tools/',
+        },
+        {
+            icon: 'https://xplanc.org/QtTheme/icon.svg',
+            title: 'QtTheme Online Themes',
+            url: 'https://hubenchang0515.github.io/QtTheme/',
+        },
+        {
+            icon: 'https://meme.xplanc.org/icon.png',
+            title: 'Moe Memes',
+            url: 'https://meme.xplanc.org/',
+        },
+        {
+            icon: 'https://pdf-shelf.pages.dev/pdf.png',
+            title: 'Programming Books',
+            url: 'https://pdf-shelf.pages.dev/',
+        },
+    ],
+    ads: [
+        {
+            image: '/ads/tx_240_400_en.png',
+            url: 'https://curl.qcloud.com/Gl0vB4Ag',
+        },
+        {
+            image: '/ads/ali_240_400_en.png',
+            url: 'https://www.aliyun.com/minisite/goods?userCode=gtmsv57a',
+        },
+    ],
+    ui: {
+        latest: 'Latest Articles',
+        latestPage: (page) => `Latest Articles - Page ${page}`,
+        latestDescription: (page) => `Page ${page} of the latest programming articles, covering practical topics in Python, Linux, Lua, HTML and more.`,
+        latestEmpty: 'No articles yet. Time to write one.',
+        categoryTitle: (name) => `${name} Category`,
+        categoryPageTitle: (name, page) => page <= 1 ? `${name} Category` : `${name} Category - Page ${page}`,
+        categoryDescription: (name, count) => `Browse ${count} practical ${name} articles with troubleshooting tips, code examples and hands-on experience.`,
+        categoryPageDescription: (name, page, last) => `Page ${page} of ${last} in the ${name} category, featuring practical ${name} articles.`,
+        categoryEmpty: 'No articles in this category yet.',
+        articlesCount: (count) => `${count} article${count === 1 ? '' : 's'}`,
+        previousPage: 'Previous',
+        nextPage: 'Next',
+        home: 'Home',
+        previousArticle: 'Previous',
+        nextArticle: 'Next',
+        readMore: 'Read more',
+        breadcrumb: 'Breadcrumb',
+        source: 'View source on GitHub',
+        backToCategory: 'Back to category',
+        related: 'Related Articles',
+        references: 'References',
+        originalLink: 'Original link',
+        disclaimer: '> This article was generated with AI assistance and reviewed by a human. Corrections are welcome.',
+        language: 'Language',
+        repost: 'Repost',
+        repostTitle: 'Repost (copy Markdown)',
+        copied: 'Copied',
+        ad: 'Advertisement',
+        adSlide: (index) => `Advertisement ${index}`,
+    },
+};

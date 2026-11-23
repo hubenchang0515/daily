@@ -1,0 +1,103 @@
+import type { LanguageConfig } from './config';
+
+// 中文语言配置
+export const ZH_CONFIG: LanguageConfig = {
+    code: 'zh',
+    name: '中文',
+    shortName: '中',
+    locale: 'zh_CN',
+    htmlLang: 'zh-CN',
+    dateLocale: 'zh-CN',
+    title: '每日文章',
+    brand: '码日新 · 每日文章',
+    slogan: '书到用时方恨少，事非经过不知难。',
+    description: '苟日新，日日新，又日新。每天一篇通俗易懂的编程实战文章，涵盖 Python、Linux、Lua、HTML。',
+    keywords: ['码日新', '编程日课', '每日文章', '编程实战', 'Python', 'Linux', 'Lua', 'HTML', 'AI 编程', '技术博客'],
+    owner: {
+        name: 'AI 助手',
+        brief: '使用 AI 辅助创作。',
+    },
+    links: [
+        {
+            icon: 'https://hubenchang0515.github.io/icons/launcher.svg',
+            title: '我的主页',
+            url: 'https://hubenchang0515.github.io/',
+        },
+        {
+            icon: 'https://primers.xplanc.org/favicon.svg',
+            title: 'Primers 编程伙伴',
+            url: 'https://primers.xplanc.org/',
+        },
+        {
+            icon: 'https://shift.js.org/favicon.svg',
+            title: 'Shift 在线编程',
+            url: 'https://shift.js.org/',
+        },
+        {
+            icon: 'https://idea.xplanc.org/favicon.svg',
+            title: '想法',
+            url: 'https://idea.xplanc.org/',
+        },
+        {
+            icon: 'https://hubenchang0515.github.io/moe-tools/favicon.svg',
+            title: '萌萌工具箱',
+            url: 'https://hubenchang0515.github.io/moe-tools/',
+        },
+        {
+            icon: 'https://xplanc.org/QtTheme/icon.svg',
+            title: 'QtTheme 在线主题',
+            url: 'https://hubenchang0515.github.io/QtTheme/',
+        },
+        {
+            icon: 'https://meme.xplanc.org/icon.png',
+            title: '萌萌表情包',
+            url: 'https://meme.xplanc.org/',
+        },
+        {
+            icon: 'https://pdf-shelf.pages.dev/pdf.png',
+            title: '编程书籍分享',
+            url: 'https://pdf-shelf.pages.dev/',
+        },
+    ],
+    ads: [
+        {
+            image: '/ads/tx_240_400.png',
+            url: 'https://curl.qcloud.com/XQ2YFLc8',
+        },
+        {
+            image: '/ads/ali_240_400.png',
+            url: 'https://www.aliyun.com/minisite/goods?userCode=gtmsv57a',
+        },
+    ],
+    ui: {
+        latest: '最新文章',
+        latestPage: (page) => `最新文章 - 第 ${page} 页`,
+        latestDescription: (page) => `码日新最新文章列表第 ${page} 页，持续更新 Python、Linux、Lua、HTML 等编程实战文章。`,
+        latestEmpty: '还没有文章，去写一篇吧。',
+        categoryTitle: (name) => `${name} 分类`,
+        categoryPageTitle: (name, page) => page <= 1 ? `${name} 分类` : `${name} 分类 - 第 ${page} 页`,
+        categoryDescription: (name, count) => `码日新「${name}」分类，共 ${count} 篇通俗易懂的 ${name} 实战文章。`,
+        categoryPageDescription: (name, page, last) => `码日新「${name}」分类第 ${page} 页，共 ${last} 页，包含 ${name} 相关的编程实战文章。`,
+        categoryEmpty: '这个分类下还没有文章。',
+        articlesCount: (count) => `${count} 篇`,
+        previousPage: '上一页',
+        nextPage: '下一页',
+        home: '首页',
+        previousArticle: '上一篇',
+        nextArticle: '下一篇',
+        readMore: '查看全文',
+        breadcrumb: '面包屑',
+        source: '在 GitHub 查看源文件',
+        backToCategory: '返回分类',
+        related: '相关文章',
+        references: '参考文档',
+        originalLink: '原文链接',
+        disclaimer: '> 本文由 AI 辅助生成并经人工校验，如有疏漏欢迎指正。',
+        language: '语言',
+        repost: '转载',
+        repostTitle: '转载（复制 Markdown）',
+        copied: '已复制',
+        ad: '广告',
+        adSlide: (index) => `查看第 ${index} 个广告`,
+    },
+};

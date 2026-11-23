@@ -1,24 +1,27 @@
 "use client";
 
-import { ADS } from "@/config";
+import { DEFAULT_LANGUAGE, LANGUAGE_CONFIG, Language, SITE_CONFIG } from "@/config";
 import { useEffect, useState, type TransitionEvent } from "react";
 import Card from "./Card";
 
 const ROTATE_INTERVAL = 10000;
 
 export interface AdCarouselProps {
+    language?: Language;
     className?: string;
 }
 
 export default function AdCarousel(props: AdCarouselProps) {
+    const config = LANGUAGE_CONFIG[props.language ?? DEFAULT_LANGUAGE];
+    const ads = config.ads;
     const [position, setPosition] = useState(0);
     const [paused, setPaused] = useState(false);
     const [jumping, setJumping] = useState(false);
 
-    const count = ADS.length;
+    const count = ads.length;
     const hasMultiple = count > 1;
     const displayIndex = count > 0 ? position % count : 0;
-    const slides = hasMultiple ? [...ADS, ADS[0]] : ADS;
+    const slides = hasMultiple ? [...ads, ads[0]] : ads;
 
     useEffect(() => {
         if (!hasMultiple || paused || jumping) {
@@ -101,13 +104,13 @@ export default function AdCarousel(props: AdCarouselProps) {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="group block w-full shrink-0"
-                                title="广告"
+                                title={config.ui.ad}
                                 tabIndex={i === position ? 0 : -1}
                                 aria-hidden={i !== position}
                             >
                                 <img
-                                    src={ad.image}
-                                    alt="广告"
+                                    src={SITE_CONFIG.basePath + ad.image}
+                                    alt={config.ui.ad}
                                     width={240}
                                     height={400}
                                     className="block w-full"
@@ -121,13 +124,13 @@ export default function AdCarousel(props: AdCarouselProps) {
                 hasMultiple &&
                 <div className="mt-3 flex items-center justify-center gap-2">
                     {
-                        ADS.map((_, i) => (
+                        ads.map((_, i) => (
                             <button
                                 key={i}
                                 type="button"
                                 onClick={() => goTo(i)}
                                 className={`h-2 w-2 cursor-pointer border border-[var(--border)] transition-colors ${i === displayIndex ? "bg-[var(--accent)]" : "bg-[var(--panel-2)] hover:bg-[var(--accent-soft)]"}`}
-                                aria-label={`查看第 ${i + 1} 个广告`}
+                                aria-label={config.ui.adSlide(i + 1)}
                                 aria-current={i === displayIndex ? "true" : undefined}
                             />
                         ))

@@ -7,7 +7,7 @@
 - 每日更新中英文编程文章的静态博客，文章由 AI 生成、人工校验后自动发布。
 - Next.js（App Router）+ React 19 + Tailwind CSS 4，`output: 'export'` 静态导出到 `out/`。
 - 文章是普通 Markdown 文件，没有 frontmatter、数据库或 CMS，直接放在 `daily-document/document/<语言>/<分类>/` 下。
-- 站点信息与语言文案集中在 `src/config.ts`，部署目标为 Cloudflare Pages / GitHub Pages。
+- 站点信息集中在 `src/config.ts`，中英文文案、友链与广告分别在 `src/config-zh.ts` / `src/config-en.ts`，部署目标为 Cloudflare Pages / GitHub Pages。
 
 ## 常用命令
 
@@ -49,7 +49,9 @@ src/components/Markdown.tsx                      # Markdown 渲染（代码高�
 src/utils/document.ts                            # 读取文章列表与内容（创建时间取自 git log）
 src/utils/seo.ts                                 # URL 拼接、标题/摘要提取
 src/utils/markdown.ts                            # 原文链接块的生成与剥离（中英文）
-src/config.ts                                    # 语言、站点、站长、文档路径、友链、广告配置
+src/config.ts                                    # 语言类型与列表、站点、站长、文档路径配置，并汇总 LANGUAGE_CONFIG
+src/config-zh.ts                                 # 中文语言配置（标题、品牌、关键词、友链、广告、界面文案）
+src/config-en.ts                                 # 英文语言配置（标题、品牌、关键词、友链、广告、界面文案）
 ```
 
 ## 文章规范
@@ -104,7 +106,7 @@ src/config.ts                                    # 语言、站点、站长、�
 ## 代码约定
 
 - 路径别名 `@/*` → `src/*`；页面默认是服务端组件，保持静态可预渲染（勿引入只能在运行时执行的动态能力）。
-- 站点域名、品牌、描述只能写在 `src/config.ts`；组件与脚本中不要硬编码域名。
+- 站点域名只能写在 `src/config.ts`；品牌、描述、友链、广告与语言文案写在 `src/config-zh.ts` / `src/config-en.ts`，组件与脚本中不要硬编码域名。
 - 站内链接统一走 `src/utils/seo.ts`：
   - 页面/元数据：`languagePath`、`absoluteUrl`、`categoryPath`、`articlePath`（后两者第一个参数是语言）；
   - Markdown 文本中的链接：`readableUrl`（保留中文，不转义）。
@@ -114,8 +116,8 @@ src/config.ts                                    # 语言、站点、站长、�
 - 开发模式下 `output: export` 同样要求参数可枚举，旧路径仍在 `generateStaticParams` 中生成并由各 `[lang]` 路由渲染 `src/components/Redirect.tsx` 跳转。
 - 新增路由时同步更新 `src/app/sitemap.ts`、`src/app/robots.ts`，并实现 `generateStaticParams`（静态导出要求所有路径可枚举）。
 - 元数据用 `generateMetadata`，必要时补充 JSON-LD（参考 `src/app/[lang]/[category]/[article]/page.tsx`）。
-- 语言列表与文案在 `src/config.ts` 的 `LANGUAGE_CONFIG` 中维护；组件通过 `language` 参数读取，不要硬编码 `zh` 或中文文案。
-- 缩进 4 个空格；引号与所在文件保持一致（`src` 内双引号居多，`scripts`/`config.ts` 用单引号）。
+- 语言列表在 `src/config.ts` 维护；各语言的文案、友链、广告在 `src/config-zh.ts` / `src/config-en.ts` 维护，统一通过 `LANGUAGE_CONFIG` 读取；组件通过 `language` 参数选择，不要硬编码 `zh` 或中文文案。
+- 缩进 4 个空格；引号与所在文件保持一致（`src` 内双引号居多，`scripts`/`config*.ts` 用单引号）。
 - 文章排序与创建时间来自 `git log`：不要 `git mv`、批量重写历史或伪造提交时间，否则首页、分类页与 README 的时间会变。
 
 ## 生成与校验

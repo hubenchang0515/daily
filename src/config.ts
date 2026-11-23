@@ -1,3 +1,6 @@
+import { EN_CONFIG } from './config-en';
+import { ZH_CONFIG } from './config-zh';
+
 // 支持的语言
 export type Language = 'zh' | 'en';
 
@@ -41,6 +44,21 @@ export interface LanguageUi {
     repost: string;
     repostTitle: string;
     copied: string;
+    ad: string;
+    adSlide: (index: number) => string;
+}
+
+// 友链
+export interface LinkItem {
+    icon: string;
+    title: string;
+    url: string;
+}
+
+// 广告，image 为站点根路径下的图片，渲染时拼接 SITE_CONFIG.basePath
+export interface AdItem {
+    image: string;
+    url: string;
 }
 
 export interface LanguageConfig {
@@ -59,103 +77,14 @@ export interface LanguageConfig {
         name: string;
         brief: string;
     };
+    links: LinkItem[];
+    ads: AdItem[];
     ui: LanguageUi;
 }
 
 export const LANGUAGE_CONFIG: Record<Language, LanguageConfig> = {
-    zh: {
-        code: 'zh',
-        name: '中文',
-        shortName: '中',
-        locale: 'zh_CN',
-        htmlLang: 'zh-CN',
-        dateLocale: 'zh-CN',
-        title: '每日文章',
-        brand: '码日新 · 每日文章',
-        slogan: '书到用时方恨少，事非经过不知难。',
-        description: '苟日新，日日新，又日新。每天一篇通俗易懂的编程实战文章，涵盖 Python、Linux、Lua、HTML。',
-        keywords: ['码日新', '编程日课', '每日文章', '编程实战', 'Python', 'Linux', 'Lua', 'HTML', 'AI 编程', '技术博客'],
-        owner: {
-            name: 'AI 助手',
-            brief: '使用 AI 辅助创作。',
-        },
-        ui: {
-            latest: '最新文章',
-            latestPage: (page) => `最新文章 - 第 ${page} 页`,
-            latestDescription: (page) => `码日新最新文章列表第 ${page} 页，持续更新 Python、Linux、Lua、HTML 等编程实战文章。`,
-            latestEmpty: '还没有文章，去写一篇吧。',
-            categoryTitle: (name) => `${name} 分类`,
-            categoryPageTitle: (name, page) => page <= 1 ? `${name} 分类` : `${name} 分类 - 第 ${page} 页`,
-            categoryDescription: (name, count) => `码日新「${name}」分类，共 ${count} 篇通俗易懂的 ${name} 实战文章。`,
-            categoryPageDescription: (name, page, last) => `码日新「${name}」分类第 ${page} 页，共 ${last} 页，包含 ${name} 相关的编程实战文章。`,
-            categoryEmpty: '这个分类下还没有文章。',
-            articlesCount: (count) => `${count} 篇`,
-            previousPage: '上一页',
-            nextPage: '下一页',
-            home: '首页',
-            previousArticle: '上一篇',
-            nextArticle: '下一篇',
-            readMore: '查看全文',
-            breadcrumb: '面包屑',
-            source: '在 GitHub 查看源文件',
-            backToCategory: '返回分类',
-            related: '相关文章',
-            references: '参考文档',
-            originalLink: '原文链接',
-            disclaimer: '> 本文由 AI 辅助生成并经人工校验，如有疏漏欢迎指正。',
-            language: '语言',
-            repost: '转载',
-            repostTitle: '转载（复制 Markdown）',
-            copied: '已复制',
-        },
-    },
-
-    en: {
-        code: 'en',
-        name: 'English',
-        shortName: 'EN',
-        locale: 'en_US',
-        htmlLang: 'en',
-        dateLocale: 'en-US',
-        title: 'Daily Coding Articles',
-        brand: 'Code Daily · Daily Articles',
-        slogan: 'A little progress every day goes a long way.',
-        description: 'One approachable programming article every day, covering Python, Linux, Lua, HTML and more.',
-        keywords: ['programming', 'daily articles', 'tutorials', 'Python', 'Linux', 'Lua', 'HTML', 'AI-assisted writing', 'tech blog'],
-        owner: {
-            name: 'AI Assistant',
-            brief: 'Written with AI assistance.',
-        },
-        ui: {
-            latest: 'Latest Articles',
-            latestPage: (page) => `Latest Articles - Page ${page}`,
-            latestDescription: (page) => `Page ${page} of the latest programming articles, covering practical topics in Python, Linux, Lua, HTML and more.`,
-            latestEmpty: 'No articles yet. Time to write one.',
-            categoryTitle: (name) => `${name} Category`,
-            categoryPageTitle: (name, page) => page <= 1 ? `${name} Category` : `${name} Category - Page ${page}`,
-            categoryDescription: (name, count) => `Browse ${count} practical ${name} articles with troubleshooting tips, code examples and hands-on experience.`,
-            categoryPageDescription: (name, page, last) => `Page ${page} of ${last} in the ${name} category, featuring practical ${name} articles.`,
-            categoryEmpty: 'No articles in this category yet.',
-            articlesCount: (count) => `${count} article${count === 1 ? '' : 's'}`,
-            previousPage: 'Previous',
-            nextPage: 'Next',
-            home: 'Home',
-            previousArticle: 'Previous',
-            nextArticle: 'Next',
-            readMore: 'Read more',
-            breadcrumb: 'Breadcrumb',
-            source: 'View source on GitHub',
-            backToCategory: 'Back to category',
-            related: 'Related Articles',
-            references: 'References',
-            originalLink: 'Original link',
-            disclaimer: '> This article was generated with AI assistance and reviewed by a human. Corrections are welcome.',
-            language: 'Language',
-            repost: 'Repost',
-            repostTitle: 'Repost (copy Markdown)',
-            copied: 'Copied',
-        },
-    },
+    zh: ZH_CONFIG,
+    en: EN_CONFIG,
 };
 
 const DEFAULT_LANGUAGE_CONFIG = LANGUAGE_CONFIG[DEFAULT_LANGUAGE];
@@ -189,66 +118,3 @@ export const DOCUMENT_CONFIG = {
     root: 'daily-document',
     pageSize: 10,
 }
-
-// 外链
-export const LINKS = [
-    {
-        icon: "https://hubenchang0515.github.io/icons/launcher.svg",
-        title: "我的主页",
-        url: "https://hubenchang0515.github.io/",
-    },
-
-    {
-        icon: "https://primers.xplanc.org/favicon.svg",
-        title: "Primers 编程伙伴",
-        url: "https://primers.xplanc.org/",
-    },
-
-    {
-        icon: "https://shift.js.org/favicon.svg",
-        title: "Shift 在线编程",
-        url: "https://shift.js.org/",
-    },
-
-    {
-        icon: "https://idea.xplanc.org/favicon.svg",
-        title: "想法",
-        url: "https://idea.xplanc.org/",
-    },
-
-    {
-        icon: "https://hubenchang0515.github.io/moe-tools/favicon.svg",
-        title: "萌萌工具箱",
-        url: "https://hubenchang0515.github.io/moe-tools/",
-    },
-
-    {
-        icon: "https://xplanc.org/QtTheme/icon.svg",
-        title: "QtTheme 在线主题",
-        url: "https://hubenchang0515.github.io/QtTheme/",
-    },
-
-    {
-        icon: "https://meme.xplanc.org/icon.png",
-        title: "萌萌表情包",
-        url: "https://meme.xplanc.org/",
-    },
-
-    {
-        icon: "https://pdf-shelf.pages.dev/pdf.png",
-        title: "编程书籍分享",
-        url: "https://pdf-shelf.pages.dev/",
-    },
-]
-
-// 广告
-export const ADS = [
-    {
-        image: SITE_CONFIG.basePath + "/ads/tx_240_400.png",
-        url: "https://curl.qcloud.com/XQ2YFLc8",
-    },
-    {
-        image: SITE_CONFIG.basePath + "/ads/ali_240_400.png",
-        url: "https://www.aliyun.com/minisite/goods?userCode=gtmsv57a",
-    }
-]
