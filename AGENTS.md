@@ -49,7 +49,7 @@ src/components/Markdown.tsx                      # Markdown 渲染（代码高�
 src/utils/document.ts                            # 读取文章列表与内容（创建时间取自 git log）
 src/utils/seo.ts                                 # URL 拼接、标题/摘要提取
 src/utils/markdown.ts                            # 原文链接块的生成与剥离（中英文）
-src/config.ts                                    # 语言类型与列表、站点、站长、文档路径配置，并汇总 LANGUAGE_CONFIG
+src/config.ts                                    # 语言类型与列表、站点（含 Google Analytics ID）、站长、文档路径配置，并汇总 LANGUAGE_CONFIG
 src/config-zh.ts                                 # 中文语言配置（标题、品牌、关键词、友链、广告、界面文案）
 src/config-en.ts                                 # 英文语言配置（标题、品牌、关键词、友链、广告、界面文案）
 ```
@@ -107,6 +107,7 @@ src/config-en.ts                                 # 英文语言配置（标题�
 
 - 路径别名 `@/*` → `src/*`；页面默认是服务端组件，保持静态可预渲染（勿引入只能在运行时执行的动态能力）。
 - 站点域名只能写在 `src/config.ts`；品牌、描述、友链、广告与语言文案写在 `src/config-zh.ts` / `src/config-en.ts`，组件与脚本中不要硬编码域名。
+- Google Analytics 使用 `@next/third-parties/google` 的 `GoogleAnalytics`，衡量 ID 写在 `SITE_CONFIG.googleAnalyticsId`；留空或 dev 模式（非生产构建）时不渲染该组件。
 - 站内链接统一走 `src/utils/seo.ts`：
   - 页面/元数据：`languagePath`、`absoluteUrl`、`categoryPath`、`articlePath`（后两者第一个参数是语言）；
   - Markdown 文本中的链接：`readableUrl`（保留中文，不转义）。
@@ -142,3 +143,13 @@ src/config-en.ts                                 # 英文语言配置（标题�
 - `scripts/pipeline.sh` 是每日定时发布入口（示例 crontab：`0 12 * * * $HOME/Projects/daily/scripts/pipeline.sh linux en`），会依次执行拉取、生成、构建、更新目录、提交、推送与部署；失败会重试 3 次（5s → 10s 退避）。
 - 脚本依赖 `~/.nvm/nvm.sh` 与 `~/.opencode/bin`，换机器时按实际情况调整。
 - 在 WSL 中工作时先 `source ~/.nvm/nvm.sh`，确保使用 Linux 版 Node/npm；否则可能调用到 `/mnt/c/...` 下的 Windows 版本，在 UNC 路径下会报错。
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+## This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

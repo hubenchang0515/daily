@@ -94,6 +94,7 @@ export const SITE_CONFIG = {
     origin: 'https://daily.xplanc.org', // 配置为你的域名，例如 https://hubenchang0515.github.io
     basePath: '',                       // 配置为基础路径，例如 /daily
     repo: 'https://github.com/hubenchang0515/daily',
+    googleAnalyticsId: 'G-7X0K330YFR',
     defaultLanguage: DEFAULT_LANGUAGE,
     title: DEFAULT_LANGUAGE_CONFIG.title,
     brand: DEFAULT_LANGUAGE_CONFIG.brand,

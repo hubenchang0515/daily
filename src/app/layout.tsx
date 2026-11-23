@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { LANGUAGES, LANGUAGE_CONFIG, OWNER_CONFIG, SITE_CONFIG } from "@/config";
 import { absoluteUrl } from "@/utils/seo";
 import NavigationHint from "@/components/NavigationHint";
@@ -71,6 +72,9 @@ const bodyStyle = {
   "--digital-rain-url": `url('${SITE_CONFIG.basePath}/digital-rain.svg')`,
 } as React.CSSProperties;
 
+// 仅生产构建加载统计脚本，避免开发自测（dev）产生统计数据
+const googleAnalyticsId = process.env.NODE_ENV === "production" ? SITE_CONFIG.googleAnalyticsId : "";
+
 // 在首屏绘制前跟随系统主题，刷新后恢复默认
 const themeScript = `
 (function () {
@@ -116,6 +120,10 @@ export default function RootLayout({
           {children}
         </div>
         <NavigationHint />
+        {
+          googleAnalyticsId &&
+          <GoogleAnalytics gaId={googleAnalyticsId} />
+        }
       </body>
     </html>
   );
