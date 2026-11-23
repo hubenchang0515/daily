@@ -110,7 +110,8 @@ src/config.ts                                    # 语言、站点、站长、�
   - Markdown 文本中的链接：`readableUrl`（保留中文，不转义）。
   - 文件名含 `()`、空格等字符时按 `scripts/generate-readme-index.ts` 的方式转义。
 - 根路径 `/` 先显示跳转加载态；静态页面中的内联脚本读取 `navigator.languages`，中文跳 `/zh`、英文跳 `/en`，都不是时再显示语言选择页。
-- 旧链接缺少语言前缀时（如 `/linux/xxx.md`），各 `[lang]` 路由会在 `generateStaticParams` 中生成旧路径并渲染 `src/components/Redirect.tsx` 跳转到 `/zh` 加原路径；未覆盖的路径由 `src/app/not-found.tsx` 兜底。
+- 旧链接缺少语言前缀时（如 `/linux/xxx.md`），生产构建不要在 `generateStaticParams` 中生成旧路径，否则每篇中文文章都会额外构建一个完整页面；这些路径由 `src/app/not-found.tsx` 的 `LegacyRedirect` 在 404 页面里跳转到 `/zh` 加原路径（Cloudflare Pages 与 GitHub Pages 都会回退到 `404.html`）。
+- 开发模式下 `output: export` 同样要求参数可枚举，旧路径仍在 `generateStaticParams` 中生成并由各 `[lang]` 路由渲染 `src/components/Redirect.tsx` 跳转。
 - 新增路由时同步更新 `src/app/sitemap.ts`、`src/app/robots.ts`，并实现 `generateStaticParams`（静态导出要求所有路径可枚举）。
 - 元数据用 `generateMetadata`，必要时补充 JSON-LD（参考 `src/app/[lang]/[category]/[article]/page.tsx`）。
 - 语言列表与文案在 `src/config.ts` 的 `LANGUAGE_CONFIG` 中维护；组件通过 `language` 参数读取，不要硬编码 `zh` 或中文文案。

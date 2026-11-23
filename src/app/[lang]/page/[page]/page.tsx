@@ -62,15 +62,18 @@ export async function generateStaticParams() {
         }
     }
 
-    // 旧分类分页：/<分类>/page/<页码>
-    for (const category of await getGategories(DEFAULT_LANGUAGE)) {
-        if (isLanguage(category.name)) continue;
-        const pages = Math.ceil(category.articles.length / DOCUMENT_CONFIG.pageSize);
-        for (let i = 1; i <= pages; i += 1) {
-            paramsList.push({
-                lang: development ? encodeURIComponent(category.name) : category.name,
-                page: `${i}`,
-            });
+    // 旧分类分页（/<分类>/page/<页码>）只在开发模式生成，
+    // 生产构建由 404 页面（src/app/not-found.tsx）重定向
+    if (development) {
+        for (const category of await getGategories(DEFAULT_LANGUAGE)) {
+            if (isLanguage(category.name)) continue;
+            const pages = Math.ceil(category.articles.length / DOCUMENT_CONFIG.pageSize);
+            for (let i = 1; i <= pages; i += 1) {
+                paramsList.push({
+                    lang: encodeURIComponent(category.name),
+                    page: `${i}`,
+                });
+            }
         }
     }
 

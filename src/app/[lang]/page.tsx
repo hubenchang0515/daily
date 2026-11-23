@@ -12,16 +12,17 @@ export interface PageParams {
 }
 
 // 生成静态页面路径
+// 旧路径（/<分类>）只在开发模式生成，生产构建由 404 页面（src/app/not-found.tsx）重定向
 export async function generateStaticParams() {
     const paramsList: PageParams[] = LANGUAGES.map((lang) => ({ lang }));
 
-    for (const category of await getGategories(DEFAULT_LANGUAGE)) {
-        if (isLanguage(category.name)) continue;
-        paramsList.push({
-            lang: process.env.NODE_ENV === 'development'
-                ? encodeURIComponent(category.name)
-                : category.name,
-        });
+    if (process.env.NODE_ENV === 'development') {
+        for (const category of await getGategories(DEFAULT_LANGUAGE)) {
+            if (isLanguage(category.name)) continue;
+            paramsList.push({
+                lang: encodeURIComponent(category.name),
+            });
+        }
     }
 
     return paramsList;

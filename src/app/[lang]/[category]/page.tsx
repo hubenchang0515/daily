@@ -62,26 +62,28 @@ export async function generateStaticParams() {
         }
     }
 
-    // 旧文章链接：/<分类>/<文章>
-    const legacyCategories = await getGategories(DEFAULT_LANGUAGE);
-    for (const category of legacyCategories) {
-        if (isLanguage(category.name)) continue;
-        for (const article of category.articles) {
+    // 旧文章链接（/<分类>/<文章>）与旧首页分页（/page/<页码>）只在开发模式生成，
+    // 生产构建由 404 页面（src/app/not-found.tsx）重定向
+    if (development) {
+        const legacyCategories = await getGategories(DEFAULT_LANGUAGE);
+        for (const category of legacyCategories) {
+            if (isLanguage(category.name)) continue;
+            for (const article of category.articles) {
+                paramsList.push({
+                    lang: encodeURIComponent(category.name),
+                    category: encodeURIComponent(article.name),
+                });
+            }
+        }
+
+        const legacyArticles = legacyCategories.flatMap(category => category.articles);
+        const legacyPages = Math.ceil(legacyArticles.length / DOCUMENT_CONFIG.pageSize);
+        for (let page = 1; page <= legacyPages; page += 1) {
             paramsList.push({
-                lang: development ? encodeURIComponent(category.name) : category.name,
-                category: development ? encodeURIComponent(article.name) : article.name,
+                lang: 'page',
+                category: `${page}`,
             });
         }
-    }
-
-    // 旧首页分页：/page/<页码>
-    const legacyArticles = legacyCategories.flatMap(category => category.articles);
-    const legacyPages = Math.ceil(legacyArticles.length / DOCUMENT_CONFIG.pageSize);
-    for (let page = 1; page <= legacyPages; page += 1) {
-        paramsList.push({
-            lang: 'page',
-            category: `${page}`,
-        });
     }
 
     return paramsList;
