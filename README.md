@@ -131,7 +131,7 @@ npm run deploy:gh
 ## 文章目录
 
 <!-- ARTICLES:BEGIN -->
-共 86 篇（中文 85 篇，English 1 篇）。
+共 87 篇（中文 86 篇，English 1 篇）。
 
 ### 中文
 
@@ -231,17 +231,18 @@ npm run deploy:gh
 - 2026-11-22 [PowerShell 错误处理：try/catch 为什么抓不住你的错误](https://daily.xplanc.org/zh/pwsh/catch-为什么抓不住你的错误.md)
 - 2026-11-22 [PowerShell 没有“返回数组”这回事](https://daily.xplanc.org/zh/pwsh/PowerShell-没有“返回数组”这回事.md)
 
+#### qt（4）
+
+- 2026-11-23 [Qt 隐式共享：一次赋值，内存到底拷没拷](https://daily.xplanc.org/zh/qt/Qt-隐式共享：一次赋值，内存到底拷没拷.md)
+- 2026-11-22 [QSettings 写了，重启怎么又没了](https://daily.xplanc.org/zh/qt/QSettings-写了，重启怎么又没了.md)
+- 2026-11-22 [Qt 链接报 vtable 未定义，问题常常不在你的代码里](https://daily.xplanc.org/zh/qt/Qt-链接报-vtable-未定义，问题常常不在你的代码里.md)
+- 2026-11-22 [Qt 信号槽：槽函数到底在哪个线程执行](https://daily.xplanc.org/zh/qt/Qt-信号槽：槽函数到底在哪个线程执行.md)
+
 #### js（3）
 
 - 2026-11-22 [ESM 循环依赖：为什么 import 进来的是 undefined](https://daily.xplanc.org/zh/js/ESM-循环依赖：为什么-import-进来的是-undefined.md)
 - 2026-11-22 [setTimeout(fn, 0) 从来不是立即执行：读懂事件循环](https://daily.xplanc.org/zh/js/setTimeout%28fn,-0%29-从来不是立即执行：读懂事件循环.md)
 - 2026-11-22 [structuredClone 复制不了什么](https://daily.xplanc.org/zh/js/structuredClone-复制不了什么.md)
-
-#### qt（3）
-
-- 2026-11-22 [QSettings 写了，重启怎么又没了](https://daily.xplanc.org/zh/qt/QSettings-写了，重启怎么又没了.md)
-- 2026-11-22 [Qt 链接报 vtable 未定义，问题常常不在你的代码里](https://daily.xplanc.org/zh/qt/Qt-链接报-vtable-未定义，问题常常不在你的代码里.md)
-- 2026-11-22 [Qt 信号槽：槽函数到底在哪个线程执行](https://daily.xplanc.org/zh/qt/Qt-信号槽：槽函数到底在哪个线程执行.md)
 
 #### java（2）
 
