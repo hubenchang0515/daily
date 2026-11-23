@@ -131,12 +131,13 @@ npm run deploy:gh
 ## 文章目录
 
 <!-- ARTICLES:BEGIN -->
-共 85 篇（中文 84 篇，English 1 篇）。
+共 86 篇（中文 85 篇，English 1 篇）。
 
 ### 中文
 
-#### linux（20）
+#### linux（21）
 
+- 2026-11-23 [程序崩了，core 文件却不见了](https://daily.xplanc.org/zh/linux/程序崩了，core-文件却不见了.md)
 - 2026-11-22 [负载 12，CPU 却在摸鱼：读懂 Linux 的 load average](https://daily.xplanc.org/zh/linux/负载-12，CPU-却在摸鱼：读懂-Linux-的-load-average.md)
 - 2026-11-22 [改了 /etc/hosts，为什么还是连到旧地址](https://daily.xplanc.org/zh/linux/hosts，为什么还是连到旧地址.md)
 - 2026-11-22 [关掉终端，进程为什么就没了](https://daily.xplanc.org/zh/linux/关掉终端，进程为什么就没了.md)
