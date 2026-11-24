@@ -131,7 +131,7 @@ npm run deploy:gh
 ## 文章目录
 
 <!-- ARTICLES:BEGIN -->
-共 92 篇（中文 89 篇，English 3 篇）。
+共 93 篇（中文 90 篇，English 3 篇）。
 
 ### 中文
 
@@ -247,6 +247,12 @@ npm run deploy:gh
 - 2026-11-22 [setTimeout(fn, 0) 从来不是立即执行：读懂事件循环](https://daily.xplanc.org/zh/js/setTimeout%28fn,-0%29-从来不是立即执行：读懂事件循环.md)
 - 2026-11-22 [structuredClone 复制不了什么](https://daily.xplanc.org/zh/js/structuredClone-复制不了什么.md)
 
+#### sql（3）
+
+- 2026-11-24 [SQL 的执行顺序：SELECT 其实最后才跑](https://daily.xplanc.org/zh/sql/SQL-的执行顺序：SELECT-其实最后才跑.md)
+- 2026-11-22 [NULL 的三值逻辑：查不到、排不掉、算不准](https://daily.xplanc.org/zh/sql/NULL-的三值逻辑：查不到、排不掉、算不准.md)
+- 2026-11-22 [SQL 实战：LEFT JOIN 之后，行数为什么变多了](https://daily.xplanc.org/zh/sql/SQL-实战：LEFT-JOIN-之后，行数为什么变多了.md)
+
 #### java（2）
 
 - 2026-11-22 [CompletableFuture 吞掉的异常去哪了](https://daily.xplanc.org/zh/java/CompletableFuture-吞掉的异常去哪了.md)
@@ -256,11 +262,6 @@ npm run deploy:gh
 
 - 2026-11-22 [Lua 协程：让函数停在半句话上](https://daily.xplanc.org/zh/lua/Lua-协程：让函数停在半句话上.md)
 - 2026-11-22 [Lua 元表实战：只读表、默认值与运算符重载](https://daily.xplanc.org/zh/lua/Lua-元表实战：只读表、默认值与运算符重载.md)
-
-#### sql（2）
-
-- 2026-11-22 [NULL 的三值逻辑：查不到、排不掉、算不准](https://daily.xplanc.org/zh/sql/NULL-的三值逻辑：查不到、排不掉、算不准.md)
-- 2026-11-22 [SQL 实战：LEFT JOIN 之后，行数为什么变多了](https://daily.xplanc.org/zh/sql/SQL-实战：LEFT-JOIN-之后，行数为什么变多了.md)
 
 #### docker（1）
 
