@@ -131,7 +131,7 @@ npm run deploy:gh
 ## 文章目录
 
 <!-- ARTICLES:BEGIN -->
-共 89 篇（中文 86 篇，English 3 篇）。
+共 90 篇（中文 87 篇，English 3 篇）。
 
 ### 中文
 
@@ -159,6 +159,17 @@ npm run deploy:gh
 - 2026-11-22 [Linux 文件描述符泄漏排查：从 Too many open files 说起](https://daily.xplanc.org/zh/linux/Linux-文件描述符泄漏排查：从-Too-many-open-files-说起.md)
 - 2026-11-22 [tail -f 跟着跟着就跟丢了：日志轮转后发生了什么](https://daily.xplanc.org/zh/linux/tail--f-跟着跟着就跟丢了：日志轮转后发生了什么.md)
 
+#### python（8）
+
+- 2026-11-24 [三个 lambda 共用一个变量：读懂闭包的延迟绑定](https://daily.xplanc.org/zh/python/三个-lambda-共用一个变量：读懂闭包的延迟绑定.md)
+- 2026-11-22 [异步 IO 入门：从阻塞到 asyncio](https://daily.xplanc.org/zh/python/异步-IO-入门：从阻塞到-asyncio.md)
+- 2026-11-22 [Python 编码：默认值替你做的决定](https://daily.xplanc.org/zh/python/Python-编码：默认值替你做的决定.md)
+- 2026-11-22 [Python 导入机制实战：改了代码为什么不生效](https://daily.xplanc.org/zh/python/Python-导入机制实战：改了代码为什么不生效.md)
+- 2026-11-22 [Python 的 super() 到底调用了谁](https://daily.xplanc.org/zh/python/Python-的-super%28%29-到底调用了谁.md)
+- 2026-11-22 [Python 的哈希契约：为什么 list 不能当字典的键](https://daily.xplanc.org/zh/python/Python-的哈希契约：为什么-list-不能当字典的键.md)
+- 2026-11-22 [Python 缓存实战：lru_cache 的五个坑与正确用法](https://daily.xplanc.org/zh/python/Python-缓存实战：lru_cache-的五个坑与正确用法.md)
+- 2026-11-22 [with 离开之后：读懂 Python 的上下文管理器](https://daily.xplanc.org/zh/python/with-离开之后：读懂-Python-的上下文管理器.md)
+
 #### cpp（7）
 
 - 2026-11-22 [表达式里的求值顺序：同一行代码，换个编译器结果就变了](https://daily.xplanc.org/zh/cpp/表达式里的求值顺序：同一行代码，换个编译器结果就变了.md)
@@ -168,16 +179,6 @@ npm run deploy:gh
 - 2026-11-22 [C++ 移动语义实战：std::move 之后，对象为什么还有值](https://daily.xplanc.org/zh/cpp/C++-移动语义实战：std-move-之后，对象为什么还有值.md)
 - 2026-11-22 [C++ ABI 兼容性实战：改一行头文件为什么会让程序崩溃](https://daily.xplanc.org/zh/cpp/C++-ABI-兼容性实战：改一行头文件为什么会让程序崩溃.md)
 - 2026-11-22 [C++ string_view 实战：不拷贝，也不保证活着](https://daily.xplanc.org/zh/cpp/C++-string_view-实战：不拷贝，也不保证活着.md)
-
-#### python（7）
-
-- 2026-11-22 [异步 IO 入门：从阻塞到 asyncio](https://daily.xplanc.org/zh/python/异步-IO-入门：从阻塞到-asyncio.md)
-- 2026-11-22 [Python 编码：默认值替你做的决定](https://daily.xplanc.org/zh/python/Python-编码：默认值替你做的决定.md)
-- 2026-11-22 [Python 导入机制实战：改了代码为什么不生效](https://daily.xplanc.org/zh/python/Python-导入机制实战：改了代码为什么不生效.md)
-- 2026-11-22 [Python 的 super() 到底调用了谁](https://daily.xplanc.org/zh/python/Python-的-super%28%29-到底调用了谁.md)
-- 2026-11-22 [Python 的哈希契约：为什么 list 不能当字典的键](https://daily.xplanc.org/zh/python/Python-的哈希契约：为什么-list-不能当字典的键.md)
-- 2026-11-22 [Python 缓存实战：lru_cache 的五个坑与正确用法](https://daily.xplanc.org/zh/python/Python-缓存实战：lru_cache-的五个坑与正确用法.md)
-- 2026-11-22 [with 离开之后：读懂 Python 的上下文管理器](https://daily.xplanc.org/zh/python/with-离开之后：读懂-Python-的上下文管理器.md)
 
 #### 编程笑话（6）
 
