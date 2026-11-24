@@ -131,12 +131,13 @@ npm run deploy:gh
 ## 文章目录
 
 <!-- ARTICLES:BEGIN -->
-共 90 篇（中文 87 篇，English 3 篇）。
+共 92 篇（中文 89 篇，English 3 篇）。
 
 ### 中文
 
-#### linux（21）
+#### linux（22）
 
+- 2026-11-24 [文件名只是一张标签：Linux 为什么不会“文件占用”](https://daily.xplanc.org/zh/linux/文件名只是一张标签：Linux-为什么不会“文件占用”.md)
 - 2026-11-23 [程序崩了，core 文件却不见了](https://daily.xplanc.org/zh/linux/程序崩了，core-文件却不见了.md)
 - 2026-11-22 [负载 12，CPU 却在摸鱼：读懂 Linux 的 load average](https://daily.xplanc.org/zh/linux/负载-12，CPU-却在摸鱼：读懂-Linux-的-load-average.md)
 - 2026-11-22 [改了 /etc/hosts，为什么还是连到旧地址](https://daily.xplanc.org/zh/linux/hosts，为什么还是连到旧地址.md)
@@ -232,8 +233,9 @@ npm run deploy:gh
 - 2026-11-22 [PowerShell 错误处理：try/catch 为什么抓不住你的错误](https://daily.xplanc.org/zh/pwsh/catch-为什么抓不住你的错误.md)
 - 2026-11-22 [PowerShell 没有“返回数组”这回事](https://daily.xplanc.org/zh/pwsh/PowerShell-没有“返回数组”这回事.md)
 
-#### qt（4）
+#### qt（5）
 
+- 2026-11-24 [Qt 的 deleteLater：调用了删除，对象却还活着](https://daily.xplanc.org/zh/qt/Qt-的-deleteLater：调用了删除，对象却还活着.md)
 - 2026-11-23 [Qt 隐式共享：一次赋值，内存到底拷没拷](https://daily.xplanc.org/zh/qt/Qt-隐式共享：一次赋值，内存到底拷没拷.md)
 - 2026-11-22 [QSettings 写了，重启怎么又没了](https://daily.xplanc.org/zh/qt/QSettings-写了，重启怎么又没了.md)
 - 2026-11-22 [Qt 链接报 vtable 未定义，问题常常不在你的代码里](https://daily.xplanc.org/zh/qt/Qt-链接报-vtable-未定义，问题常常不在你的代码里.md)
