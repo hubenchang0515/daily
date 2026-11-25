@@ -131,7 +131,7 @@ npm run deploy:gh
 ## 文章目录
 
 <!-- ARTICLES:BEGIN -->
-共 94 篇（中文 91 篇，English 3 篇）。
+共 95 篇（中文 92 篇，English 3 篇）。
 
 ### 中文
 
@@ -242,8 +242,9 @@ npm run deploy:gh
 - 2026-11-22 [Qt 链接报 vtable 未定义，问题常常不在你的代码里](https://daily.xplanc.org/zh/qt/Qt-链接报-vtable-未定义，问题常常不在你的代码里.md)
 - 2026-11-22 [Qt 信号槽：槽函数到底在哪个线程执行](https://daily.xplanc.org/zh/qt/Qt-信号槽：槽函数到底在哪个线程执行.md)
 
-#### js（3）
+#### js（4）
 
+- 2026-11-25 [给异步操作装一个取消键：AbortController](https://daily.xplanc.org/zh/js/给异步操作装一个取消键：AbortController.md)
 - 2026-11-22 [ESM 循环依赖：为什么 import 进来的是 undefined](https://daily.xplanc.org/zh/js/ESM-循环依赖：为什么-import-进来的是-undefined.md)
 - 2026-11-22 [setTimeout(fn, 0) 从来不是立即执行：读懂事件循环](https://daily.xplanc.org/zh/js/setTimeout%28fn,-0%29-从来不是立即执行：读懂事件循环.md)
 - 2026-11-22 [structuredClone 复制不了什么](https://daily.xplanc.org/zh/js/structuredClone-复制不了什么.md)
