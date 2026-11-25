@@ -131,7 +131,7 @@ npm run deploy:gh
 ## 文章目录
 
 <!-- ARTICLES:BEGIN -->
-共 93 篇（中文 90 篇，English 3 篇）。
+共 94 篇（中文 91 篇，English 3 篇）。
 
 ### 中文
 
@@ -181,6 +181,16 @@ npm run deploy:gh
 - 2026-11-22 [C++ ABI 兼容性实战：改一行头文件为什么会让程序崩溃](https://daily.xplanc.org/zh/cpp/C++-ABI-兼容性实战：改一行头文件为什么会让程序崩溃.md)
 - 2026-11-22 [C++ string_view 实战：不拷贝，也不保证活着](https://daily.xplanc.org/zh/cpp/C++-string_view-实战：不拷贝，也不保证活着.md)
 
+#### html（7）
+
+- 2026-11-25 [一行 base 标签，让整站相对路径都偏了](https://daily.xplanc.org/zh/html/一行-base-标签，让整站相对路径都偏了.md)
+- 2026-11-22 [被低估的 details：折叠面板根本不用写 JS](https://daily.xplanc.org/zh/html/被低估的-details：折叠面板根本不用写-JS.md)
+- 2026-11-22 [别急着写 JS：用原生 HTML 完成表单校验](https://daily.xplanc.org/zh/html/别急着写-JS：用原生-HTML-完成表单校验.md)
+- 2026-11-22 [改了 setAttribute，页面为什么没反应](https://daily.xplanc.org/zh/html/改了-setAttribute，页面为什么没反应.md)
+- 2026-11-22 [告别手写遮罩层：用原生 dialog 实现弹窗](https://daily.xplanc.org/zh/html/告别手写遮罩层：用原生-dialog-实现弹窗.md)
+- 2026-11-22 [写了 srcset，浏览器为什么还是下载了最大那张图](https://daily.xplanc.org/zh/html/写了-srcset，浏览器为什么还是下载了最大那张图.md)
+- 2026-11-22 [preload 写了，字体为什么还是下载两遍](https://daily.xplanc.org/zh/html/preload-写了，字体为什么还是下载两遍.md)
+
 #### 编程笑话（6）
 
 - 2026-11-22 [「删掉那行代码试试」：程序员的调试玄学](https://daily.xplanc.org/zh/编程笑话/「删掉那行代码试试」：程序员的调试玄学.md)
@@ -198,15 +208,6 @@ npm run deploy:gh
 - 2026-11-22 [Go 切片实战：扩容、共享底层数组与隐藏的内存泄漏](https://daily.xplanc.org/zh/go/Go-切片实战：扩容、共享底层数组与隐藏的内存泄漏.md)
 - 2026-11-22 [Go 切片实战：append 之后，原数组为什么变了](https://daily.xplanc.org/zh/go/Go-切片实战：append-之后，原数组为什么变了.md)
 - 2026-11-22 [nil 指针，为什么不等于 nil](https://daily.xplanc.org/zh/go/nil-指针，为什么不等于-nil.md)
-
-#### html（6）
-
-- 2026-11-22 [被低估的 details：折叠面板根本不用写 JS](https://daily.xplanc.org/zh/html/被低估的-details：折叠面板根本不用写-JS.md)
-- 2026-11-22 [别急着写 JS：用原生 HTML 完成表单校验](https://daily.xplanc.org/zh/html/别急着写-JS：用原生-HTML-完成表单校验.md)
-- 2026-11-22 [改了 setAttribute，页面为什么没反应](https://daily.xplanc.org/zh/html/改了-setAttribute，页面为什么没反应.md)
-- 2026-11-22 [告别手写遮罩层：用原生 dialog 实现弹窗](https://daily.xplanc.org/zh/html/告别手写遮罩层：用原生-dialog-实现弹窗.md)
-- 2026-11-22 [写了 srcset，浏览器为什么还是下载了最大那张图](https://daily.xplanc.org/zh/html/写了-srcset，浏览器为什么还是下载了最大那张图.md)
-- 2026-11-22 [preload 写了，字体为什么还是下载两遍](https://daily.xplanc.org/zh/html/preload-写了，字体为什么还是下载两遍.md)
 
 #### rust（6）
 
