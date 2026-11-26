@@ -131,7 +131,7 @@ npm run deploy:gh
 ## 文章目录
 
 <!-- ARTICLES:BEGIN -->
-共 96 篇（中文 93 篇，English 3 篇）。
+共 97 篇（中文 94 篇，English 3 篇）。
 
 ### 中文
 
@@ -266,6 +266,11 @@ npm run deploy:gh
 - 2026-11-22 [Lua 协程：让函数停在半句话上](https://daily.xplanc.org/zh/lua/Lua-协程：让函数停在半句话上.md)
 - 2026-11-22 [Lua 元表实战：只读表、默认值与运算符重载](https://daily.xplanc.org/zh/lua/Lua-元表实战：只读表、默认值与运算符重载.md)
 
+#### zig（2）
+
+- 2026-11-26 [errdefer：把清理代码钉在错误路径上](https://daily.xplanc.org/zh/zig/errdefer：把清理代码钉在错误路径上.md)
+- 2026-11-22 [Zig 没有隐藏的 malloc](https://daily.xplanc.org/zh/zig/Zig-没有隐藏的-malloc.md)
+
 #### docker（1）
 
 - 2026-11-22 [docker stop 之后，那十秒在等什么](https://daily.xplanc.org/zh/docker/docker-stop-之后，那十秒在等什么.md)
@@ -277,10 +282,6 @@ npm run deploy:gh
 #### ruby（1）
 
 - 2026-11-22 [block、proc 和 lambda 不是一回事](https://daily.xplanc.org/zh/ruby/block、proc-和-lambda-不是一回事.md)
-
-#### zig（1）
-
-- 2026-11-22 [Zig 没有隐藏的 malloc](https://daily.xplanc.org/zh/zig/Zig-没有隐藏的-malloc.md)
 
 ### English
 
