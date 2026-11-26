@@ -131,7 +131,7 @@ npm run deploy:gh
 ## 文章目录
 
 <!-- ARTICLES:BEGIN -->
-共 95 篇（中文 92 篇，English 3 篇）。
+共 96 篇（中文 93 篇，English 3 篇）。
 
 ### 中文
 
@@ -160,6 +160,17 @@ npm run deploy:gh
 - 2026-11-22 [Linux 文件描述符泄漏排查：从 Too many open files 说起](https://daily.xplanc.org/zh/linux/Linux-文件描述符泄漏排查：从-Too-many-open-files-说起.md)
 - 2026-11-22 [tail -f 跟着跟着就跟丢了：日志轮转后发生了什么](https://daily.xplanc.org/zh/linux/tail--f-跟着跟着就跟丢了：日志轮转后发生了什么.md)
 
+#### cpp（8）
+
+- 2026-11-26 [构造函数里调虚函数，多态为什么没生效](https://daily.xplanc.org/zh/cpp/构造函数里调虚函数，多态为什么没生效.md)
+- 2026-11-22 [表达式里的求值顺序：同一行代码，换个编译器结果就变了](https://daily.xplanc.org/zh/cpp/表达式里的求值顺序：同一行代码，换个编译器结果就变了.md)
+- 2026-11-22 [C++ 迭代器失效：删掉一个元素，循环为什么漏掉一个](https://daily.xplanc.org/zh/cpp/C++-迭代器失效：删掉一个元素，循环为什么漏掉一个.md)
+- 2026-11-22 [C++ 全局对象的初始化顺序，为什么靠不住](https://daily.xplanc.org/zh/cpp/C++-全局对象的初始化顺序，为什么靠不住.md)
+- 2026-11-22 [C++ 条件变量：wait 为什么必须放在 while 里](https://daily.xplanc.org/zh/cpp/C++-条件变量：wait-为什么必须放在-while-里.md)
+- 2026-11-22 [C++ 移动语义实战：std::move 之后，对象为什么还有值](https://daily.xplanc.org/zh/cpp/C++-移动语义实战：std-move-之后，对象为什么还有值.md)
+- 2026-11-22 [C++ ABI 兼容性实战：改一行头文件为什么会让程序崩溃](https://daily.xplanc.org/zh/cpp/C++-ABI-兼容性实战：改一行头文件为什么会让程序崩溃.md)
+- 2026-11-22 [C++ string_view 实战：不拷贝，也不保证活着](https://daily.xplanc.org/zh/cpp/C++-string_view-实战：不拷贝，也不保证活着.md)
+
 #### python（8）
 
 - 2026-11-24 [三个 lambda 共用一个变量：读懂闭包的延迟绑定](https://daily.xplanc.org/zh/python/三个-lambda-共用一个变量：读懂闭包的延迟绑定.md)
@@ -170,16 +181,6 @@ npm run deploy:gh
 - 2026-11-22 [Python 的哈希契约：为什么 list 不能当字典的键](https://daily.xplanc.org/zh/python/Python-的哈希契约：为什么-list-不能当字典的键.md)
 - 2026-11-22 [Python 缓存实战：lru_cache 的五个坑与正确用法](https://daily.xplanc.org/zh/python/Python-缓存实战：lru_cache-的五个坑与正确用法.md)
 - 2026-11-22 [with 离开之后：读懂 Python 的上下文管理器](https://daily.xplanc.org/zh/python/with-离开之后：读懂-Python-的上下文管理器.md)
-
-#### cpp（7）
-
-- 2026-11-22 [表达式里的求值顺序：同一行代码，换个编译器结果就变了](https://daily.xplanc.org/zh/cpp/表达式里的求值顺序：同一行代码，换个编译器结果就变了.md)
-- 2026-11-22 [C++ 迭代器失效：删掉一个元素，循环为什么漏掉一个](https://daily.xplanc.org/zh/cpp/C++-迭代器失效：删掉一个元素，循环为什么漏掉一个.md)
-- 2026-11-22 [C++ 全局对象的初始化顺序，为什么靠不住](https://daily.xplanc.org/zh/cpp/C++-全局对象的初始化顺序，为什么靠不住.md)
-- 2026-11-22 [C++ 条件变量：wait 为什么必须放在 while 里](https://daily.xplanc.org/zh/cpp/C++-条件变量：wait-为什么必须放在-while-里.md)
-- 2026-11-22 [C++ 移动语义实战：std::move 之后，对象为什么还有值](https://daily.xplanc.org/zh/cpp/C++-移动语义实战：std-move-之后，对象为什么还有值.md)
-- 2026-11-22 [C++ ABI 兼容性实战：改一行头文件为什么会让程序崩溃](https://daily.xplanc.org/zh/cpp/C++-ABI-兼容性实战：改一行头文件为什么会让程序崩溃.md)
-- 2026-11-22 [C++ string_view 实战：不拷贝，也不保证活着](https://daily.xplanc.org/zh/cpp/C++-string_view-实战：不拷贝，也不保证活着.md)
 
 #### html（7）
 
