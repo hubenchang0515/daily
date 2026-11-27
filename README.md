@@ -131,7 +131,7 @@ npm run deploy:gh
 ## 文章目录
 
 <!-- ARTICLES:BEGIN -->
-共 98 篇（中文 95 篇，English 3 篇）。
+共 99 篇（中文 96 篇，English 3 篇）。
 
 ### 中文
 
@@ -262,6 +262,11 @@ npm run deploy:gh
 - 2026-11-22 [CompletableFuture 吞掉的异常去哪了](https://daily.xplanc.org/zh/java/CompletableFuture-吞掉的异常去哪了.md)
 - 2026-11-22 [Java 线程池实战：核心线程、队列与拒绝策略的三个坑](https://daily.xplanc.org/zh/java/Java-线程池实战：核心线程、队列与拒绝策略的三个坑.md)
 
+#### kotlin（2）
+
+- 2026-11-27 [Kotlin 协程：被 catch 吞掉的取消](https://daily.xplanc.org/zh/kotlin/Kotlin-协程：被-catch-吞掉的取消.md)
+- 2026-11-22 [Kotlin 扩展函数：写在类外面的方法，运行时去哪了](https://daily.xplanc.org/zh/kotlin/Kotlin-扩展函数：写在类外面的方法，运行时去哪了.md)
+
 #### lua（2）
 
 - 2026-11-22 [Lua 协程：让函数停在半句话上](https://daily.xplanc.org/zh/lua/Lua-协程：让函数停在半句话上.md)
@@ -275,10 +280,6 @@ npm run deploy:gh
 #### docker（1）
 
 - 2026-11-22 [docker stop 之后，那十秒在等什么](https://daily.xplanc.org/zh/docker/docker-stop-之后，那十秒在等什么.md)
-
-#### kotlin（1）
-
-- 2026-11-22 [Kotlin 扩展函数：写在类外面的方法，运行时去哪了](https://daily.xplanc.org/zh/kotlin/Kotlin-扩展函数：写在类外面的方法，运行时去哪了.md)
 
 #### ruby（1）
 
