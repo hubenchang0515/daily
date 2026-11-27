@@ -131,7 +131,7 @@ npm run deploy:gh
 ## 文章目录
 
 <!-- ARTICLES:BEGIN -->
-共 97 篇（中文 94 篇，English 3 篇）。
+共 98 篇（中文 95 篇，English 3 篇）。
 
 ### 中文
 
@@ -182,6 +182,16 @@ npm run deploy:gh
 - 2026-11-22 [Python 缓存实战：lru_cache 的五个坑与正确用法](https://daily.xplanc.org/zh/python/Python-缓存实战：lru_cache-的五个坑与正确用法.md)
 - 2026-11-22 [with 离开之后：读懂 Python 的上下文管理器](https://daily.xplanc.org/zh/python/with-离开之后：读懂-Python-的上下文管理器.md)
 
+#### go（7）
+
+- 2026-11-27 [循环变量只有一个：读懂 Go 的 for range](https://daily.xplanc.org/zh/go/循环变量只有一个：读懂-Go-的-for-range.md)
+- 2026-11-22 [Go 的 defer：return 之后发生的事](https://daily.xplanc.org/zh/go/Go-的-defer：return-之后发生的事.md)
+- 2026-11-22 [Go 的 goroutine 泄漏：没人接收的消息去哪了](https://daily.xplanc.org/zh/go/Go-的-goroutine-泄漏：没人接收的消息去哪了.md)
+- 2026-11-22 [Go 的 map 被并发写时，为什么连 recover 都救不了](https://daily.xplanc.org/zh/go/Go-的-map-被并发写时，为什么连-recover-都救不了.md)
+- 2026-11-22 [Go 切片实战：扩容、共享底层数组与隐藏的内存泄漏](https://daily.xplanc.org/zh/go/Go-切片实战：扩容、共享底层数组与隐藏的内存泄漏.md)
+- 2026-11-22 [Go 切片实战：append 之后，原数组为什么变了](https://daily.xplanc.org/zh/go/Go-切片实战：append-之后，原数组为什么变了.md)
+- 2026-11-22 [nil 指针，为什么不等于 nil](https://daily.xplanc.org/zh/go/nil-指针，为什么不等于-nil.md)
+
 #### html（7）
 
 - 2026-11-25 [一行 base 标签，让整站相对路径都偏了](https://daily.xplanc.org/zh/html/一行-base-标签，让整站相对路径都偏了.md)
@@ -200,15 +210,6 @@ npm run deploy:gh
 - 2026-11-22 [代码评审黑话词典：LGTM 的十种语气](https://daily.xplanc.org/zh/编程笑话/代码评审黑话词典：LGTM-的十种语气.md)
 - 2026-11-22 [所有的临时方案，最后都成了基础设施](https://daily.xplanc.org/zh/编程笑话/所有的临时方案，最后都成了基础设施.md)
 - 2026-11-22 [Git 提交信息鉴赏：从 fix 到 fix again](https://daily.xplanc.org/zh/编程笑话/Git-提交信息鉴赏：从-fix-到-fix-again.md)
-
-#### go（6）
-
-- 2026-11-22 [Go 的 defer：return 之后发生的事](https://daily.xplanc.org/zh/go/Go-的-defer：return-之后发生的事.md)
-- 2026-11-22 [Go 的 goroutine 泄漏：没人接收的消息去哪了](https://daily.xplanc.org/zh/go/Go-的-goroutine-泄漏：没人接收的消息去哪了.md)
-- 2026-11-22 [Go 的 map 被并发写时，为什么连 recover 都救不了](https://daily.xplanc.org/zh/go/Go-的-map-被并发写时，为什么连-recover-都救不了.md)
-- 2026-11-22 [Go 切片实战：扩容、共享底层数组与隐藏的内存泄漏](https://daily.xplanc.org/zh/go/Go-切片实战：扩容、共享底层数组与隐藏的内存泄漏.md)
-- 2026-11-22 [Go 切片实战：append 之后，原数组为什么变了](https://daily.xplanc.org/zh/go/Go-切片实战：append-之后，原数组为什么变了.md)
-- 2026-11-22 [nil 指针，为什么不等于 nil](https://daily.xplanc.org/zh/go/nil-指针，为什么不等于-nil.md)
 
 #### rust（6）
 
