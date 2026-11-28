@@ -131,12 +131,13 @@ npm run deploy:gh
 ## 文章目录
 
 <!-- ARTICLES:BEGIN -->
-共 101 篇（中文 98 篇，English 3 篇）。
+共 102 篇（中文 99 篇，English 3 篇）。
 
 ### 中文
 
-#### linux（22）
+#### linux（23）
 
+- 2026-11-28 [sudo 之后，环境变量怎么没了](https://daily.xplanc.org/zh/linux/sudo-之后，环境变量怎么没了.md)
 - 2026-11-24 [文件名只是一张标签：Linux 为什么不会“文件占用”](https://daily.xplanc.org/zh/linux/文件名只是一张标签：Linux-为什么不会“文件占用”.md)
 - 2026-11-23 [程序崩了，core 文件却不见了](https://daily.xplanc.org/zh/linux/程序崩了，core-文件却不见了.md)
 - 2026-11-22 [负载 12，CPU 却在摸鱼：读懂 Linux 的 load average](https://daily.xplanc.org/zh/linux/负载-12，CPU-却在摸鱼：读懂-Linux-的-load-average.md)
