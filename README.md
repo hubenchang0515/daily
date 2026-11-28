@@ -131,7 +131,7 @@ npm run deploy:gh
 ## 文章目录
 
 <!-- ARTICLES:BEGIN -->
-共 99 篇（中文 96 篇，English 3 篇）。
+共 100 篇（中文 97 篇，English 3 篇）。
 
 ### 中文
 
@@ -202,6 +202,16 @@ npm run deploy:gh
 - 2026-11-22 [写了 srcset，浏览器为什么还是下载了最大那张图](https://daily.xplanc.org/zh/html/写了-srcset，浏览器为什么还是下载了最大那张图.md)
 - 2026-11-22 [preload 写了，字体为什么还是下载两遍](https://daily.xplanc.org/zh/html/preload-写了，字体为什么还是下载两遍.md)
 
+#### rust（7）
+
+- 2026-11-28 [&String 凭什么能传给 &str](https://daily.xplanc.org/zh/rust/&String-凭什么能传给-&str.md)
+- 2026-11-22 [写给线程的闭包，为什么带不走一个借用](https://daily.xplanc.org/zh/rust/写给线程的闭包，为什么带不走一个借用.md)
+- 2026-11-22 [Rust 闭包的三张面孔：Fn、FnMut 与 FnOnce](https://daily.xplanc.org/zh/rust/Rust-闭包的三张面孔：Fn、FnMut-与-FnOnce.md)
+- 2026-11-22 [Rust 错误处理实战：? 运算符到底替你做成了什么](https://daily.xplanc.org/zh/rust/Rust-错误处理实战：-运算符到底替你做成了什么.md)
+- 2026-11-22 [Rust 的 Drop 顺序：谁先走，谁后走](https://daily.xplanc.org/zh/rust/Rust-的-Drop-顺序：谁先走，谁后走.md)
+- 2026-11-22 [Rust 的整数溢出：debug 会崩，release 为什么不会](https://daily.xplanc.org/zh/rust/Rust-的整数溢出：debug-会崩，release-为什么不会.md)
+- 2026-11-22 [Rust 智能指针实战：Rc、RefCell 与循环引用](https://daily.xplanc.org/zh/rust/Rust-智能指针实战：Rc、RefCell-与循环引用.md)
+
 #### 编程笑话（6）
 
 - 2026-11-22 [「删掉那行代码试试」：程序员的调试玄学](https://daily.xplanc.org/zh/编程笑话/「删掉那行代码试试」：程序员的调试玄学.md)
@@ -210,15 +220,6 @@ npm run deploy:gh
 - 2026-11-22 [代码评审黑话词典：LGTM 的十种语气](https://daily.xplanc.org/zh/编程笑话/代码评审黑话词典：LGTM-的十种语气.md)
 - 2026-11-22 [所有的临时方案，最后都成了基础设施](https://daily.xplanc.org/zh/编程笑话/所有的临时方案，最后都成了基础设施.md)
 - 2026-11-22 [Git 提交信息鉴赏：从 fix 到 fix again](https://daily.xplanc.org/zh/编程笑话/Git-提交信息鉴赏：从-fix-到-fix-again.md)
-
-#### rust（6）
-
-- 2026-11-22 [写给线程的闭包，为什么带不走一个借用](https://daily.xplanc.org/zh/rust/写给线程的闭包，为什么带不走一个借用.md)
-- 2026-11-22 [Rust 闭包的三张面孔：Fn、FnMut 与 FnOnce](https://daily.xplanc.org/zh/rust/Rust-闭包的三张面孔：Fn、FnMut-与-FnOnce.md)
-- 2026-11-22 [Rust 错误处理实战：? 运算符到底替你做成了什么](https://daily.xplanc.org/zh/rust/Rust-错误处理实战：-运算符到底替你做成了什么.md)
-- 2026-11-22 [Rust 的 Drop 顺序：谁先走，谁后走](https://daily.xplanc.org/zh/rust/Rust-的-Drop-顺序：谁先走，谁后走.md)
-- 2026-11-22 [Rust 的整数溢出：debug 会崩，release 为什么不会](https://daily.xplanc.org/zh/rust/Rust-的整数溢出：debug-会崩，release-为什么不会.md)
-- 2026-11-22 [Rust 智能指针实战：Rc、RefCell 与循环引用](https://daily.xplanc.org/zh/rust/Rust-智能指针实战：Rc、RefCell-与循环引用.md)
 
 #### 每周报告（5）
 
