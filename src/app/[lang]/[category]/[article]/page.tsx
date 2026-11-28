@@ -12,7 +12,7 @@ import { isLanguage, LANGUAGES, LANGUAGE_CONFIG, OWNER_CONFIG } from "@/config";
 import { categories as getGategories, content, state } from "@/utils/document";
 import { markdownForRepost } from "@/utils/repost";
 import { originalLink, originalLinkBlock, stripOriginalLink } from "@/utils/markdown";
-import { absoluteUrl, articlePath, categoryPath, documentSourceUrl, languagePath, markdownDescription, markdownTitle, readableUrl } from "@/utils/seo";
+import { absoluteUrl, articlePath, categoryPath, decodePathSegment, documentSourceUrl, languagePath, markdownDescription, markdownTitle, readableUrl } from "@/utils/seo";
 
 export interface PageParams {
     lang:string;        // 语言：zh / en
@@ -25,8 +25,8 @@ export async function generateMetadata({params}:{params:Promise<PageParams>}): P
     if (!isLanguage(path.lang)) return {};
     const language = path.lang;
     const config = LANGUAGE_CONFIG[language];
-    const category = decodeURIComponent(path.category);
-    const article = decodeURIComponent(path.article);
+    const category = decodePathSegment(path.category);
+    const article = decodePathSegment(path.article);
     const text = await content(language, category, article);
     const title = markdownTitle(text) ?? article.replace(/\.md$/, '');
     const description = markdownDescription(text, language);
@@ -92,8 +92,8 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
     if (!isLanguage(path.lang)) notFound();
     const language = path.lang;
     const config = LANGUAGE_CONFIG[language];
-    const category = decodeURIComponent(path.category);
-    const articleName = decodeURIComponent(path.article);
+    const category = decodePathSegment(path.category);
+    const articleName = decodePathSegment(path.article);
     const text = await content(language, category, articleName);
     const categories = await getGategories(language);
     const articles = categories.flatMap(item => item.articles).sort((x, y) => y.state.createdTime.getTime() - x.state.createdTime.getTime());

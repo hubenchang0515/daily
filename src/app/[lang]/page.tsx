@@ -5,7 +5,7 @@ import Pagination from "@/components/Pagination";
 import Redirect from "@/components/Redirect";
 import { DEFAULT_LANGUAGE, DOCUMENT_CONFIG, isLanguage, LANGUAGES, LANGUAGE_CONFIG } from "@/config";
 import { categories as getGategories } from "@/utils/document";
-import { categoryPath, languagePath } from "@/utils/seo";
+import { categoryPath, decodePathSegment, languagePath } from "@/utils/seo";
 
 export interface PageParams {
     lang: string;
@@ -32,7 +32,7 @@ export default async function Home({ params }: { params: Promise<PageParams> }) 
     const { lang } = await params;
 
     if (!isLanguage(lang)) {
-        return <Redirect href={categoryPath(DEFAULT_LANGUAGE, decodeURIComponent(lang))} />;
+        return <Redirect href={categoryPath(DEFAULT_LANGUAGE, decodePathSegment(lang))} />;
     }
 
     const config = LANGUAGE_CONFIG[lang];

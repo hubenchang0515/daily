@@ -13,6 +13,15 @@ export function readableUrl(pathname = '/') {
     return `${SITE_CONFIG.origin}${SITE_CONFIG.basePath}${path}`;
 }
 
+// 解码路由参数：部分场景下参数已经解码，文件名里也可能直接带有 % 等字符
+export function decodePathSegment(value: string) {
+    try {
+        return decodeURIComponent(value);
+    } catch {
+        return value;
+    }
+}
+
 export function languagePath(language: Language) {
     return `/${language}`;
 }

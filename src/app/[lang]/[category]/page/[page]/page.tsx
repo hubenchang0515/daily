@@ -6,7 +6,7 @@ import Frame from "@/components/Frame";
 import Pagination from "@/components/Pagination";
 import { DOCUMENT_CONFIG, isLanguage, LANGUAGES, LANGUAGE_CONFIG } from "@/config";
 import { categories as getGategories } from "@/utils/document";
-import { absoluteUrl, categoryPath } from "@/utils/seo";
+import { absoluteUrl, categoryPath, decodePathSegment } from "@/utils/seo";
 
 export interface PageParams {
     lang:string;        // 语言：zh / en
@@ -17,7 +17,7 @@ export interface PageParams {
 export async function generateMetadata({params}:{params:Promise<PageParams>}): Promise<Metadata> {
     const path = await params;
     if (!isLanguage(path.lang)) return {};
-    const name = decodeURIComponent(path.category);
+    const name = decodePathSegment(path.category);
     const page = Number(path.page);
     const config = LANGUAGE_CONFIG[path.lang];
     const categories = await getGategories(path.lang);
@@ -85,10 +85,10 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
     const config = LANGUAGE_CONFIG[path.lang];
     const categories = await getGategories(path.lang);
     const articles = categories.flatMap(category => category.articles).sort((x, y) => y.state.createdTime.getTime() - x.state.createdTime.getTime());
-    const category = categories.find((item) => item.name === decodeURIComponent(path.category));
+    const category = categories.find((item) => item.name === decodePathSegment(path.category));
     const page = Number(path.page);
     const last = Math.ceil((category?.articles.length??0) / DOCUMENT_CONFIG.pageSize);
-    const name = category?.name ?? decodeURIComponent(path.category);
+    const name = category?.name ?? decodePathSegment(path.category);
 
     if (!Number.isInteger(page) || page < 1 || page > last) notFound();
 

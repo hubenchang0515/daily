@@ -131,7 +131,7 @@ npm run deploy:gh
 ## 文章目录
 
 <!-- ARTICLES:BEGIN -->
-共 100 篇（中文 97 篇，English 3 篇）。
+共 101 篇（中文 98 篇，English 3 篇）。
 
 ### 中文
 
@@ -182,6 +182,16 @@ npm run deploy:gh
 - 2026-11-22 [Python 缓存实战：lru_cache 的五个坑与正确用法](https://daily.xplanc.org/zh/python/Python-缓存实战：lru_cache-的五个坑与正确用法.md)
 - 2026-11-22 [with 离开之后：读懂 Python 的上下文管理器](https://daily.xplanc.org/zh/python/with-离开之后：读懂-Python-的上下文管理器.md)
 
+#### 编程笑话（7）
+
+- 2026-11-28 [「重启解决 90% 的问题」：剩下 10% 要重启两次](https://daily.xplanc.org/zh/编程笑话/「重启解决-90%-的问题」：剩下-10%-要重启两次.md)
+- 2026-11-22 [「删掉那行代码试试」：程序员的调试玄学](https://daily.xplanc.org/zh/编程笑话/「删掉那行代码试试」：程序员的调试玄学.md)
+- 2026-11-22 [「在我机器上是好的」：程序员最诚实的谎言](https://daily.xplanc.org/zh/编程笑话/「在我机器上是好的」：程序员最诚实的谎言.md)
+- 2026-11-22 [代码考古指南：如何调查一行祖传代码](https://daily.xplanc.org/zh/编程笑话/代码考古指南：如何调查一行祖传代码.md)
+- 2026-11-22 [代码评审黑话词典：LGTM 的十种语气](https://daily.xplanc.org/zh/编程笑话/代码评审黑话词典：LGTM-的十种语气.md)
+- 2026-11-22 [所有的临时方案，最后都成了基础设施](https://daily.xplanc.org/zh/编程笑话/所有的临时方案，最后都成了基础设施.md)
+- 2026-11-22 [Git 提交信息鉴赏：从 fix 到 fix again](https://daily.xplanc.org/zh/编程笑话/Git-提交信息鉴赏：从-fix-到-fix-again.md)
+
 #### go（7）
 
 - 2026-11-27 [循环变量只有一个：读懂 Go 的 for range](https://daily.xplanc.org/zh/go/循环变量只有一个：读懂-Go-的-for-range.md)
@@ -211,15 +221,6 @@ npm run deploy:gh
 - 2026-11-22 [Rust 的 Drop 顺序：谁先走，谁后走](https://daily.xplanc.org/zh/rust/Rust-的-Drop-顺序：谁先走，谁后走.md)
 - 2026-11-22 [Rust 的整数溢出：debug 会崩，release 为什么不会](https://daily.xplanc.org/zh/rust/Rust-的整数溢出：debug-会崩，release-为什么不会.md)
 - 2026-11-22 [Rust 智能指针实战：Rc、RefCell 与循环引用](https://daily.xplanc.org/zh/rust/Rust-智能指针实战：Rc、RefCell-与循环引用.md)
-
-#### 编程笑话（6）
-
-- 2026-11-22 [「删掉那行代码试试」：程序员的调试玄学](https://daily.xplanc.org/zh/编程笑话/「删掉那行代码试试」：程序员的调试玄学.md)
-- 2026-11-22 [「在我机器上是好的」：程序员最诚实的谎言](https://daily.xplanc.org/zh/编程笑话/「在我机器上是好的」：程序员最诚实的谎言.md)
-- 2026-11-22 [代码考古指南：如何调查一行祖传代码](https://daily.xplanc.org/zh/编程笑话/代码考古指南：如何调查一行祖传代码.md)
-- 2026-11-22 [代码评审黑话词典：LGTM 的十种语气](https://daily.xplanc.org/zh/编程笑话/代码评审黑话词典：LGTM-的十种语气.md)
-- 2026-11-22 [所有的临时方案，最后都成了基础设施](https://daily.xplanc.org/zh/编程笑话/所有的临时方案，最后都成了基础设施.md)
-- 2026-11-22 [Git 提交信息鉴赏：从 fix 到 fix again](https://daily.xplanc.org/zh/编程笑话/Git-提交信息鉴赏：从-fix-到-fix-again.md)
 
 #### 每周报告（5）
 

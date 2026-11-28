@@ -6,7 +6,7 @@ import Pagination from "@/components/Pagination";
 import Redirect from "@/components/Redirect";
 import { DEFAULT_LANGUAGE, DOCUMENT_CONFIG, isLanguage, LANGUAGES, LANGUAGE_CONFIG } from "@/config";
 import { categories as getGategories } from "@/utils/document";
-import { absoluteUrl, categoryPath, languagePath } from "@/utils/seo";
+import { absoluteUrl, categoryPath, decodePathSegment, languagePath } from "@/utils/seo";
 
 export interface PageParams {
     lang:string;        // 语言：zh / en
@@ -86,7 +86,7 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
     if (!isLanguage(path.lang)) {
         return (
             <Redirect
-                href={`${categoryPath(DEFAULT_LANGUAGE, decodeURIComponent(path.lang))}/page/${path.page}`}
+                href={`${categoryPath(DEFAULT_LANGUAGE, decodePathSegment(path.lang))}/page/${path.page}`}
             />
         );
     }
