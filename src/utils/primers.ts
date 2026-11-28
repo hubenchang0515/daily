@@ -50,6 +50,13 @@ const PATTERNS_ZH: Pattern[] = [
             /https:\/\/primers\.xplanc\.org\/document\/zh\/10\.Bash\/90\.%E5%B8%AE%E5%8A%A9%E6%89%8B%E5%86%8C\/EX\.(.+?)\.md/g
         ],
     },
+
+    {
+        lang: ["powershell", "pwsh"],
+        regexps: [
+            /https:\/\/primers\.xplanc\.org\/document\/zh\/11\.PowerShell\/90.%E5%B8%AE%E5%8A%A9%E6%89%8B%E5%86%8C\/EX\.(.+?)\.md/g
+        ],
+    },
 ]
 
 const PATTERNS_EN: Pattern[] = [
